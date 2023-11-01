@@ -6,15 +6,16 @@
 
 ## Планируемая структура проекта
  - BnLog = основной проект
-  -  = запускаемая часть основного проекта-
- --+ Docs = Описание проетаи его элеметов
- --+ wwwroot = корневая папка сайта (auto)
-      -  + стили, ресурсы
-         + страничные представления
- -+ Repo = Data Layer
-   -  = BD, Data model, Repository
- -+ Views = View Model Layer
- -    -  = Layer for Data buinding model, Repository <> Site
---+ Controllers =  Buisnes Controller Layer
- --  = Buisnes Rule Layer
- --  = Site page Controllers
+ - - += запускаемая часть основного проекта
+ -  Docs = Описание проекта и его элеметов
+ - Repo = Data Layer
+   - -  = BD, Data model, Repository
+ - Views = View Model Layer
+   - -  = Layer for Data buinding model, Repository <> Site
+-  Controllers =  Buisnes Controller Layer
+   - -  = Buisnes Rule Layer
+   - -  =  Site page Controllers   
+ - wwwroot = корневая папка сайта (auto)
+   - -  = стили, ресурсы
+   - -  = страничные представления(?)
+
