@@ -7,9 +7,10 @@
 ## Планируемая структура проекта
  - BnLog = основной проект
  - - += запускаемая часть основного проекта
- -  Docs = Описание проекта и его элеметов
+ - Docs = Описание проекта и его элеметов
  - Repo = Data Layer
    - -  = BD, Data model, Repository
+   - -  = Здесь ( и ниже) место компонетов, обеспечивающих доступ к хранилищам данных
  - Views = View Model Layer
    - -  = Layer for Data buinding model, Repository <> Site
 -  Controllers =  Buisnes Controller Layer
