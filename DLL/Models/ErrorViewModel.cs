@@ -1,4 +1,4 @@
-namespace BnLog.Repo.Models
+namespace BnLog.DLL.Models
 {
     public class ErrorViewModel
     {

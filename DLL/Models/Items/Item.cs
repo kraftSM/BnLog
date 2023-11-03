@@ -1,4 +1,4 @@
-﻿namespace BnLog.Repo.Models.Items
+﻿namespace BnLog.DLL.Models.Items
 {
     public class Item
     //Non entity elements for linking  addons to main entitys

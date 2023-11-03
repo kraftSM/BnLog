@@ -1,8 +1,8 @@
-﻿using BnLog.Repo.Models;
+﻿using BnLog.DLL.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BnLog.Controllers
+namespace BnLog.BLL.Controllers
 {
     public class HomeController : Controller
     {

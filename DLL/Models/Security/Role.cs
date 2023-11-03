@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BnLog.Repo.Models.Security
+namespace BnLog.DLL.Models.Security
 {
     public class Role : IdentityRole
     {

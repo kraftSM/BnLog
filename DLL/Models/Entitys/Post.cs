@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BnLog.Repo.Models.Security;
+using BnLog.DLL.Models.Security;
 
-namespace BnLog.Repo.Models.Entitys
+namespace BnLog.DLL.Models.Entitys
 {
     public class Post
     {

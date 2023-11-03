@@ -4,12 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BnLog.Repo.Models.Entitys;
+using BnLog.DLL.Models.Entitys;
 
 //using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 
-namespace BnLog.Repo.Models.Security
+namespace BnLog.DLL.Models.Security
 {
     public class User : IdentityUser
     {

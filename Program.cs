@@ -1,3 +1,6 @@
+using AutoMapper;
+using BnLog.BLL;
+
 namespace BnLog
 {
     public class Program
@@ -8,6 +11,11 @@ namespace BnLog
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            // Connect AutoMapper
+            var mapperConfig = new MapperConfiguration((v) =>
+            {
+                v.AddProfile(new MappingProfile());
+            });
 
             var app = builder.Build();
 
@@ -23,6 +31,7 @@ namespace BnLog
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
