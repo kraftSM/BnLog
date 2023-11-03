@@ -12,7 +12,7 @@ namespace BnLog.BLL.Services.IService
         Task<IdentityResult> Register(RegisterRequest model);
         Task<SignInResult> Login(LoginRequest model);
         Task<IdentityResult> EditAccount(UserEditRequest model);
-        //Task<UserEditRequest> EditAccount(Guid id);
+        Task<UserEditRequest> EditAccount(Guid id);
         Task RemoveAccount(Guid id);
         Task<List<User>> GetAccounts();
         Task LogoutAccount();
