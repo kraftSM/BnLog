@@ -22,9 +22,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.IsInRole("Администратор") || User.IsInRole("Модератор"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Tag" asp-action="GetTags">Теги</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Role" asp-action="GetRoles">Роли</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="GetAccounts">Пользователи</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Post" asp-action="GetPosts">Статьи</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form method="post" asp-controller="Security" asp-action="LogoutAccount">
+                                <p class="badge bg-success text-white nav-item flex-grow-1" style="line-height: 2; margin-bottom: 0;">@User.Identity.Name</p>
+                                <input class="btn btn-sm btn-primary nav-item flex-grow-1" style="margin-bottom: 0;" type="submit" value="Выход" />
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Login">Вход</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Register">Регистрация</a>
+                            
+                        }
                     </ul>
                 </div>
             </div>

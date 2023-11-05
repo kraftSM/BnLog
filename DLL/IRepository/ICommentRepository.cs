@@ -1,4 +1,4 @@
-﻿using BnLog.DLL.Models.Entitys;
+﻿using BnLog.DLL.Models.Entity;
 
 namespace BnLog.DLL.IRepository
 {

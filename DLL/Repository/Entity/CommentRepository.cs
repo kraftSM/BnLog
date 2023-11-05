@@ -1,7 +1,7 @@
 ﻿using BnLog.DLL.IRepository;
-using BnLog.DLL.Models.Entitys;
+using BnLog.DLL.Models.Entity;
 
-namespace BnLog.DLL.Repository
+namespace BnLog.DLL.Repository.Entity
 {
     public class CommentRepository : ICommentRepository
     {

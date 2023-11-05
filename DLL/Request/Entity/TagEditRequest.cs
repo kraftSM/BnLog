@@ -1,17 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
-namespace BnLog.DLL.Request
+namespace BnLog.DLL.Request.Entity
 {
-    public class RoleEditRequest
+    public class TagEditRequest
     {
         public Guid Id { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Название", Prompt = "Название")]
         public string Name { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Уровень доступа", Prompt = "Уровень")]
-        public int? SecurityLvl { get; set; } = null;
     }
 }

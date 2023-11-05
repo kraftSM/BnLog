@@ -1,38 +1,55 @@
 ﻿using AutoMapper;
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Request;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using BnLog.BLL.Services.IService;
+using System.Data;
+
 using BnLog.BLL.Services;
+using BnLog.BLL.Services.IService;
+
 using BnLog.DLL.Models.Security;
+using BnLog.DLL.Request.Security;
+//using BnLog.
+//using BnLog.Views.Security;
 
 namespace BnLog.BLL.Controllers
 {
-    public class AccountController : Controller
+    //public class AccountController : Controller
+    public class SecurityController : Controller     
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly IAccountService _accountService;
+        private readonly ISecurityService _securityService;
         private readonly IMapper _mapper;
-        private readonly ILogger<AccountController> _logger;
+        //private readonly ILogger<AccountController> _logger;
+        private readonly ILogger<SecurityController> _logger;
 
-        public AccountController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
+        //public AccountController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
+        public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ISecurityService securityService, ILogger<SecurityController> logger)
         {
             _roleManager = roleManager;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _accountService = accountService;
+            _securityService = securityService;
             _logger = logger;
         }
+        //public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
+        //{
+        //    _roleManager = roleManager;
+        //    _mapper = mapper;
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //    _accountService = accountService;
+        //    _logger = logger;
+        //}
 
         /// <summary>
         /// [Get] Метод, login
         /// </summary>
-        [Route("Account/Login")]
+        [Route("Security/Login")]  
         [HttpGet]
         public IActionResult Login()
         {
@@ -42,14 +59,14 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, login
         /// </summary>
-        [Route("Account/Login")]
+        [Route("Security/Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginRequest model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _accountService.Login(model);
+                var result = await _securityService.Login(model);
 
                 if (result.Succeeded)
                     return RedirectToAction("Index", "Home");
@@ -64,7 +81,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, регистрации
         /// </summary>
-        [Route("Account/Register")]
+        [Route("Security/Register")]
         [HttpGet]
         public IActionResult Register()
         {
@@ -74,13 +91,13 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, регистрации
         /// </summary>
-        [Route("Account/Register")]
+        [Route("Security/Register")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterRequest model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _accountService.Register(model);
+                var result = await _securityService.Register(model);
 
                 if (result.Succeeded)
                 {
@@ -101,24 +118,24 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования
         /// </summary>
-        [Route("Account/Edit")]
+        [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> EditAccount(Guid id)
         {
-            var model = await _accountService.EditAccount(id);
+            var model = await _securityService.EditAccount(id);
             return View(model);
         }
 
         /// <summary>
         /// [Post] Метод, редактирования
         /// </summary>
-        [Route("Account/Edit")]
+        [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditRequest model)
         {
-            var result = await _accountService.EditAccount(model);
+            var result = await _securityService.EditAccount(model);
 
             if (result.Succeeded)
             {
@@ -135,7 +152,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаление аккаунта
         /// </summary>
-        [Route("Account/Remove")]
+        [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> RemoveAccount(Guid id, bool confirm = true)
@@ -148,12 +165,12 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаление аккаунта
         /// </summary>
-        [Route("Account/Remove")]
+        [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> RemoveAccount(Guid id)
         {
-            await _accountService.RemoveAccount(id);
+            await _securityService.RemoveAccount(id);
             _logger.LogDebug($"Remove account {id}");
 
             return RedirectToAction("Index", "Home");
@@ -162,24 +179,24 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, выхода из аккаунта
         /// </summary>
-        [Route("Account/Logout")]
+        [Route("Security/Logout")]
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> LogoutAccount(Guid id)
         {
-            await _accountService.LogoutAccount();
+            await _securityService.LogoutAccount();
             return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
         /// [Get] Метод, получения всех пользователей
         /// </summary>
-        [Route("Account/Get")]
+        [Route("Security/Get")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
-            var users = await _accountService.GetAccounts();
+            var users = await _securityService.GetAccounts();
 
             return View(users);
         }

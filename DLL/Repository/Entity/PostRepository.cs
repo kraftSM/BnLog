@@ -1,8 +1,8 @@
 ﻿using BnLog.DLL.IRepository;
-using BnLog.DLL.Models.Entitys;
+using BnLog.DLL.Models.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace BnLog.DLL.Repository
+namespace BnLog.DLL.Repository.Entity
 {
     public class PostRepository : IPostRepository
     {

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
-namespace BnLog.DLL.Request
+namespace BnLog.DLL.Request.Entity
 {
-    public class RoleRequest
+    public class TagRequest
     {
         public Guid Id { get; set; }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BnLog.DLL.Models.Security;
 
-namespace BnLog.DLL.Models.Entitys
+namespace BnLog.DLL.Models.Entity
 {
     public class Post
     {

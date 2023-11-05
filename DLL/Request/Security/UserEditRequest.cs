@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BnLog.DLL.Request
+namespace BnLog.DLL.Request.Security
 {
     public class UserEditRequest
     {

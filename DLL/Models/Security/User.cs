@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BnLog.DLL.Models.Entitys;
+using BnLog.DLL.Models.Entity;
 
 //using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;

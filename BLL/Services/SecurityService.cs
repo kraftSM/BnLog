@@ -3,16 +3,17 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BnLog.DLL.IRepository;
-using BnLog.DLL.Request;
+using BnLog.DLL.Request.Security;
 using BnLog.DLL.Models.Security;
 using BnLog.BLL.Services.IService;
 
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
+
 namespace BnLog.BLL.Services
 {
-    public class AccountService : IAccountService
+    public class SecurityService : ISecurityService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -20,7 +21,7 @@ namespace BnLog.BLL.Services
         private readonly IPostRepository _postRepo;
         public IMapper _mapper;
 
-        public AccountService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public SecurityService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _roleManager = roleManager;
             _mapper = mapper;
