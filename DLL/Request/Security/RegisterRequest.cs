@@ -16,7 +16,7 @@ namespace BnLog.DLL.Request.Security
 
         [Required(ErrorMessage = "Поле Никнейм обязательно для заполнения")]
         [DataType(DataType.Text)]
-        [Display(Name = "Никнейм", Prompt = "Введите Никнейм")]
+        [Display(Name = "Login", Prompt = "Введите Login")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Поле Email обязательно для заполнения")]
