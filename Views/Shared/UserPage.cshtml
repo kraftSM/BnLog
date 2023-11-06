@@ -1,0 +1,11 @@
+﻿@model BnLog.DLL.Request.Security.UserLoginRequest
+@{
+    ViewData["Title"] = "UserPage";
+    //Layout = null; //отключение стилей мастер-страниц, и теперь можно лепить свой дизайн.
+                   //Layout = "~/Views/Shared/_Layout.cshtml";//-тогда будет дизай мастер страницы.
+}
+<h1class="center">User Page</h1>
+<div class="block-reg background-white">
+    @*<h3 class="center">Model.User.GetFullName()</h3>*@
+        <h4 class="center">@Model.Email</h4>
+</div>

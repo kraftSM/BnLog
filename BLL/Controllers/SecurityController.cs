@@ -68,7 +68,8 @@ namespace BnLog.BLL.Controllers
                 var result = await _securityService.Login(model);
 
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home", "UserPage");
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
@@ -102,6 +103,7 @@ namespace BnLog.BLL.Controllers
                 {
                     _logger.LogInformation($"Создан аккаунт - {model.Email}");
                     return RedirectToAction("Index", "Home");
+
                 }
                 else
                 {

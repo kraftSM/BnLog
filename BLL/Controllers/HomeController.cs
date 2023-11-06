@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AutoMapper.Internal;
+using BnLog.DLL.Request.Security;
 
 namespace BnLog.BLL.Controllers
 {
@@ -39,10 +40,10 @@ namespace BnLog.BLL.Controllers
         }
 
         [Authorize]
-        public IActionResult MyPage()
+        public IActionResult UserPage()
         {
 
-            return View();
+            return View(UserLoginRequest);
         }
 
         public IActionResult Privacy()
