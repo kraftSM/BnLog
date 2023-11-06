@@ -16,7 +16,7 @@ namespace BnLog.BLL
         public MappingProfile()
         {
             // Security
-            CreateMap<RegisterRequest, User>()
+            CreateMap<UserRegisterRequest, User>()
                 .ForMember(x => x.Email, opt => opt.MapFrom(c => c.Email))
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.UserName));
             CreateMap<UserEditRequest, User>();

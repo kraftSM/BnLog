@@ -43,10 +43,10 @@ namespace BnLog
             builder.Services
                 .AddSingleton(mapper)
                 //.AddTransient<ICommentService, CommentService>()
-                //.AddTransient<IHomeService, HomeService>()
+                .AddTransient<IHomeService, HomeService>()
                 //.AddTransient<IPostService, PostService>()
                 //.AddTransient<ITagService, TagService>()
-                //.AddTransient<IRoleService, RoleService>()
+                .AddTransient<IRoleService, RoleService>()
                 .AddTransient<ICommentRepository, CommentRepository>()
                 .AddTransient<ITagRepository, TagRepository>()
                 .AddTransient<IPostRepository, PostRepository>()

@@ -25,7 +25,7 @@ namespace BnLog.BLL.Controllers
         /// [Get] Метод, создания тега
         /// </summary>
         [Route("Role/Create")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        //[Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public IActionResult CreateRole()
         {

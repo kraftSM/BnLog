@@ -30,7 +30,7 @@ namespace BnLog.BLL.Services
             _postRepo = postRepo;
         }
 
-        public async Task<IdentityResult> Register(RegisterRequest model)
+        public async Task<IdentityResult> Register(UserRegisterRequest model)
         {
             var user = _mapper.Map<User>(model);
 
@@ -53,7 +53,7 @@ namespace BnLog.BLL.Services
             }
         }
 
-        public async Task<SignInResult> Login(LoginRequest model)
+        public async Task<SignInResult> Login(UserLoginRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);

@@ -23,7 +23,6 @@ namespace BnLog.BLL.Controllers
         private readonly RoleManager<Role> _roleManager;
         private readonly ISecurityService _securityService;
         private readonly IMapper _mapper;
-        //private readonly ILogger<AccountController> _logger;
         private readonly ILogger<SecurityController> _logger;
 
         //public AccountController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
@@ -62,7 +61,7 @@ namespace BnLog.BLL.Controllers
         [Route("Security/Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginRequest model)
+        public async Task<IActionResult> Login(UserLoginRequest model)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +92,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [Route("Security/Register")]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterRequest model)
+        public async Task<IActionResult> Register(UserRegisterRequest model)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +118,7 @@ namespace BnLog.BLL.Controllers
         /// [Get] Метод, редактирования
         /// </summary>
         [Route("Security/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        //[Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> EditAccount(Guid id)
         {
@@ -131,7 +130,7 @@ namespace BnLog.BLL.Controllers
         /// [Post] Метод, редактирования
         /// </summary>
         [Route("Security/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        //[Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditRequest model)
         {

@@ -9,8 +9,8 @@ namespace BnLog.BLL.Services.IService
 {
     public interface ISecurityService
     {
-        Task<IdentityResult> Register(RegisterRequest model);
-        Task<SignInResult> Login(LoginRequest model);
+        Task<IdentityResult> Register(UserRegisterRequest model);
+        Task<SignInResult> Login(UserLoginRequest model);
         Task<IdentityResult> EditAccount(UserEditRequest model);
         Task<UserEditRequest> EditAccount(Guid id);
         Task RemoveAccount(Guid id);

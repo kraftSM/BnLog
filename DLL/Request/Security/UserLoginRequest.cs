@@ -2,7 +2,7 @@
 
 namespace BnLog.DLL.Request.Security
 {
-    public class LoginRequest
+    public class UserLoginRequest
     {
         [Required]
         [EmailAddress]

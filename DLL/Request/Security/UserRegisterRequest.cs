@@ -2,7 +2,7 @@
 
 namespace BnLog.DLL.Request.Security
 {
-    public class RegisterRequest
+    public class UserRegisterRequest
     {
         [Required(ErrorMessage = "Поле Имя обязательно для заполнения")]
         [DataType(DataType.Text)]
