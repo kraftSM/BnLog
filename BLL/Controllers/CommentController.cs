@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BnLog.BLL.Services;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
@@ -53,10 +54,20 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [Route("Comment/Edit")]
         [HttpGet]
-        public IActionResult EditComment(Guid id)
+        public async Task<IActionResult> EditComment(Guid id)
         {
-            var view = new CommentEditRequest { Id = id };
-            return View(view);
+            if (id == null)
+                return NotFound();
+            var comm = await _commentService.GetComment(id);
+            if (comm == null)
+                return NotFound();
+
+            var model = new CommentEditRequest { Id = id };
+            model.Title = comm.Title;
+            model.Author = comm.Author;
+            model.Description =  comm.Body;
+
+            return View(model);
         }
 
         /// <summary>

@@ -9,5 +9,6 @@ namespace BnLog.BLL.Services.IService
         Task EditComment(CommentEditRequest model);
         Task RemoveComment(Guid id);
         Task<List<Comment>> GetComments();
+        Task<Comment> GetComment(Guid id);
     }
 }

@@ -77,7 +77,7 @@ namespace BnLog.BLL.Controllers
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public async Task<IActionResult> EditTagAsync(Guid id)
+        public async Task<IActionResult> EditTag(Guid id)
         {
             if (id == null)
                 return NotFound();
@@ -99,7 +99,8 @@ namespace BnLog.BLL.Controllers
             {
                 await _tagService.EditTag(model);
                 _logger.LogDebug($"Изменен тег - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetTags", "Tag");
             }
             else
             {
@@ -118,7 +119,8 @@ namespace BnLog.BLL.Controllers
         {
             if (isConfirm)
                 await RemoveTag(id);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetTags", "Tag");
         }
 
         /// <summary>
@@ -131,7 +133,8 @@ namespace BnLog.BLL.Controllers
         {
             await _tagService.RemoveTag(id);
             _logger.LogDebug($"Удаленн тег - {id}");
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetTags", "Tag");
         }
 
         /// <summary>

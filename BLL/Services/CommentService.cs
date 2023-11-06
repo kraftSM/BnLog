@@ -5,6 +5,7 @@ using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Entity;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace BnLog.BLL.Services
 {
@@ -47,7 +48,11 @@ namespace BnLog.BLL.Services
 
             await _commentRepo.UpdateComment(comment);
         }
-
+        public async Task<Comment> GetComment(Guid Id)
+        {
+            var comment = _commentRepo.GetComment(Id);
+            return comment;
+        }
         public async Task RemoveComment(Guid id)
         {
             await _commentRepo.RemoveComment(id);
