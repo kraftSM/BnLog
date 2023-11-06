@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-<<<<<<< HEAD:DAL/Request/Entity/CommentEditRequest.cs
-namespace BnLog.DAL.Request.Entity
-=======
+
 namespace BnLog.VAL.Request.Entity
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/Entity/CommentEditRequest.cs
+
 {
     public class CommentEditRequest
     {

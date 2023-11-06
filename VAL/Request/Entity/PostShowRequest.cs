@@ -1,10 +1,8 @@
 ﻿using AutoMapper.Internal;
 
-<<<<<<< HEAD:DAL/Request/Entity/PostShowRequest.cs
-namespace BnLog.DAL.Request.Entity
-=======
+
 namespace BnLog.VAL.Request.Entity
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/Entity/PostShowRequest.cs
+
 {
     public class PostShowRequest
     {

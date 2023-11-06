@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-<<<<<<< HEAD:DAL/Request/Security/UserEditRequest.cs
-namespace BnLog.DAL.Request.Security
-=======
+
 namespace BnLog.VAL.Request.Security
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/Security/UserEditRequest.cs
+
 {
     public class UserEditRequest
     {

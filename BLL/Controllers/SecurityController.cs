@@ -91,7 +91,8 @@ namespace BnLog.BLL.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation($"Создан аккаунт - {model.Email}");
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GetAccounts", "Security");
 
                 }
                 else
@@ -109,7 +110,7 @@ namespace BnLog.BLL.Controllers
         /// [Get] Метод, редактирования
         /// </summary>
         [Route("Security/Edit")]
-        //[Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> EditAccount(Guid id)
         {
@@ -121,7 +122,7 @@ namespace BnLog.BLL.Controllers
         /// [Post] Метод, редактирования
         /// </summary>
         [Route("Security/Edit")]
-        //[Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditRequest model)
         {
@@ -130,7 +131,8 @@ namespace BnLog.BLL.Controllers
             if (result.Succeeded)
             {
                 _logger.LogDebug($"Аккаунт - {model.UserName} был изменен");
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetAccounts", "Security");
             }
             else
             {
@@ -149,7 +151,8 @@ namespace BnLog.BLL.Controllers
         {
             if (confirm)
                 await RemoveAccount(id);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetAccounts", "Security");
         }
 
         /// <summary>
@@ -163,7 +166,8 @@ namespace BnLog.BLL.Controllers
             await _securityService.RemoveAccount(id);
             _logger.LogDebug($"Remove account {id}");
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetAccounts", "Security");
         }
 
         /// <summary>
@@ -181,7 +185,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех пользователей
         /// </summary>
-        [Route("Security/Get")]
+        [Route("Security/GetAccounts")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()

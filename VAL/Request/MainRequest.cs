@@ -1,12 +1,8 @@
-<<<<<<< HEAD:DAL/Request/MainRequest.cs
-﻿using BnLog.DAL.Request.Security;
 
-namespace BnLog.DAL.Request
-=======
 ﻿using BnLog.VAL.Request.Security;
 
 namespace BnLog.VAL.Request
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/MainRequest.cs
+
 {
     public class MainRequest
     {

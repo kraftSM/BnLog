@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-<<<<<<< HEAD:DAL/Request/Entity/TagRequest.cs
-namespace BnLog.DAL.Request.Entity
-=======
+
 namespace BnLog.VAL.Request.Entity
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/Entity/TagRequest.cs
+
 {
     public class TagRequest
     {

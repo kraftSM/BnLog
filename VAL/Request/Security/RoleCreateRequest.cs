@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-<<<<<<< HEAD:DAL/Request/Security/RoleCreateRequest.cs
-namespace BnLog.DAL.Request.Security
-=======
+
+
 namespace BnLog.VAL.Request.Security
->>>>>>> ++ [Post, User ,Tag,Role] Edit -> Work:VAL/Request/Security/RoleCreateRequest.cs
+
 {
     public class RoleCreateRequest
     {
