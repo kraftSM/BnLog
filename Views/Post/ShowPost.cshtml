@@ -15,8 +15,7 @@
     }
     <p>Description: @Model.Description</p>
     <p>Body: @Model.Body</p>
-    <h7>Author: @Model.AuthorId</h7>
-    <p></p>
+    <h5>Author: @Model.AuthorId</h5>
     <p></p>
 </div>
 @{
@@ -35,12 +34,17 @@
             <div class="card w-75">
                 <h6 class="card-title">@comment.Title</h6>
                 <p>@comment.Body</p>
-                <h7>Author: @comment.Author</h7>
+                <p>Author: @comment.Author</p>
                 @if (User.IsInRole("Администратор") || User.Identity.Name == comment.Author)
                 {
-                    <p>Author real name: @comment.Author</p>
-                    <a class="btn btn-outline-info button" method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Редактировать</a>
+                    @*
+                    <a class="btn btn-outline-info button" method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Редактировать</a> 
                     <a class="btn btn-outline-danger button" method="post" asp-controller="Comment" asp-action="RemoveComment" asp-route-id="@comment.Id">Удалить</a>
+                    *@
+                    <span>
+                        <a method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Удалить</a>|
+                        <a method="post" asp-controller="Comment" asp-action="RemoveComment" asp-route-id="@comment.Id">Удалить </a>
+                    </span>
                 }
             </div>
         }
