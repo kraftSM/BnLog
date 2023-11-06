@@ -6,10 +6,10 @@
     @{
         <div>
             <h6>Tags:
-            @foreach (var tag in Model.Tags)
-            {
-                <span class="badge rounded-pill text-bg-success" style="color:green; display:inline;">@tag.Name</span>
-                }
+                 @foreach (var tag in Model.Tags)
+                 {
+                    <span class="badge rounded-pill text-bg-success tagInfo" display:inline;">@tag.Name</span>
+                 }
             </h6>
         </div>
     }

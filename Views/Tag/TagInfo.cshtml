@@ -1,0 +1,41 @@
+﻿@model BnLog.DAL.Models.Entity.Tag;
+
+<div class="container-page">
+    <h2 class="title-margin">Просмотр тега</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Field Name</th>
+                <th>Field Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label>Наименование [@Html.DisplayNameFor(model => model.Name)]</label>
+                    </td>
+                <td>
+                    <label>@ViewData.Model.Name</label>
+                </td>
+             </tr>
+            <tr> 
+                <td>
+                    <a method="get" asp-controller="Tag" asp-action="GetTags">Перейти к списку всех тегов </a>
+                </td>
+                @if (User.IsInRole("Администратор") || User.IsInRole("Модератор"))
+                    {
+                    <td>                   
+                        <a method="get"   asp-controller= "Tag" asp-action ="EditTag"    asp-route-id = "@ViewData.Model.Id"> Edit </a>|
+                        <a method ="post" asp-controller ="Tag" asp-action = "RemoveTag" asp-route-id = "@ViewData.Model.Id"> Delete </a>                        
+                    </td>
+                    }
+                else 
+                {
+                <td></td>
+                };
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>

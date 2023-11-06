@@ -1,5 +1,5 @@
 ﻿using BnLog.DAL.Models.Entity;
-using BnLog.DAL.Request.Entity;
+using BnLog.VAL.Request.Entity;
 
 namespace BnLog.BLL.Services.IService
 {

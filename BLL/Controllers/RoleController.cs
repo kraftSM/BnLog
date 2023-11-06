@@ -3,7 +3,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BnLog.BLL.Services.IService;
-using BnLog.DAL.Request.Security;
+using BnLog.BLL.Services;
+using BnLog.VAL.Request.Security;
 
 namespace BnLog.BLL.Controllers
 {
@@ -42,7 +43,8 @@ namespace BnLog.BLL.Controllers
             {
                 var roleId = await _roleService.CreateRole(model);
                 _logger.LogInformation($"Созданна роль - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetRoles", "Role");
             }
             else
             {
@@ -57,8 +59,14 @@ namespace BnLog.BLL.Controllers
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public IActionResult EditRole(Guid id)
+        public async Task<IActionResult> EditRole(Guid id)
         {
+            if (id == null)
+                return NotFound();
+            var iRrole = await _roleService.GetRole(id);
+            if (iRrole == null)
+                return NotFound();
+            return View(iRrole);
             var view = new RoleEditRequest { Id = id };
             return View(view);
         }
@@ -75,7 +83,8 @@ namespace BnLog.BLL.Controllers
             {
                 await _roleService.EditRole(model);
                 _logger.LogDebug($"Измененна роль - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetRoles", "Role");
             }
             else
             {
@@ -94,7 +103,8 @@ namespace BnLog.BLL.Controllers
         {
             if (isConfirm)
                 await RemoveRole(id);
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetRoles", "Role");
         }
 
         /// <summary>
@@ -107,7 +117,8 @@ namespace BnLog.BLL.Controllers
         {
             await _roleService.RemoveRole(id);
             _logger.LogDebug($"Удаленна роль - {id}");
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetRoles", "Role");
         }
 
         /// <summary>

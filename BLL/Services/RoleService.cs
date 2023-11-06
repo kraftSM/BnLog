@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.Models.Security;
-using BnLog.DAL.Request.Security;
+using BnLog.VAL.Request.Security;
 
 namespace BnLog.BLL.Services
 {
@@ -44,6 +44,11 @@ namespace BnLog.BLL.Services
         {
             var role = await _roleManager.FindByIdAsync(Id.ToString());
             await _roleManager.DeleteAsync(role);
+        }
+        public async Task<Role> GetRole(Guid Id)
+        {
+            var role = await _roleManager.FindByIdAsync(Id.ToString());
+            return  role;
         }
 
         public async Task<List<Role>> GetRoles()

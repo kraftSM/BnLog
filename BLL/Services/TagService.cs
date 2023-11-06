@@ -5,6 +5,7 @@ using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Request.Entity;
 using BnLog.DAL.Models.Security;
 using Microsoft.AspNetCore.Identity;
+using BnLog.VAL.Request.Entity;
 
 
 namespace BnLog.BLL.Services
@@ -27,7 +28,7 @@ namespace BnLog.BLL.Services
 
             return tag.Id;
         }
-        public async Task<Tag> ShowTag(Guid id)
+        public async Task<Tag> GetTag(Guid id)
         {
             var tag = _tagRepo.GetTag(id);
 

@@ -1,5 +1,5 @@
 ﻿using BnLog.DAL.Models.Entity;
-using BnLog.DAL.Request.Entity;
+using BnLog.VAL.Request.Entity;
 
 namespace BnLog.BLL.Services.IService
 {
@@ -9,7 +9,7 @@ namespace BnLog.BLL.Services.IService
         Task EditTag(Guid id);
         Task EditTag(TagEditRequest model);
         Task RemoveTag(Guid id);
-        Task<Tag> ShowTag(Guid id);
+        Task<Tag> GetTag(Guid id);
         Task<List<Tag>> GetTags();
     }
 }

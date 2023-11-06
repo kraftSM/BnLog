@@ -8,7 +8,7 @@ using System.Data;
 using BnLog.BLL.Services;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.Models.Security;
-using BnLog.DAL.Request.Security;
+using BnLog.VAL.Request.Security;
 //using BnLog.
 //using BnLog.Views.Security;
 

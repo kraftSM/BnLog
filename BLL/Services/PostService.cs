@@ -3,7 +3,8 @@ using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
-using BnLog.DAL.Request.Entity;
+//using BnLog.DAL.Request.Entity;
+using BnLog.VAL.Request.Entity;
 using Microsoft.AspNetCore.Identity;
 
 namespace BnLog.BLL.Services

@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
-namespace BnLog.DAL.Request.Entity
+
+namespace BnLog.VAL.Request.Entity
+
 {
     public class CommentCreateRequest
     {

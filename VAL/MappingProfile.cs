@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
-using BnLog.DAL.Request.Entity;
-using BnLog.DAL.Request.Security;
+using BnLog.VAL.Request.Entity;
+using BnLog.VAL.Request.Security;
 
-namespace BnLog.BLL
+namespace BnLog.VAL
 {
     public class MappingProfile : Profile
     {

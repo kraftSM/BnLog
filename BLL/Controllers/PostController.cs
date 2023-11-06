@@ -6,10 +6,11 @@ using BnLog.BLL.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using BnLog.VAL.Request.Entity;
 
 namespace BnLog.BLL.Controllers
 {
-     public class PostController : Controller
+    public class PostController : Controller
     {
         private readonly IPostRepository _postRepo;
         private readonly IPostService _postService;

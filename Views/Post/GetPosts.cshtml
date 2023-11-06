@@ -20,7 +20,7 @@
                     <h5>Теги:
                     @foreach (var tag in post.Tags)
                     {
-                        <span class="badge rounded-pill text-bg-success" style="color:green">@tag.Name</span>
+                            <span class="badge rounded-pill text-bg-success tagInfo" >@tag.Name</span>
                         }
                     </h5>
                     @if (User.IsInRole("Администратор"))

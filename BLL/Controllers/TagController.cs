@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services;
+
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
-using BnLog.DAL.Request.Entity;
+using BnLog.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BnLog.VAL.Request.Entity;
 
 namespace BnLog.BLL.Controllers
 {
@@ -56,18 +57,34 @@ namespace BnLog.BLL.Controllers
         }
 
         /// <summary>
+        /// [Get] Метод просмотра тега
+        /// </summary>
+        [Route("Tag/Info")]
+        [Authorize(Roles = "Администратор, Модератор")]
+        [HttpGet, ActionName("ViewTag")]
+        public async Task<IActionResult> TagInfo(Guid id)
+        {
+            if (id == null)
+                return NotFound();
+            var eTag = await _tagService.GetTag(id);
+            if (eTag == null)
+                return NotFound();
+            return View("TagInfo",eTag);
+        }
+        /// <summary>
         /// [Get] Метод, редактирования тега
         /// </summary>
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public IActionResult EditTag(Guid id)
+        public async Task<IActionResult> EditTagAsync(Guid id)
         {
-            
-            var view = new TagEditRequest { Id = id };
-            return View(view);
-            //var model = _tagService.EditTag(id);
-            //return View(model);
+            if (id == null)
+                return NotFound();
+            var eTag = await _tagService.GetTag(id);
+            if (eTag == null)
+                return NotFound();
+            return View(eTag);
         }
 
         /// <summary>
@@ -120,7 +137,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
-        [Route("Tag/Get")]
+        [Route("Tag/GetAll")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetTags()

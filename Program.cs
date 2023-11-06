@@ -1,5 +1,5 @@
 using AutoMapper;
-using BnLog.BLL;
+using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using Microsoft.EntityFrameworkCore;
