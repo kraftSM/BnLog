@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using BnLog.BLL.Services.IService;
-using BnLog.DLL.Models;
-using BnLog.DLL.Models.Security;
+using BnLog.DAL.Models;
 using BnLog.BLL.Services.IService;
-using BnLog.DLL.Request;
+using BnLog.DAL.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AutoMapper.Internal;
-using BnLog.DLL.Request.Security;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL.Controllers
 {
@@ -40,10 +40,11 @@ namespace BnLog.BLL.Controllers
         }
 
         [Authorize]
-        public IActionResult UserPage()
+        [Route("Home/UserPage")]
+        public IActionResult UserPage(UserLoginRequest model)
         {
-
-            return View(UserLoginRequest);
+            //_userManager.GetUserName;
+            return View("UserPage", model);
         }
 
         public IActionResult Privacy()

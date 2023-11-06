@@ -1,9 +1,9 @@
-﻿using BnLog.DLL.Models.Security;
-using BnLog.DLL.Models;
+﻿using BnLog.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using BnLog.DLL.Request.Security;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL.Services.IService
 {

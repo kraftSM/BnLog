@@ -2,11 +2,11 @@ using AutoMapper;
 using BnLog.BLL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
-using BnLog.DLL.IRepository;
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Repository.Entity;
-using BnLog.DLL.Repository;
 using Microsoft.EntityFrameworkCore;
+using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Repository.Entity;
+using BnLog.DAL.Repository;
 
 namespace BnLog
 {
@@ -42,10 +42,10 @@ namespace BnLog
             // Services AddSingletons/Transient
             builder.Services
                 .AddSingleton(mapper)
-                //.AddTransient<ICommentService, CommentService>()
+                .AddTransient<ICommentService, CommentService>()
                 .AddTransient<IHomeService, HomeService>()
-                //.AddTransient<IPostService, PostService>()
-                //.AddTransient<ITagService, TagService>()
+                .AddTransient<IPostService, PostService>()
+                .AddTransient<ITagService, TagService>()
                 .AddTransient<IRoleService, RoleService>()
                 .AddTransient<ICommentRepository, CommentRepository>()
                 .AddTransient<ITagRepository, TagRepository>()

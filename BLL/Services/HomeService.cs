@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using BnLog.BLL.Services.IService;
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Request.Security;
+using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 using Microsoft.AspNetCore.Identity;
 
 namespace BnLog.BLL.Services
@@ -10,10 +11,12 @@ namespace BnLog.BLL.Services
     {
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly ITagRepository _tagRepo;
         public IMapper _mapper;
 
-        public HomeService(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager)
+        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager)
         {
+            _tagRepo = tagRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
@@ -49,7 +52,9 @@ namespace BnLog.BLL.Services
             await _userManager.AddToRoleAsync(user0, roleUser.Name);
             await _userManager.AddToRoleAsync(user1, roleModer.Name);
             await _userManager.AddToRoleAsync(user2, roleAdmin.Name);
-            await _userManager.AddToRoleAsync(user2, roleDesign.Name);
+            await _userManager.AddToRoleAsync(user3, roleDesign.Name);
+
+            //await _tagRepo.AddTag("Test");
         }
     }
 }

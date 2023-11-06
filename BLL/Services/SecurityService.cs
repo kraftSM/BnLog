@@ -2,14 +2,13 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using BnLog.DLL.IRepository;
-using BnLog.DLL.Request.Security;
-using BnLog.DLL.Models.Security;
 using BnLog.BLL.Services.IService;
 
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-
+using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL.Services
 {

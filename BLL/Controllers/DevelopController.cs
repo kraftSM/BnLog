@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using BnLog.BLL.Services;
 using BnLog.BLL.Services.IService;
-using BnLog.DLL.Develop;
-using BnLog.DLL.Models.Security;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Develop;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +13,11 @@ namespace BnLog.BLL.Controllers
 {
     public class DevelopController : Controller
     {
+        //Сейчас не делаю. Может стоит отказаться от этого ВООБЩЕ 
+
         //Добавочные опции для Разработчика.
-        //Минимум Users+Roles генерятся в HomeService
-        //Здесь планируется расположить генераторы тестовых Post;sbyte etc
+        //Минимум данных для теста Users+Roles генерятся в HomeService
+        //Здесь планируется расположить генераторы тестовых Post&Comment etc
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;

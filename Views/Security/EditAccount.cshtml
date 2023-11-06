@@ -1,4 +1,5 @@
-﻿@model BnLog.DLL.Request.Security.UserEditRequest
+﻿@model UserEditRequest
+@using BnLog.DAL.Request.Security
 
 <div class="container-page">
     <h2 class="title-margin">Редактирование пользователя</h2>
@@ -22,31 +23,31 @@
 			    }
             }
 		</table>
-        <div style="margin-bottom: 5px">
+        <div style="margin-bottom: 3px">
             <label asp-for="FirstName"></label><br />
             <input class="form-control" asp-for="FirstName" />
             <span asp-validation-for="FirstName" class="text-danger"></span>
             <input class="form-control" asp-for="Id" hidden/>
         </div>
-        <div style="margin-bottom: 5px">
+        <div style="margin-bottom: 3px">
             <label asp-for="LastName"></label><br />
             <input class="form-control" asp-for="LastName" />
             <span asp-validation-for="LastName" class="text-danger"></span>
             <input class="form-control" asp-for="Id" hidden/>
         </div>
-        <div style="margin-bottom: 5px">
+        <div style="margin-bottom: 3px">
             <label asp-for="UserName"></label><br />
             <input class="form-control" asp-for="UserName" />
             <span asp-validation-for="UserName" class="text-danger"></span>
             <input class="form-control" asp-for="Id" hidden/>
         </div>
-        <div style="margin-bottom: 5px">
+        <div style="margin-bottom: 3px">
             <label asp-for="Email"></label><br />
             <input class="form-control" asp-for="Email" />
             <span asp-validation-for="Email" class="text-danger"></span>
             <input class="form-control" asp-for="Id" hidden/>
         </div>
-        <div style="margin-bottom: 5px">
+        <div style="margin-bottom: 3px">
             <label asp-for="NewPassword"></label><br />
             <input class="form-control" asp-for="NewPassword" />
             <span asp-validation-for="NewPassword" class="text-danger"></span>

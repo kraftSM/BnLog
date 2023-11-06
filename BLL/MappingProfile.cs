@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Request.Security;
-using BnLog.DLL.Request.Entity;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BnLog.DLL.Models.Entity;
+using BnLog.DAL.Models.Entity;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Entity;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL
 {

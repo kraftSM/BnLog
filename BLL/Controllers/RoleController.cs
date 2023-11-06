@@ -2,10 +2,8 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
-using BnLog.DLL.Request.Security;
 using BnLog.BLL.Services.IService;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL.Controllers
 {
@@ -121,7 +119,7 @@ namespace BnLog.BLL.Controllers
         public async Task<IActionResult> GetRoles()
         {
             var roles = await _roleService.GetRoles();
-            return View(roles);
+            return View( roles);
         }
     }
 }

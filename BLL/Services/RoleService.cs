@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Request.Security;
 using BnLog.BLL.Services.IService;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 
 namespace BnLog.BLL.Services
 {

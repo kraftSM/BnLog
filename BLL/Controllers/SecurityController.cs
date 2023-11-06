@@ -7,9 +7,8 @@ using System.Data;
 
 using BnLog.BLL.Services;
 using BnLog.BLL.Services.IService;
-
-using BnLog.DLL.Models.Security;
-using BnLog.DLL.Request.Security;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Request.Security;
 //using BnLog.
 //using BnLog.Views.Security;
 
@@ -25,7 +24,6 @@ namespace BnLog.BLL.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger<SecurityController> _logger;
 
-        //public AccountController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
         public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ISecurityService securityService, ILogger<SecurityController> logger)
         {
             _roleManager = roleManager;
@@ -35,16 +33,7 @@ namespace BnLog.BLL.Controllers
             _securityService = securityService;
             _logger = logger;
         }
-        //public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService, ILogger<AccountController> logger)
-        //{
-        //    _roleManager = roleManager;
-        //    _mapper = mapper;
-        //    _userManager = userManager;
-        //    _signInManager = signInManager;
-        //    _accountService = accountService;
-        //    _logger = logger;
-        //}
-
+    
         /// <summary>
         /// [Get] Метод, login
         /// </summary>
@@ -69,7 +58,7 @@ namespace BnLog.BLL.Controllers
 
                 if (result.Succeeded)
                     //return RedirectToAction("Index", "Home");
-                    return RedirectToAction("Home", "UserPage");
+                    return RedirectToAction("UserPage","Home", model);
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");

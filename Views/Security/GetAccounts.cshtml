@@ -1,9 +1,48 @@
-﻿﻿@*
-@using BnLog.DLL.Models.Security.User;
-@model List<User>
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@model List<User>
+@using BnLog.DAL.Models.Security;
+
+﻿@*    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 *@
-<h53 class="card-title">Отображения данных по всем User-Accounts </h53>
+<h3 class="card-title">Отображения данных по всем User-Accounts </h3>
 
-    
+@{
+    @if (Model.Count() == 0)
+    {
+        <h5 class="card-title">Нету данных для отображения</h5>
+    }
+    else
+    {
+        <h5 class="card-title">Все пользователи</h5>
+        foreach (var user in Model)
+        {
+            <div class="card w-75">
+                <div class="card-body">
+                    <h4 class="card-title"> Account : @user.UserName
+                    @if (User.IsInRole("Администратор"))
+                    {
+                            <span>
+                            <a class="btn btn-outline-info button" method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@user.Id">Редактировать</a>
+                            <a class="btn btn-outline-danger button" method="post" asp-controller="Security" asp-action="RemoveAccount" asp-route-id="@user.Id">Удалить</a>
+                        </span>
+                    }</h4>
+
+                    <h4>Роли:
+                    @foreach (var role in user.Roles)
+                    {
+                        <span class="badge rounded-pill text-bg-success" style="color:darkblue">@role.Name</span> 
+                        ﻿@* <span   style="color:darkblue">@role.Name</span>﻿*@
+                        }
+                    </h4>
+                    <h5>Посты:</h5>
+                    @foreach (var post in user.Posts)
+                    {
+                        <span class="badge rounded-pill text-bg-success" style="color:green"><a method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Title</a></span>
+                    }
+                    <p> </p>
+                </div>
+            </div>            
+        }
+        <p> Total user accounts @Model.Count()</p>
+    }
+}
