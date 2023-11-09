@@ -3,12 +3,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Data;
 
 using BnLog.BLL.Services;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
+using System.Security.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 //using BnLog.
 //using BnLog.Views.Security;
 
@@ -52,19 +57,41 @@ namespace BnLog.BLL.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserLoginRequest model)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _securityService.Login(model);
-
-                if (result.Succeeded)
-                    //return RedirectToAction("Index", "Home");
-                    return RedirectToAction("UserPage","Home", model);
-                else
+            //Что-то Claim навертелось...
+            //Check Login/Password format
+            if (!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("", "Неправильный логин и (или) пароль"); 
+                    throw new ArgumentNullException("Логин или пароль не корректен");
+                }
+            //Try to entry by Login/Password
+            var result = await _securityService.Login(model);
+            if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    return View(model);
+                    //throw new AuthenticationException("User password incorrect");//здесь ли??
                 }
-            }
-            return View(model);
+            //ALL is OK 
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, model.Email) // Claim for user Name
+                //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name) // Claim for user Role
+            };
+            //Add claims
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims,
+                "AppCookie",
+                ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+            //Go to work   
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("UserPage","Home", model);
+            //return _mapper.Map<UserViewModel>(user);        
+            
         }
 
         /// <summary>

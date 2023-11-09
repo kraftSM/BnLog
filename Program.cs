@@ -1,4 +1,12 @@
 using AutoMapper;
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+
 using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
@@ -38,8 +46,13 @@ namespace BnLog
                 })
                 .AddEntityFrameworkStores<BlogDbContext>();
 
+            // Не забыть бы потом Services AddSwaggerGen
+            //builder.Services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
+            //});
 
-            // Services AddSingletons/Transient
+            // subServices mapper & Company...AddSingletons/Transient
             builder.Services
                 .AddSingleton(mapper)
                 .AddTransient<ICommentService, CommentService>()
@@ -57,8 +70,21 @@ namespace BnLog
                 .ClearProviders()
                 .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
                 //
-                .AddConsole();        
+                .AddConsole();
 
+            // AddAuthentication "Cookies"
+            builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
+                .AddCookie("Cookies", options =>
+                {
+                    options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = redirectContext =>
+                        {
+                            redirectContext.HttpContext.Response.StatusCode = 401;
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             // Start WebApplication
             var app = builder.Build();
