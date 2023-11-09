@@ -56,26 +56,26 @@ namespace BnLog.BLL.Services
         public async Task<SignInResult> Login(UserLoginRequest model)
         {
             //?? Simple & BEST
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
-            return result;
-
-            //?? Complex Variant. Think it men...
-            //var user = await _userManager.FindByEmailAsync(model.Email);           
-
-            //if (user is null)
-            //{
-            //    //throw new AuthenticationException("User not found");//здесь ли??
-            //    return new SignInResult();// sinRes= Failed;                                                                 
-            //}   
+            //var user = await _userManager.FindByEmailAsync(model.Email);
             //var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
-            //if (result.Succeeded)
-            //    return result; 
-            //else
-            //{
-            //    return result;
-            //    //throw new AuthenticationException("User password incorrect");//здесь ли??
-            //}           
+            //return result;
+
+            //?? Complex Variant.Think it men...
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user is null)
+            {
+                //throw new AuthenticationException("User not found");//здесь ли??
+                return new SignInResult();// sinRes= Failed;                                                                 
+            }
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
+            if (result.Succeeded)
+                return result;
+            else
+            {
+                return result;
+                //throw new AuthenticationException("User password incorrect");//здесь ли??
+            }
         }
 
         public async Task<UserEditRequest> EditAccount(Guid id)

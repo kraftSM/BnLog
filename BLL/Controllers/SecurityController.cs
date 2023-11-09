@@ -70,15 +70,18 @@ namespace BnLog.BLL.Controllers
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
                     return View(model);
+                    //return RedirectToAction("Error", "Home");//Можно итак грубо... Но здесь ли??                 
                     //throw new AuthenticationException("User password incorrect");//здесь ли??
-                }
+            }
             //ALL is OK 
+            //Add claims etc..
+            //Возможно и не стоит так извращаться, в сервисе и так установлен флаг на хранение Cookieы ??? Think it Man...
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, model.Email) // Claim for user Name
                 //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name) // Claim for user Role
             };
-            //Add claims
+            
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(
                 claims,
                 "AppCookie",
