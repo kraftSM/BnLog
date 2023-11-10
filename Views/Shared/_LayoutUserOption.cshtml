@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @if (User.IsInRole("Администратор") || User.IsInRole("Модератор"))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Tag" asp-action="GetTags">Теги</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Role" asp-action="GetRoles">Роли</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Security" asp-action="GetAccounts">Пользователи</a>
+        </li>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <a class="nav-link text-dark" method="post" asp-area="" asp-controller="Home" asp-action="UserPage" asp-route-UserName="@User.Identity.Name">UserPage:[
+            <span style="color: dodgerblue">@User.Identity.Name</span>  ]
+            </a>
+        <form method="post" asp-controller="Security" asp-action="LogoutAccount">
+            @*<p class="badge bg-success text-white nav-item flex-grow-1" style="line-height: 2; margin-bottom: 0;">@User.Identity.Name</p>*@
+            <input class="btn btn-sm btn-primary nav-item flex-grow-1" style="margin-bottom: 0;" type="submit" value="Выход" />
+        </form>
+    }
+    else
+    {
+        <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Login">Вход</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Register">Регистрация</a>
+    }
+}

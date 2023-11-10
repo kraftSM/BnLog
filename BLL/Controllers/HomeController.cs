@@ -11,6 +11,10 @@ using System.Diagnostics;
 using AutoMapper.Internal;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
+using Microsoft.EntityFrameworkCore;
+using BnLog.BLL.Services;
+using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace BnLog.BLL.Controllers
 {
@@ -29,6 +33,7 @@ namespace BnLog.BLL.Controllers
             _roleManager = roleManager;
             _signInManager = signInManager;
             _homeService = homeService;
+
             _mapper = mapper;
             _logger = logger;
         }
@@ -41,10 +46,13 @@ namespace BnLog.BLL.Controllers
 
         [Authorize]
         [Route("Home/UserPage")]
-        public IActionResult UserPage(UserLoginRequest model)
+        //public IActionResult UserPage(UserLoginRequest model)
+        public async Task<IActionResult> UserPage(string? UserName = null)
         {
+            var user = await _userManager.FindByNameAsync(UserName);
+            
             //_userManager.GetUserName;
-            return View("UserPage", model);
+            return View("UserPage", user);
         }
 
         public IActionResult Privacy()

@@ -38,33 +38,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.IsInRole("Администратор") || User.IsInRole("Модератор"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Tag" asp-action="GetTags">Теги</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Role" asp-action="GetRoles">Роли</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Security" asp-action="GetAccounts">Пользователи</a>
-                            </li>
-                        }
+                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Post" asp-action="GetPosts">Статьи</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <form method="post" asp-controller="Security" asp-action="LogoutAccount">
-                                <p class="badge bg-success text-white nav-item flex-grow-1" style="line-height: 2; margin-bottom: 0;">@User.Identity.Name</p>
-                                <input class="btn btn-sm btn-primary nav-item flex-grow-1" style="margin-bottom: 0;" type="submit" value="Выход" />
-                            </form>
-                        }
-                        else
-                        {
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Login">Вход</a>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Security" asp-action="Register">Регистрация</a>                            
-                        }
+                        <partial name="_LayoutUserOption.cshtml" />
+                        
                     </ul>
                 </div>
             </div>
@@ -78,8 +57,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - BnLog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span></span>&copy BnLog Версия (V1.0.2 от 2023-11-09) <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -62,7 +62,7 @@ namespace BnLog.BLL.Services
 
             //?? Complex Variant.Think it men...
             var user = await _userManager.FindByEmailAsync(model.Email);
-
+            
             if (user is null)
             {
                 //throw new AuthenticationException("User not found");//здесь ли??
@@ -164,6 +164,12 @@ namespace BnLog.BLL.Services
             }
 
             return accounts;
+        }
+        public async Task<UserEditRequest> GetAccountByName(string Name)
+        {
+            var user = await _userManager.FindByNameAsync(Name);
+
+            return  _mapper.Map<UserEditRequest>(user);  
         }
 
         public async Task LogoutAccount()
