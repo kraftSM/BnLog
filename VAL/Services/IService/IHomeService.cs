@@ -1,4 +1,4 @@
-﻿namespace BnLog.BLL.Services.IService
+﻿namespace BnLog.VAL.Services.IService
 {
     public interface IHomeService
     {

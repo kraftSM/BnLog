@@ -2,9 +2,9 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BnLog.BLL.Services.IService;
-using BnLog.BLL.Services;
+using BnLog.VAL.Services;
 using BnLog.VAL.Request.Security;
+using BnLog.VAL.Services.IService;
 
 namespace BnLog.BLL.Controllers
 {

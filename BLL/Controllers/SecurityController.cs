@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Data;
 
-using BnLog.BLL.Services;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using System.Security.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using BnLog.VAL.Services.IService;
 //using BnLog.
 //using BnLog.Views.Security;
 

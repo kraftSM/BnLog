@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-
-using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
-using BnLog.BLL.Services;
+using BnLog.VAL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BnLog.VAL.Request.Entity;
+using BnLog.VAL.Services.IService;
 
 namespace BnLog.BLL.Controllers
 {

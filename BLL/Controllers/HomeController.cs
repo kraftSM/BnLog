@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services.IService;
 using BnLog.DAL.Models;
-using BnLog.BLL.Services.IService;
 using BnLog.VAL.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,9 +10,10 @@ using AutoMapper.Internal;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using Microsoft.EntityFrameworkCore;
-using BnLog.BLL.Services;
+using BnLog.VAL.Services;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using BnLog.VAL.Services.IService;
 
 namespace BnLog.BLL.Controllers
 {

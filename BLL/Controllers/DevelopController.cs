@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services;
 using BnLog.DAL.Models.Security;
 using BnLog.DAL.Develop;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using BnLog.VAL.Services.IService;
 
 namespace BnLog.BLL.Controllers
 {

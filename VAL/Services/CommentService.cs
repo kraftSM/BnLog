@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
@@ -7,7 +7,7 @@ using BnLog.VAL.Request.Entity;
 using Microsoft.AspNetCore.Identity;
 using System;
 
-namespace BnLog.BLL.Services
+namespace BnLog.VAL.Services
 {
     public class CommentService : ICommentService
     {

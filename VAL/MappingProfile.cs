@@ -6,8 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
+using BnLog.VAL.Response.Item;
+using BnLog.VAL.Request.Item;
 using BnLog.VAL.Request.Entity;
 using BnLog.VAL.Request.Security;
+using BnLog.DAL.Models.Info;
 
 namespace BnLog.VAL
 {
@@ -27,6 +30,9 @@ namespace BnLog.VAL
             CreateMap<CommentEditRequest, Comment>();
             CreateMap<TagCreateRequest, Tag>();
             CreateMap<TagEditRequest, Tag>();
+            // Item
+            CreateMap<ItemInfoRqst, ItemInfo>();
+            CreateMap<ItemInfoResp, ItemInfo>();
             // Item
 
         }

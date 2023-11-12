@@ -2,7 +2,7 @@
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 
-namespace BnLog.BLL.Services.IService
+namespace BnLog.VAL.Services.IService
 {
     public interface IRoleService
     {

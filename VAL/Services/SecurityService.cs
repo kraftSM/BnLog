@@ -2,7 +2,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using BnLog.BLL.Services.IService;
 
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -10,8 +9,9 @@ using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using System.Security.Authentication;
+using BnLog.VAL.Services.IService;
 
-namespace BnLog.BLL.Services
+namespace BnLog.VAL.Services
 {
     public class SecurityService : ISecurityService
     {
@@ -31,7 +31,7 @@ namespace BnLog.BLL.Services
         }
 
         public async Task<IdentityResult> Register(UserRegisterRequest model)
-        {           
+        {
             var user = _mapper.Map<User>(model);
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -62,7 +62,7 @@ namespace BnLog.BLL.Services
 
             //?? Complex Variant.Think it men...
             var user = await _userManager.FindByEmailAsync(model.Email);
-            
+
             if (user is null)
             {
                 //throw new AuthenticationException("User not found");//здесь ли??
@@ -169,7 +169,7 @@ namespace BnLog.BLL.Services
         {
             var user = await _userManager.FindByNameAsync(Name);
 
-            return  _mapper.Map<UserEditRequest>(user);  
+            return _mapper.Map<UserEditRequest>(user);
         }
 
         public async Task LogoutAccount()

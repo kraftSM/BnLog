@@ -1,20 +1,21 @@
-using AutoMapper;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.EntityFrameworkCore;
 
 using BnLog.VAL;
-using BnLog.BLL.Services.IService;
-using BnLog.BLL.Services;
-using Microsoft.EntityFrameworkCore;
-using BnLog.DAL.IRepository;
+
 using BnLog.DAL.Models.Security;
-using BnLog.DAL.Repository.Entity;
+using BnLog.DAL.Models.Info;
+using BnLog.DAL.IRepository;
 using BnLog.DAL.Repository;
+using BnLog.DAL.Repository.Item;
+using BnLog.DAL.Repository.Entity;
+using BnLog.VAL.Services;
+using BnLog.VAL.Services.IService;
+using BnLog.VAL.Extentions;
 
 namespace BnLog
 {
@@ -26,50 +27,53 @@ namespace BnLog
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            // Connect AutoMapper
-            var mapperConfig = new MapperConfiguration((v) =>
-            {
-                v.AddProfile(new MappingProfile());
-            });
-            IMapper mapper = mapperConfig.CreateMapper();
+            
+            //var mapperConfig = new MapperConfiguration((v) =>
+            //{
+            //    v.AddProfile(new MappingProfile());
+            //});
+            //IMapper mapper = mapperConfig.CreateMapper();
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection))
-                .AddIdentity<User, Role>(opts =>
-                {
-                    opts.Password.RequiredLength = 5;
-                    opts.Password.RequireNonAlphanumeric = false;
-                    opts.Password.RequireLowercase = false;
-                    opts.Password.RequireUppercase = false;
-                    opts.Password.RequireDigit = false;
-                })
-                .AddEntityFrameworkStores<BlogDbContext>();
+            //builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Scoped);
+            builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Singleton);
 
-            // Не забыть бы потом Services AddSwaggerGen
-            //builder.Services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
-            //});
 
-            // subServices mapper & Company...AddSingletons/Transient
+            // subServices mapper & Company... via ServiceExtentions
+            builder.Services.AddAutoMapper() // Connect AutoMapper
+                //.AddUnitOfWork()
+                .AddRepositories()
+                .AddServicesBLL();
             builder.Services
-                .AddSingleton(mapper)
-                .AddTransient<ICommentService, CommentService>()
+                //.AddSingleton(mapper)
+                // This moved to AddServicesBLL()
+                //.AddTransient<ICommentService, CommentService>()
                 .AddTransient<IHomeService, HomeService>()
-                .AddTransient<IPostService, PostService>()
-                .AddTransient<ITagService, TagService>()
-                .AddTransient<IRoleService, RoleService>()
+                //.AddTransient<IPostService, PostService>()
+                //.AddTransient<ITagService, TagService>()
+                //.AddTransient<IRoleService, RoleService>()
+                //.AddTransient<ISecurityService, SecurityService>()
+                .AddTransient<IItemInfoRepository, ItemInfoRepository>()
                 .AddTransient<ICommentRepository, CommentRepository>()
                 .AddTransient<ITagRepository, TagRepository>()
-                .AddTransient<IPostRepository, PostRepository>()
-                .AddTransient<ISecurityService, SecurityService>();
+                .AddTransient<IPostRepository, PostRepository>();
+
+            // Add MS SECURITY
+            builder.Services.AddIdentity<User, Role>(opts =>
+            {
+                opts.Password.RequiredLength = 5;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            })
+                .AddEntityFrameworkStores<BlogDbContext>();
 
             // Connect logger
             builder.Logging
                 .ClearProviders()
                 .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
-                //
                 .AddConsole();
 
             // AddAuthentication "Cookies"
@@ -104,7 +108,7 @@ namespace BnLog
             app.UseAuthentication();
 
             app.UseAuthorization();
-
+            //app.UseStatusCodePagesWithRedirects("/Home/{0}");
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

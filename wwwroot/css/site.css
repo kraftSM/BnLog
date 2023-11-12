@@ -14,11 +14,6 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
-.tagInfo {
-    font-size: 16px;
-    /*color: darkgreen;*/
-    color: darkblue;
-    /*color: darkred;*/
-}
+

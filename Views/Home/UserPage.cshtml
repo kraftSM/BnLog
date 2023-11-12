@@ -1,7 +1,14 @@
-﻿@model User 
-@using BnLog.DAL.Models.Security
+﻿@model BnLog.DAL.Models.Security.User 
 @*@using BnLog.VAL.Request.Security
-@model BnLog.DLL.Request.MainRequest*@
+
+@model UserLoginRequest
+@using BnLog.VAL.Request.Security
+@model BnLog.DLL.Request.MainRequest
+
+@{
+    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    var currentUser = userManager.FindById(User.Identity.GetUserId());
+}*@
 @{
     ViewData["Title"] = "UserPage";
     //Layout = null; //отключение стилей мастер-страниц, и теперь можно лепить свой дизайн.
@@ -12,6 +19,6 @@
     @*<h3 class="center">Model.User.GetFullName()</h3>
         <h3 class="center">@Model.RegisterView.FirstName</h3>
         <h4 class="center">@Model.LoginView.Email</h4>*@
-        <h4 class="center">@Model.UserName</h4>
+        <h4 class="center">@Model.Email</h4>
 
 </div>
