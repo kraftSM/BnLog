@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
+using BnLog.DAL.Models.Items;
 using BnLog.DAL.Repository;
 using BnLog.DAL.Repository.Items;
 using BnLog.DAL.Repository.Entity;
@@ -15,8 +16,6 @@ using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using BnLog.BLL.Extentions;
-
-
 
 namespace BnLog
 {
@@ -51,10 +50,12 @@ namespace BnLog
             })
                 .AddEntityFrameworkStores<BlogDbContext>();
  
-            builder.Services.AddUnitOfWork()
+            builder.Services.AddServicesBL()
                 .AddDirectRepositories()
                 .AddRepositories()
-                .AddServicesBL()
+                .AddUnitOfWork()
+                .AddCustomRepository<ItemOption, ItemOptionRepository>()
+                .AddCustomRepository<ItemResurce, ItemResurceRepository>()
                 .AddAutoMapper();
            // Не забыть бы потом Services AddSwaggerGen
            //builder.Services.AddSwaggerGen(c =>

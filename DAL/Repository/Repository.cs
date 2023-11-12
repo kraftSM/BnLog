@@ -45,7 +45,7 @@ namespace BnLog.DAL.Repository
         {
             return await Set.FindAsync(id);
         }
-        public virtual async Task<T> GetByGuidAsync(Guid guid)
+        public virtual async Task<T?> GetByGuidAsync(Guid guid)
         {
             return await Set.FindAsync(guid);
                 //Where(x => x.Id == guid).FirstOrDefaultAsync();

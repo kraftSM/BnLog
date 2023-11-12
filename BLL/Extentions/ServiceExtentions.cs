@@ -85,13 +85,16 @@ namespace BnLog.BLL.Extentions
             //Items Repository
             //services.AddTransient<IRepository<ItemOption>, ItemOptionRepository>();
             //services.AddTransient<IRepository<ItemResurce>, ItemResurceRepository>();
-            services.AddScoped<IRepository<ItemOption>, ItemOptionRepository>();
-            services.AddScoped<IRepository<ItemResurce>, ItemResurceRepository>();
+
+            //services.AddCustomRepository<ItemOption, ItemOptionRepository>();
+            //services.AddCustomRepository<ItemResurce, ItemResurceRepository>();
+
+            //services.AddScoped<IRepository <ItemOption>, ItemOptionRepository>();
+            //services.AddScoped<IRepository<ItemResurce>, ItemResurceRepository>();
 
             return services;
         }
         #endregion
-
 
         #region Конфигурация automapper'a
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)

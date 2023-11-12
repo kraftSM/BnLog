@@ -17,7 +17,7 @@ namespace BnLog.VAL.Services
         private readonly ItemResurceRepository _itemResurceRepo;
         private readonly ItemOptionRepository _itemOptionRepo;
 
-        public ItemService( IItemsRepository itemRepo, IMapper mapper)// ItemOptionRepository itemOptionRepo, ItemResurceRepository itemResurceRepo,
+        public ItemService( IItemsRepository itemRepo, IMapper mapper)//ItemOptionRepository itemOptionRepo,  ItemResurceRepository itemResurceRepo,
         {
             _itemRepo = itemRepo;
             ////_tagRepo = tagRepo;
