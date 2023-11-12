@@ -8,6 +8,7 @@ namespace BnLog.DAL.IRepository
         //HashSet<Item> GetAllItems();
         Item GetItem(Guid id);
         List<Item> GetAllItems();
+        public Task AddItem(Item? item);
         List<Item> GetAllItemsOfTypes(int ItemType);
         //Task AddItem(Item item);
         //Task UpdateItem(Item item);

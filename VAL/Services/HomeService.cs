@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Items;
+using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using Microsoft.AspNetCore.Identity;
@@ -11,12 +13,14 @@ namespace BnLog.BLL.Services
     {
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly IItemsRepository _itemRepo;
         private readonly ITagRepository _tagRepo;
         public IMapper _mapper;
 
-        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager)
+        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, IItemsRepository itemRepo)
         {
             _tagRepo = tagRepo;
+            _itemRepo = itemRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
@@ -54,7 +58,33 @@ namespace BnLog.BLL.Services
             await _userManager.AddToRoleAsync(user2, roleAdmin.Name);
             await _userManager.AddToRoleAsync(user3, roleDesign.Name);
 
-            //await _tagRepo.AddTag("Test");
+            var testTag1 = new Tag { Name = "testTag1" };
+            await _tagRepo.AddTag(testTag1);
+
+            var testItem0 = new Item()
+            {
+                Id = Guid.NewGuid(),
+                CreatedData = DateTime.Now,
+                ItemType = 1,
+                
+                ItemId = testTag1.Id,
+                ItemOption = new List<ItemOption>()
+                {
+                    new ItemOption
+                    {
+                        Id = Guid.NewGuid(),
+                        CreatedData = DateTime.Now,
+                        TypeId = 0,
+                        Type = "Test",
+                        strVal = "TestVal",
+                        intVal = 0
+                    }
+
+                }
+            };
+            await _itemRepo.AddItem(testItem0);
+
+            // _tagRepo.AddTag("Test");
         }
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using BnLog.BLL.Services;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using BnLog.DAL.IRepository;
 
 namespace BnLog.BLL.Controllers
 {
@@ -25,10 +26,12 @@ namespace BnLog.BLL.Controllers
         private readonly RoleManager<Role> _roleManager;
         private readonly IHomeService _homeService;
         private readonly ILogger<HomeController> _logger;
+        private readonly IItemsRepository _itemRepo;  
         private IMapper _mapper;
 
-        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, ILogger<HomeController> logger)
+        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, ILogger<HomeController> logger, IItemsRepository itemRepo)
         {
+            _itemRepo = itemRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;

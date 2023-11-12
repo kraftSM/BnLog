@@ -12,7 +12,11 @@ namespace BnLog.DAL.Repository.Items
         {
             _context = context;
         }
-
+        public async Task AddItem(Item? item)
+        {
+            _context.Items.Add(item);
+            await SaveChangesAsync();
+        }
         public List<Item> GetAllItems()
         {
             return _context.Items.Include(p => p.ItemType).ToList();

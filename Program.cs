@@ -6,15 +6,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Security;
+using BnLog.DAL.Repository;
+using BnLog.DAL.Repository.Items;
+using BnLog.DAL.Repository.Entity;
 
 using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using Microsoft.EntityFrameworkCore;
-using BnLog.DAL.IRepository;
-using BnLog.DAL.Models.Security;
-using BnLog.DAL.Repository.Entity;
-using BnLog.DAL.Repository;
+
 
 namespace BnLog
 {
@@ -61,6 +63,7 @@ namespace BnLog
                 .AddTransient<ITagService, TagService>()
                 .AddTransient<IRoleService, RoleService>()
                 .AddTransient<ICommentRepository, CommentRepository>()
+                .AddTransient<IItemsRepository, ItemsRepository>()
                 .AddTransient<ITagRepository, TagRepository>()
                 .AddTransient<IPostRepository, PostRepository>()
                 .AddTransient<ISecurityService, SecurityService>();

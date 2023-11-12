@@ -1,4 +1,6 @@
-﻿namespace BnLog.DAL.Models.Items
+﻿using BnLog.DAL.Models.Entity;
+
+namespace BnLog.DAL.Models.Items
 {
     public class Item
     //Non entity elements for linking  addons to main entitys
@@ -8,5 +10,7 @@
         // к чему привязываемся
         public int? ItemType { get; set; } = null;
         public Guid? ItemId { get; set; } = null;
+        public List<ItemOption> ItemOption { get; set; } = new List<ItemOption>();
+        public List<ItemResurce> ItemResurce { get; set; } = new List<ItemResurce>(); 
     }
 }
