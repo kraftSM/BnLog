@@ -29,30 +29,30 @@ namespace BnLog
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             // Connect AutoMapper
-            var mapperConfig = new MapperConfiguration((v) =>
-            {
-                v.AddProfile(new MappingProfile());
-            });
-            IMapper mapper = mapperConfig.CreateMapper();
+            //var mapperConfig = new MapperConfiguration((v) =>
+            //{
+            //    v.AddProfile(new MappingProfile());
+            //});
+            //IMapper mapper = mapperConfig.CreateMapper();
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
             //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection));
-            builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Scoped)
-                //.AddUnitOfWork()
-                //.AddRepositories()
-                //.AddServicesBL()
-                //.AddAutoMapper()
-                .AddIdentity<User, Role>(opts =>
-                {
-                    opts.Password.RequiredLength = 5;
-                    opts.Password.RequireNonAlphanumeric = false;
-                    opts.Password.RequireLowercase = false;
-                    opts.Password.RequireUppercase = false;
-                    opts.Password.RequireDigit = false;
-                })
+            builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Scoped);
+
+            // Add MS SECURITY
+            builder.Services.AddIdentity<User, Role>(opts =>
+            {
+                opts.Password.RequiredLength = 5;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+            })
                 .AddEntityFrameworkStores<BlogDbContext>();
+ 
             builder.Services.AddUnitOfWork()
+                .AddDirectRepositories()
                 .AddRepositories()
                 .AddServicesBL()
                 .AddAutoMapper();
@@ -64,17 +64,23 @@ namespace BnLog
 
             // subServices mapper & Company...AddSingletons/Transient
            builder.Services
-                .AddSingleton(mapper)
-                .AddTransient<ICommentService, CommentService>()
-                .AddTransient<IHomeService, HomeService>()
-                .AddTransient<IPostService, PostService>()
-                .AddTransient<ITagService, TagService>()
-                .AddTransient<IRoleService, RoleService>()
-                .AddTransient<ICommentRepository, CommentRepository>()
-                .AddTransient<IItemsRepository, ItemsRepository>()
-                .AddTransient<ITagRepository, TagRepository>()
-                .AddTransient<IPostRepository, PostRepository>()
-                .AddTransient<ISecurityService, SecurityService>();
+                //.AddSingleton(mapper)
+                //.AddTransient<ICommentService, CommentService>()
+                //.AddTransient<IHomeService, HomeService>()
+                //.AddTransient<IPostService, PostService>()
+                //.AddTransient<ITagService, TagService>()
+
+                //.AddTransient<IRoleService, RoleService>()
+                //.AddTransient<ISecurityService, SecurityService>()
+
+                //.AddTransient<ICommentRepository, CommentRepository>()
+                //.AddTransient<IPostRepository, PostRepository>()
+                //.AddTransient<ITagRepository, TagRepository>()
+
+                .AddTransient<IItemsRepository, ItemsRepository>();
+                
+                
+                
 
             // Connect logger
             builder.Logging

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Microsoft.EntityFrameworkCore;
+
 using BnLog.DAL.IRepository;
 
 namespace BnLog.DAL.Repository
@@ -42,6 +44,11 @@ namespace BnLog.DAL.Repository
         public virtual async Task<T?> GetByIdAsync(int id)
         {
             return await Set.FindAsync(id);
+        }
+        public virtual async Task<T> GetByGuidAsync(Guid guid)
+        {
+            return await Set.FindAsync(guid);
+                //Where(x => x.Id == guid).FirstOrDefaultAsync();
         }
 
         public virtual async Task<int> UpdateAsync(T item)

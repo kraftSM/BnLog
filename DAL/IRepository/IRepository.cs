@@ -14,7 +14,7 @@ namespace BnLog.DAL.IRepository
         Task<List<T>> GetAllAsync();
 
         Task<T?> GetByIdAsync(int id);
-
+        Task<T?> GetByGuidAsync(Guid guid);
         Task<int> CreateAsync(T item);
 
         Task<int> UpdateAsync(T item);
