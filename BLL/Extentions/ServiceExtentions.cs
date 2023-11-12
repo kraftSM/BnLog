@@ -1,14 +1,19 @@
 ﻿using AutoMapper;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Repository.Entity;
 using BnLog.DAL.Repository;
-using BnLog.VAL;
-using Microsoft.Extensions.DependencyInjection;
 using BnLog.DAL.Models.Items;
 using BnLog.DAL.Repository.Items;
+
+using BnLog.VAL;
+using BnLog.VAL.Services;
+using BnLog.VAL.Services.IService;
 
 namespace BnLog.BLL.Extentions
 {
@@ -49,11 +54,12 @@ namespace BnLog.BLL.Extentions
             services.AddScoped<IRoleService, RoleService>();
             //Other services
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IItemService, ItemService>();
 
             //.AddTransient<ITagRepository, TagRepository>()
             //services.AddScoped<IUserService, UserService>();
             //services.AddScoped<IDataDefaultService, DataDefaultService>();       
-            
+
             return services;
         }
         #endregion
@@ -65,6 +71,7 @@ namespace BnLog.BLL.Extentions
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
+            services.AddTransient<IItemsRepository, ItemsRepository>();
             //services.AddScoped<IPostRepository, PostRepository>();
             //services.AddTransient<ICommentRepository, CommentRepository>();
             //services.AddScoped<ITagRepository, TagRepository>();
@@ -76,10 +83,10 @@ namespace BnLog.BLL.Extentions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             //Items Repository
-            services.AddTransient<IRepository<ItemOption>, ItemOptionRepository>();
-            ////services.AddScoped<IRepository<Article>, ArticleRepository>();
-            //services.AddScoped<IRepository<Comment>, CommentRepository>();
-            //services.AddScoped<IRepository<Tag>, TagRepository>();
+            //services.AddTransient<IRepository<ItemOption>, ItemOptionRepository>();
+            //services.AddTransient<IRepository<ItemResurce>, ItemResurceRepository>();
+            services.AddScoped<IRepository<ItemOption>, ItemOptionRepository>();
+            services.AddScoped<IRepository<ItemResurce>, ItemResurceRepository>();
 
             return services;
         }

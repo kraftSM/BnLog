@@ -6,6 +6,7 @@ using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using Microsoft.AspNetCore.Identity;
+using BnLog.DAL.Repository.Items;
 
 namespace BnLog.BLL.Services
 {
@@ -14,13 +15,18 @@ namespace BnLog.BLL.Services
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly IItemsRepository _itemRepo;
+        //private readonly ItemResurceRepository _itemResurceRepo;
+        //private readonly ItemOptionRepository _itemOptionRepo;
         private readonly ITagRepository _tagRepo;
         public IMapper _mapper;
-
-        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, IItemsRepository itemRepo)
+        
+        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, IItemsRepository itemRepo) 
+        //, ItemResurceRepository itemResurceRepo, ItemOptionRepository itemOptionRepo            
         {
             _tagRepo = tagRepo;
             _itemRepo = itemRepo;
+            //_itemResurceRepo = itemResurceRepo;
+            //_itemOptionRepo = itemOptionRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;

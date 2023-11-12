@@ -7,7 +7,7 @@ using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Entity;
 using Microsoft.AspNetCore.Identity;
 
-namespace BnLog.BLL.Services
+namespace BnLog.VAL.Services
 {
     public class PostService : IPostService
     {

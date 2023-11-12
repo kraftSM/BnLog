@@ -63,7 +63,7 @@ namespace BnLog
            //});
 
             // subServices mapper & Company...AddSingletons/Transient
-           builder.Services
+           //builder.Services
                 //.AddSingleton(mapper)
                 //.AddTransient<ICommentService, CommentService>()
                 //.AddTransient<IHomeService, HomeService>()
@@ -77,10 +77,7 @@ namespace BnLog
                 //.AddTransient<IPostRepository, PostRepository>()
                 //.AddTransient<ITagRepository, TagRepository>()
 
-                .AddTransient<IItemsRepository, ItemsRepository>();
-                
-                
-                
+                //.AddTransient<IItemsRepository, ItemsRepository>();
 
             // Connect logger
             builder.Logging
