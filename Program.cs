@@ -27,58 +27,35 @@ namespace BnLog
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            // Connect AutoMapper
-            //var mapperConfig = new MapperConfiguration((v) =>
-            //{
-            //    v.AddProfile(new MappingProfile());
-            //});
-            //IMapper mapper = mapperConfig.CreateMapper();
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection));
-            builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Scoped);
+            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection));
 
             // Add MS SECURITY
-            builder.Services.AddIdentity<User, Role>(opts =>
-            {
-                opts.Password.RequiredLength = 5;
-                opts.Password.RequireNonAlphanumeric = false;
-                opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = false;
-                opts.Password.RequireDigit = false;
-            })
+            builder.Services
+                .AddIdentity<User, Role>(opts =>
+                    {
+                        opts.Password.RequiredLength = 5;
+                        opts.Password.RequireNonAlphanumeric = false;
+                        opts.Password.RequireLowercase = false;
+                        opts.Password.RequireUppercase = false;
+                        opts.Password.RequireDigit = false;
+                    })
                 .AddEntityFrameworkStores<BlogDbContext>();
- 
-            builder.Services.AddServicesBL()
+
+
+            // subServices, mapper & Company...+ Try ( but  NOT WORK) UnitOfWork() 
+            builder.Services
+                .AddServicesBL()
                 .AddDirectRepositories()
-                .AddRepositories()
-                .AddUnitOfWork()
-                .AddCustomRepository<ItemOption, ItemOptionRepository>()
-                .AddCustomRepository<ItemResurce, ItemResurceRepository>()
+                // // UnitOfWork() не интегруем, DI exception - дописать потом,if any...
+                //.AddUnitOfWork()
+                // //(1) or (2)
+                // // (1).AddCustomRepository<ItemOption, ItemOptionRepository>()
+                // // (1).AddCustomRepository<ItemResurce, ItemResurceRepository>()
+                // // (2).AddRepositories()
                 .AddAutoMapper();
-           // Ќе забыть бы потом Services AddSwaggerGen
-           //builder.Services.AddSwaggerGen(c =>
-           //{
-           //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
-           //});
-
-            // subServices mapper & Company...AddSingletons/Transient
-           //builder.Services
-                //.AddSingleton(mapper)
-                //.AddTransient<ICommentService, CommentService>()
-                //.AddTransient<IHomeService, HomeService>()
-                //.AddTransient<IPostService, PostService>()
-                //.AddTransient<ITagService, TagService>()
-
-                //.AddTransient<IRoleService, RoleService>()
-                //.AddTransient<ISecurityService, SecurityService>()
-
-                //.AddTransient<ICommentRepository, CommentRepository>()
-                //.AddTransient<IPostRepository, PostRepository>()
-                //.AddTransient<ITagRepository, TagRepository>()
-
-                //.AddTransient<IItemsRepository, ItemsRepository>();
 
             // Connect logger
             builder.Logging

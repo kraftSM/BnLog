@@ -22,7 +22,7 @@ namespace BnLog.BLL.Extentions
     /// </summary>
     public static class ServiceExtentions
     {
-        #region Реализация паттерна UnitOfWork
+        #region For UnitOfWork Pattern
         public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -73,8 +73,9 @@ namespace BnLog.BLL.Extentions
             services.AddTransient<IPostRepository, PostRepository>();
             services.AddTransient<IItemsRepository, ItemsRepository>();
             //services.AddScoped<IPostRepository, PostRepository>();
-            //services.AddTransient<ICommentRepository, CommentRepository>();
+            //services.AddScoped<ICommentRepository, CommentRepository>();
             //services.AddScoped<ITagRepository, TagRepository>();
+            //services.AddScoped<IItemsRepository, ItemsRepository>();
 
             return services;
         }
@@ -82,7 +83,8 @@ namespace BnLog.BLL.Extentions
         #region ServiceExtentions-> DAL UoW Repositories
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            //Items Repository
+            //Items Repository            
+            //services.AddTransient<IRepository<ItemOptionRepository>(new ItemOptionRepository ()); //Try rester ItemOptionRepository for avoid exception Not Help
             //services.AddTransient<IRepository<ItemOption>, ItemOptionRepository>();
             //services.AddTransient<IRepository<ItemResurce>, ItemResurceRepository>();
 
@@ -96,7 +98,7 @@ namespace BnLog.BLL.Extentions
         }
         #endregion
 
-        #region Конфигурация automapper'a
+        #region Mapper Configuration for automapper
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
             var mapperConfig = new MapperConfiguration((v) =>
