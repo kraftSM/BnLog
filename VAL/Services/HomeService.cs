@@ -58,31 +58,33 @@ namespace BnLog.BLL.Services
             await _userManager.AddToRoleAsync(user2, roleAdmin.Name);
             await _userManager.AddToRoleAsync(user3, roleDesign.Name);
 
-            var testTag1 = new Tag { Name = "testTag1" };
-            await _tagRepo.AddTag(testTag1);
+            //var testTag0 = new Tag { Name = "testTag0" };
+            //await _tagRepo.AddTag(testTag0);
+            //var testTag1 = new Tag { Name = "testTag1" };
+            //await _tagRepo.AddTag(testTag1);
 
-            var testItem0 = new Item()
-            {
-                Id = Guid.NewGuid(),
-                CreatedData = DateTime.Now,
-                ItemType = 1,
-                
-                ItemId = testTag1.Id,
-                ItemOption = new List<ItemOption>()
-                {
-                    new ItemOption
-                    {
-                        Id = Guid.NewGuid(),
-                        CreatedData = DateTime.Now,
-                        TypeId = 0,
-                        Type = "Test",
-                        strVal = "TestVal",
-                        intVal = 0
-                    }
+            //var testItem0 = new Item()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    CreatedData = DateTime.Now,
+            //    ItemType = 1
 
-                }
-            };
-            await _itemRepo.AddItem(testItem0);
+            //    //ItemId = testTag1.Id,
+            //    //ItemOption = new List<ItemOption>()
+            //    //{
+            //    //    new ItemOption
+            //    //    {
+            //    //        Id = Guid.NewGuid(),
+            //    //        CreatedData = DateTime.Now,
+            //    //        TypeId = 0,
+            //    //        Type = "Test",
+            //    //        strVal = "TestVal",
+            //    //        intVal = 0
+            //    //    }
+
+            //    //}
+            //};
+            //await _itemRepo.AddItem(testItem0);
 
             // _tagRepo.AddTag("Test");
         }

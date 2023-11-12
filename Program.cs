@@ -1,5 +1,5 @@
 using AutoMapper;
-
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,11 +11,11 @@ using BnLog.DAL.Models.Security;
 using BnLog.DAL.Repository;
 using BnLog.DAL.Repository.Items;
 using BnLog.DAL.Repository.Entity;
-
 using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
-using Microsoft.EntityFrameworkCore;
+using BnLog.BLL.Extentions;
+
 
 
 namespace BnLog
@@ -37,7 +37,12 @@ namespace BnLog
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection))
+            //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection));
+            builder.Services.AddDbContext<BlogDbContext>(option => option.UseSqlServer(connection), ServiceLifetime.Scoped)
+                //.AddUnitOfWork()
+                //.AddRepositories()
+                //.AddServicesBL()
+                //.AddAutoMapper()
                 .AddIdentity<User, Role>(opts =>
                 {
                     opts.Password.RequiredLength = 5;
@@ -47,15 +52,18 @@ namespace BnLog
                     opts.Password.RequireDigit = false;
                 })
                 .AddEntityFrameworkStores<BlogDbContext>();
-
-            // Не забыть бы потом Services AddSwaggerGen
-            //builder.Services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
-            //});
+            builder.Services.AddUnitOfWork()
+                .AddRepositories()
+                .AddServicesBL()
+                .AddAutoMapper();
+           // Не забыть бы потом Services AddSwaggerGen
+           //builder.Services.AddSwaggerGen(c =>
+           //{
+           //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
+           //});
 
             // subServices mapper & Company...AddSingletons/Transient
-            builder.Services
+           builder.Services
                 .AddSingleton(mapper)
                 .AddTransient<ICommentService, CommentService>()
                 .AddTransient<IHomeService, HomeService>()
