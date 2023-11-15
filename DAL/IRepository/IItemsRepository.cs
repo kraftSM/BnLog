@@ -1,18 +1,14 @@
 ﻿using BnLog.DAL.Models.Items;
-using BnLog.DAL.Models.Entity;
 
 namespace BnLog.DAL.IRepository
 {
     public interface IItemsRepository
     {
-        //HashSet<Item> GetAllItems();
-        Item GetItem(Guid id);
-        List<Item> GetAllItems();
-        public Task AddItem(Item? item);
-        List<Item> GetAllItemsOfTypes(int ItemType);
-        //Task AddItem(Item item);
-        //Task UpdateItem(Item item);
-        //Task RemoveItem(Guid id);
-        Task<bool> SaveChangesAsync();
+        Task<IEnumerable<Item>> GetAll();
+        Task<Item> Get(Guid id);
+        Task Create(Item item);
+        Task Update(Item item);
+        Task Delete(Item item);
+        Task<IEnumerable<Item>> GetAllByItemId(Guid guidItem);
     }
 }

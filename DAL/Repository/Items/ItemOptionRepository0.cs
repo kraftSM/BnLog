@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BnLog.DAL.Repository.Items
 {
-    public class ItemOptionRepository : Repository<ItemOption>
+    public class ItemOptionRepository0 : Repository<ItemOption>
     {
-        public ItemOptionRepository(BlogDbContext context) : base(context)
+        public ItemOptionRepository0(BlogDbContext context) : base(context)
         {
         }
 

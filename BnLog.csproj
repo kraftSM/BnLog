@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="VAL\Response\User\" />
-    <Folder Include="VAL\Response\Items\" />
   </ItemGroup>
 
 </Project>

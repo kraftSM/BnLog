@@ -14,6 +14,7 @@ using BnLog.DAL.Repository.Items;
 using BnLog.VAL;
 using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
+using BnLog.VAL.Response.Items;
 
 namespace BnLog.BLL.Extentions
 {
@@ -56,6 +57,8 @@ namespace BnLog.BLL.Extentions
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IItemService, ItemService>();
 
+            //services.AddScoped<ItemInfo, ItemService>();
+
             //.AddTransient<ITagRepository, TagRepository>()
             //services.AddScoped<IUserService, UserService>();
             //services.AddScoped<IDataDefaultService, DataDefaultService>();       
@@ -71,7 +74,15 @@ namespace BnLog.BLL.Extentions
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IPostRepository, PostRepository>();
-            services.AddTransient<IItemsRepository, ItemsRepository>();
+            services.AddTransient<IItemsRepository0, ItemsRepository0>();
+
+            services.AddScoped<IItemsRepository, ItemsRepository>();
+            services.AddScoped<IItemResurceRepository, ItemResurceRepository>();
+            services.AddScoped<IItemOptionRepository, ItemOptionRepository>();
+            //services.AddTransient<IItemsRepository, ItemsRepository>();
+            //services.AddTransient<IItemResurceRepository, ItemResurceRepository>();
+            //services.AddTransient<IItemOptionRepository, ItemOptionRepository>();
+
             //services.AddScoped<IPostRepository, PostRepository>();
             //services.AddScoped<ICommentRepository, CommentRepository>();
             //services.AddScoped<ITagRepository, TagRepository>();

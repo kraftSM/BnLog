@@ -16,6 +16,8 @@ using BnLog.BLL.Services;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 using BnLog.DAL.IRepository;
+using BnLog.VAL.Services.IService;
+using BnLog.VAL.Response.Items;
 
 namespace BnLog.BLL.Controllers
 {
@@ -25,17 +27,19 @@ namespace BnLog.BLL.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly IHomeService _homeService;
+        private readonly IItemService _itemService;
         private readonly ILogger<HomeController> _logger;
         private readonly IItemsRepository _itemRepo;  
         private IMapper _mapper;
 
-        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, ILogger<HomeController> logger, IItemsRepository itemRepo)
+        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, IItemService itemService, ILogger<HomeController> logger, IItemsRepository itemRepo)
         {
             _itemRepo = itemRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _homeService = homeService;
+            _itemService = itemService;
 
             _mapper = mapper;
             _logger = logger;
@@ -54,6 +58,8 @@ namespace BnLog.BLL.Controllers
         {
             var user = await _userManager.FindByNameAsync(UserName);
             
+            //var itemInfo =  new ItemInfo();
+            //var itemInfo = _itemService.GetItemInfo(user.Id);
             //_userManager.GetUserName;
             return View("UserPage", user);
         }

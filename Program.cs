@@ -30,8 +30,8 @@ namespace BnLog
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection));
-
+            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
+            //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped); // rконтекст вызова явно
             // Add MS SECURITY
             builder.Services
                 .AddIdentity<User, Role>(opts =>
