@@ -1,5 +1,6 @@
 ﻿namespace BnLog.DAL.Models.Items
 {
+    //enum ItemResurceType { undefine = 0, test }; //?? или в Repo забросить. Там определим
     public class ItemResurce
     {
         public Guid Id { get; set; } = Guid.NewGuid();

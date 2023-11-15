@@ -1,0 +1,60 @@
+﻿@using BnLog.VAL.Response.Items;
+@model List<ItemInfo>
+@*
+    @using BnLog.DAL.Models.Items;
+    @model List<Item>    
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*<h3 class="center">Model.User.GetFullName()</h3>*@
+
+<h3 class="center">Items ALL View for USER items </h3>
+@{
+    @if (Model.Count() == 0)
+    {
+        <h5 class="card-title">Нет данных для отображения</h5>
+        <h6 class="card-title"><a method="get" asp-controller="Role" asp-action="CreateRole">Добавить роль</a></h6>
+    }
+    else
+    {
+        <h5 class="card-title">Всего Items: @Model.Count()</h5>
+        @*<p> Total Items @Model.Count()</p>        *@
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> REC Id [ID]</th>
+                    <th> Created [CreatedData]</th>
+                    <th> Type [ItemType]</th>
+                    <th> MasterItemId [ItemId]</th>
+                    <th> Options[ ... ]</th>
+                    @*<th><a method="get" asp-controller="Role" asp-action="CreateRole">Добавить роль</a></th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedData)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemId)
+                        </td>
+                        <td>
+                            Options[ ... ]
+                            @*<a method="get" asp-controller="Role" asp-action="EditRole" asp-route-id="@item.Id"> Edit </a> |
+                             Не делалось <a method="get" asp-controller="Role" asp-action="ViewRole" asp-route-id="@item.Id"> Details </a> |
+                <a method="post" asp-controller="Role" asp-action="RemoveRole" asp-route-id="@item.Id"> Delete </a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+

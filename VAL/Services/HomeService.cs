@@ -15,18 +15,18 @@ namespace BnLog.BLL.Services
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly IItemsRepository _itemRepo;
-        //private readonly ItemResurceRepository _itemResurceRepo;
-        //private readonly ItemOptionRepository _itemOptionRepo;
+        private readonly IItemResurceRepository _itemResurceRepo;
+        private readonly IItemOptionRepository _itemOptionRepo;
         private readonly ITagRepository _tagRepo;
         public IMapper _mapper;
         
-        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, IItemsRepository itemRepo) 
-        //, ItemResurceRepository itemResurceRepo, ItemOptionRepository itemOptionRepo            
+        public HomeService(ITagRepository tagRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, IItemsRepository itemRepo, IItemResurceRepository itemResurceRepo, IItemOptionRepository itemOptionRepo )
+        //        
         {
             _tagRepo = tagRepo;
             _itemRepo = itemRepo;
-            //_itemResurceRepo = itemResurceRepo;
-            //_itemOptionRepo = itemOptionRepo;
+            _itemResurceRepo = itemResurceRepo;
+            _itemOptionRepo = itemOptionRepo;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
@@ -69,27 +69,41 @@ namespace BnLog.BLL.Services
             //var testTag1 = new Tag { Name = "testTag1" };
             //await _tagRepo.AddTag(testTag1);
 
-            //var testItem0 = new Item()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    CreatedData = DateTime.Now,
-            //    ItemType = 1
 
-            //    //ItemId = testTag1.Id,
-            //    //ItemOption = new List<ItemOption>()
-            //    //{
-            //    //    new ItemOption
-            //    //    {
-            //    //        Id = Guid.NewGuid(),
-            //    //        CreatedData = DateTime.Now,
-            //    //        TypeId = 0,
-            //    //        Type = "Test",
-            //    //        strVal = "TestVal",
-            //    //        intVal = 0
-            //    //    }
+            //var testGuid0 = Guid.NewGuid();
 
-            //    //}
-            //};
+            var testItem0 = new Item()
+            {
+                Id = Guid.NewGuid(),
+                CreatedData = DateTime.Now,
+                ItemType = 1,
+                ItemOption = new List<ItemOption>(),
+                ItemResurce = new List<ItemResurce>(),
+            };
+            _itemRepo.Create(testItem0);
+
+            var testItem0Opt0 = new ItemOption()
+            {
+                Id = Guid.NewGuid(),
+                CreatedData = DateTime.Now,
+                ItemId = testItem0.Id,
+                TypeId = 0,                
+                Type = "Test",
+                strVal = "TestVal0",
+                intVal = 0
+            };
+
+            //testItem0.ItemOption.Add(testItem0Opt0);
+            _itemOptionRepo.Create(testItem0Opt0);
+
+
+            
+            testItem0Opt0.strVal = "TestVal1";
+            testItem0Opt0.intVal = 1;
+            //testItem0.ItemOption.Add(testItem0Opt0);
+            _itemOptionRepo.Create(testItem0Opt0);
+
+
             //await _itemRepo.AddItem(testItem0);
 
             // _tagRepo.AddTag("Test");

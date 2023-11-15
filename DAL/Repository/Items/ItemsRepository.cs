@@ -1,42 +1,59 @@
-﻿using BnLog.DAL.Models.Entity;
-using Microsoft.EntityFrameworkCore;
-using BnLog.DAL.IRepository;
+﻿using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Items;
+using Microsoft.EntityFrameworkCore;
 
 namespace BnLog.DAL.Repository.Items
 {
     public class ItemsRepository : IItemsRepository
     {
-        private BlogDbContext _context;
-        public ItemsRepository(BlogDbContext context)
+        private readonly BlogDbContext _context;
+        public ItemsRepository(BlogDbContext db)
         {
-            _context = context;
+            _context = db;
         }
-        public async Task AddItem(Item? item)
+        public async Task Create(Item item)
         {
-            _context.Items.Add(item);
-            await SaveChangesAsync();
+            var entry = _context.Entry(item);
+            if (entry.State == EntityState.Detached)
+                _context.Items.Add(item);
+            await _context.SaveChangesAsync();
         }
-        public List<Item> GetAllItems()
+        public async Task Delete(Item item)
         {
-            return _context.Items.Include(p => p.ItemType).ToList();
+            _context.Items.Remove(item);
+            await _context.SaveChangesAsync();
         }
-        public List<Item> GetAllItemsOfTypes(int pItemType)
+        public async Task<Item> Get(Guid id)
         {
-            return _context.Items.Include(p => p.ItemType == pItemType).ToList();
+            return await _context.Items
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            //.Include(x => x.intVal)
+            //.Include(x => x.strVal)
+            //.Include(x => x.TypeId)
+            //.Include(x => x.Type)
+            //.FirstOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<IEnumerable<Item>> GetAll()
+        {
+            return await _context.Items
+                .ToListAsync();
         }
 
-        public Item GetItem(Guid id)
+        public async Task<IEnumerable<Item>> GetAllByItemId(Guid id)
         {
-            return _context.Items.Include(p => p.ItemType).FirstOrDefault(p => p.Id == id);
+            return await _context.Items.Where(x => x.ItemId == id).ToListAsync();
         }
-        public async Task<bool> SaveChangesAsync()
+        public async Task Update(Item item)
         {
-            if (await _context.SaveChangesAsync() > 0)
-            {
-                return true;
-            }
-            return false;
+            await _context.Items.FindAsync(item.Id);
+            var oldItem = _context.Items.FindAsync(item);
+
+            var entry = _context.Entry(oldItem);
+
+            if (entry.State == EntityState.Detached)
+                _context.Items.Update(item);
+            await _context.SaveChangesAsync();
         }
     }
 }
