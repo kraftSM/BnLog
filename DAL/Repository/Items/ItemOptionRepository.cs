@@ -1,7 +1,7 @@
 ﻿using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Items;
-using BnLog.Migrations;
+//using BnLog.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 

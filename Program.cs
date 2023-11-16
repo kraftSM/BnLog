@@ -6,6 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using NLog;
+using NLog.Fluent;
+using NLog.Web;
+
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
 using BnLog.DAL.Models.Items;
@@ -26,6 +30,7 @@ namespace BnLog
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //builder.Configuration.Get
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -62,8 +67,9 @@ namespace BnLog
             builder.Logging
                 .ClearProviders()
                 .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
-                //
-                .AddConsole();
+                //.AddConsole();
+            .AddConsole()
+            .AddNLog("nlog");
 
             // AddAuthentication "Cookies"
             builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
@@ -85,16 +91,23 @@ namespace BnLog
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
                 {
-                //app.UseDeveloperExceptionPage();
+                ////app.UseDeveloperExceptionPage();
 
-                //app.UseExceptionHandler("/Home/Error");
-                //app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
+                ////app.UseExceptionHandler("/Home/Error");
+                ////app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
 
-                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
+                //app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
 
+                //1
+                app.UseExceptionHandler("/Error");                
                 //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
                 };
+
+            //app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");//1
+            
+
             // Этот сегмент кода пока не в работе, скажем так не ясно, будет ли нужен... Здесь просто STUB
             //else
             //    {
@@ -109,6 +122,8 @@ namespace BnLog
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}"); //2
 
             app.MapControllerRoute(
                 name: "default",

@@ -9,7 +9,7 @@ namespace BnLog.BLL.Controllers.Handlers
         public void OnException ( ExceptionContext context )
             {
 
-            string onCstomCustomExceptionMESSAGE = "Произошла непредвиденная ошибка. Мы пытемся её исправить.";
+            string onCstomCustomExceptionMESSAGE = "Произошла непредвиденная ошибка. Мы пытаемся её исправить.";
 
             if (context.Exception is CustomException)
                 {

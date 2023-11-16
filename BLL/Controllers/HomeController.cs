@@ -20,20 +20,20 @@ using BnLog.VAL.Services.IService;
 using BnLog.VAL.Response.Items;
 
 namespace BnLog.BLL.Controllers
-{
-    public class HomeController : Controller
     {
+    public class HomeController : Controller
+        {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly IHomeService _homeService;
         private readonly IItemService _itemService;
         private readonly ILogger<HomeController> _logger;
-        private readonly IItemsRepository _itemRepo;  
+        private readonly IItemsRepository _itemRepo;
         private IMapper _mapper;
 
-        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, IItemService itemService, ILogger<HomeController> logger, IItemsRepository itemRepo)
-        {
+        public HomeController ( RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, IItemService itemService, ILogger<HomeController> logger, IItemsRepository itemRepo )
+            {
             _itemRepo = itemRepo;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -43,48 +43,58 @@ namespace BnLog.BLL.Controllers
 
             _mapper = mapper;
             _logger = logger;
-        }
-         public async Task<IActionResult> Index()
-        {
+            }
+        public async Task<IActionResult> Index ( )
+            {
             await _homeService.GenerateData();
             return View(new MainRequest());
             // return View();
-        }
+            }
 
         [Authorize]
         [Route("Home/UserPage")]
         //public IActionResult UserPage(UserLoginRequest model)
-        public async Task<IActionResult> UserPage(string? UserName = null)
-        {
+        public async Task<IActionResult> UserPage ( string? UserName = null )
+            {
             var user = await _userManager.FindByNameAsync(UserName);
-            
+
             //var itemInfo =  new ItemInfo();
             //var itemInfo = _itemService.GetItemInfo(user.Id);
             //_userManager.GetUserName;
             return View("UserPage", user);
-        }
+            }
 
-        public IActionResult Privacy()
-        {
+        public IActionResult Privacy ( )
+            {
             return View();
-        }
+            }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //[Route("Home/Error")]
-        public IActionResult Error(int? statusCode = null)
-        {
-            if (statusCode.HasValue)
+        [Route("Home/Error")]
+        public IActionResult Error ( int? statusCode = null )
             {
-                if (statusCode == 404 || statusCode == 500)
+            const string viewBaseDir = "Error/";
+            var ErrorInfo = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
+            if (statusCode.HasValue)
                 {
-                    var viewName = statusCode.ToString();
-                    _logger.LogWarning($"Произошла ошибка - {statusCode}\n{viewName}");
+                if (statusCode == 401|| statusCode == 403 || statusCode == 404) //
+                    {
+                    var stCode = statusCode.ToString();
+                    var viewName = viewBaseDir + stCode;
+                    //var viewName =  statusCode.ToString();
+
+                    _logger.LogWarning($"Произошла ошибка - {stCode}\t{viewName}");
                     return View(viewName);
-                }
+                    }
                 else
-                    return View("500");
-            }
+                    {
+                    _logger.LogWarning($"Произошла ошибка - {500}"); 
+                    return View(viewBaseDir + "500", ErrorInfo); //имеет ли смысл отдавать дот инф. наружу???
+                        //return View(viewBaseDir+"500");
+                    }
+                }
+            //Return message by default
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
     }
-}
