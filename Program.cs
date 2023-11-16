@@ -85,13 +85,15 @@ namespace BnLog
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
                 {
-                app.UseDeveloperExceptionPage(); 
+                //app.UseDeveloperExceptionPage();
+
                 //app.UseExceptionHandler("/Home/Error");
                 //app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
-                //app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
 
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
+                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
+
+                //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
                 };
             // Этот сегмент кода пока не в работе, скажем так не ясно, будет ли нужен... Здесь просто STUB
             //else

@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Temp\" />
     <Folder Include="VAL\Response\User\" />
   </ItemGroup>
 

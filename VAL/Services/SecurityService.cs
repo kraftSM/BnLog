@@ -11,6 +11,8 @@ using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using System.Security.Authentication;
 using BnLog.DAL.Models.Entity;
+using System.Data;
+using System.Linq;
 
 namespace BnLog.BLL.Services
 {
@@ -82,7 +84,7 @@ namespace BnLog.BLL.Services
         public async Task<UserEditRequest> EditAccount(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
-
+            var userRolesList = await _userManager.GetRolesAsync(user);
             var allRolesName = _roleManager.Roles.ToList();
 
             UserEditRequest model = new UserEditRequest
@@ -95,17 +97,17 @@ namespace BnLog.BLL.Services
                 Id = id,
                 Roles = allRolesName.Select(r => new RoleRequest() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
             };
-            //foreach (var tag in tags)
-            //    {
-            //    foreach (var postTag in post.Tags)
-            //        {
-            //        if (postTag.Id == tag.Id)
-            //            {
-            //            tag.IsSelected = true;
-            //            break;
-            //            }
-            //        }
-            //    }
+            foreach (var role in model.Roles)
+                {
+                if (role.Name =="Пользователь") //by def, ALL are users
+                    {
+                        role.IsSelected = true;
+                        continue;
+                    }
+                    
+                if (userRolesList.Contains(role.Name))
+                    role.IsSelected = true;      
+                }
             return model;
         }
 
