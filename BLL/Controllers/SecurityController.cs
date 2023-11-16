@@ -160,13 +160,15 @@ namespace BnLog.BLL.Controllers
 
             if (result.Succeeded)
             {
-                _logger.LogDebug($"Аккаунт - {model.UserName} был изменен");
-                //return RedirectToAction("Index", "Home");
-                return RedirectToAction("GetAccounts", "Security");
+                _logger.LogInformation($"Аккаунт - {model.UserName} был изменен");
+				//_logger.LogDebug($"Аккаунт - {model.UserName} был изменен");
+
+				//return RedirectToAction("Index", "Home");
+				return RedirectToAction("GetAccounts", "Security");
             }
             else
             {
-                ModelState.AddModelError("", $"{result.Errors.First().Description}");
+                ModelState.AddModelError("", $"{result.Errors.First().Description}");                
                 return View(model);
             }
         }

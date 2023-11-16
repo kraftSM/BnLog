@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="logs\" />
     <Folder Include="Temp\" />
     <Folder Include="VAL\Response\User\" />
   </ItemGroup>
