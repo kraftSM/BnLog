@@ -11,6 +11,7 @@ using System.Collections.Generic;
 
 namespace BnLog.VAL.Services
 {
+    //Сейчас сделано для просмотра выборки данных из ...Rеpo и пребразования их в View 
     public class ItemService : IItemService
     {
         //private readonly RoleManager<Role> _roleManager;

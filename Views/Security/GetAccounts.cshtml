@@ -7,77 +7,84 @@
 <h3 class="card-title">Отображения данных по всем User-Accounts </h3>
 
 @{
+
     @if (Model.Count() == 0)
-    {
+        {
         <h5 class="card-title">Нет данных для отображения</h5>
         <h6 class="card-title"><a method="get" asp-controller="Tag" asp-action="CreateTag">Добавить тег</a></h6>
-    }
-    else
-    {
-        <h5 class="card-title">Все теги</h5>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>User Name</th>
-                    @*<th>Total user accounts @Model.Count()</th>*@
-                    <th><a method="get" asp-controller="Security" asp-action="Register">Add user accounts</a></th>@**@
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            <a method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@item.Id">Edit</a> |
-                            @*<a method="get" asp-controller="Security" asp-action="ViewTag" asp-route-id="@item.Id">Details</a> |*@
-                            <a method="post" asp-controller="Security" asp-action="RemoveAccount" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <p> Total user accounts @Model.Count()</p>
-    }
-    @if (Model.Count() == 0)
-    {
-        <h5 class="card-title">Нету данных для отображения</h5>
-    }
-    else
-    {
-        <h5 class="card-title">Все пользователи</h5>
-        foreach (var user in Model)
-        {
-            <div class="card w-75">
-                <div class="card-body">
-                    <h4 class="card-title"> Account : @user.UserName
-                    @if (User.IsInRole("Администратор"))
-                    {
-                            <span>
-                            <a class="btn btn-outline-info button" method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@user.Id">Редактировать</a>
-                            <a class="btn btn-outline-danger button" method="post" asp-controller="Security" asp-action="RemoveAccount" asp-route-id="@user.Id">Удалить</a>
-                        </span>
-                    }</h4>
-
-                    <h4>Роли:
-                    @foreach (var role in user.Roles)
-                    {
-                        <span class="badge rounded-pill text-bg-success" style="color:darkblue">@role.Name</span> 
-                        ﻿@* <span   style="color:darkblue">@role.Name</span>﻿*@
-                        }
-                    </h4>
-                    <h5>Посты:</h5>
-                    @foreach (var post in user.Posts)
-                    {
-                        <span class="badge rounded-pill text-bg-success" style="color:green"><a method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Title</a></span>
-                    }
-                    <p> </p>
-                </div>
-            </div>            
         }
-        <p> Total user accounts @Model.Count()</p>
-    }
+    else
+        {
+        @*As Table *@
+        @if (ViewBag.TableView > 0)
+            {
+
+            <h5 class="card-title">Все теги</h5>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        @*<th>Total user accounts @Model.Count()</th>*@
+                        <th><a method="get" asp-controller="Security" asp-action="Register">Add user accounts</a></th>@**@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                <a method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@item.Id">Edit</a> |
+                                @*<a method="get" asp-controller="Security" asp-action="ViewTag" asp-route-id="@item.Id">Details</a> |*@
+                                <a method="post" asp-controller="Security" asp-action="RemoveAccount" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+            <p> Total user accounts @Model.Count()</p>
+            }
+
+        @*As Card *@
+        @if (ViewBag.CardView > 0)
+            {
+            <h5 class="card-title">Все пользователи</h5>
+            foreach (var user in Model)
+                {
+                <div class="card w-75">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            Account : @user.UserName
+                            @if (User.IsInRole("Администратор"))
+                                {
+                                <span>
+                                    <a class="btn btn-outline-info button" method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@user.Id">Редактировать</a>
+                                    <a class="btn btn-outline-danger button" method="post" asp-controller="Security" asp-action="RemoveAccount" asp-route-id="@user.Id">Удалить</a>
+                                </span>
+                                }
+                        </h4>
+
+                        <h4>
+                            Роли:
+                            @foreach (var role in user.Roles)
+                                {
+                                <span class="badge rounded-pill text-bg-success" style="color:darkblue">@role.Name</span>
+                                ﻿@* <span   style="color:darkblue">@role.Name</span>﻿*@
+                                }
+                        </h4>
+                        <h5>Посты:</h5>
+                        @foreach (var post in user.Posts)
+                            {
+                            <span class="badge rounded-pill text-bg-success" style="color:green"><a method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">@post.Title</a></span>
+                            }
+                        <p> </p>
+                    </div>
+                </div>
+                }
+            <p> Total user accounts @Model.Count()</p>
+            }
+        }
 }

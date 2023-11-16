@@ -76,7 +76,7 @@ namespace BnLog.BLL.Services
             {
                 Id = Guid.NewGuid(),
                 CreatedData = DateTime.Now,
-                ItemType = 1,
+                ItemType = itType.Undefinend,
                 ItemOption = new List<ItemOption>(),
                 ItemResurce = new List<ItemResurce>(),
             };
@@ -88,7 +88,7 @@ namespace BnLog.BLL.Services
                 CreatedData = DateTime.Now,
                 ItemId = testItem0.Id,
                 TypeId = 0,                
-                Type = "Test",
+                Type = "Test0",
                 strVal = "TestVal0",
                 intVal = 0
             };
@@ -96,12 +96,19 @@ namespace BnLog.BLL.Services
             //testItem0.ItemOption.Add(testItem0Opt0);
             _itemOptionRepo.Create(testItem0Opt0);
 
+            var testItem0Opt1 = new ItemOption()
+                {
+                Id = Guid.NewGuid(),
+                CreatedData = DateTime.Now,
+                ItemId = testItem0.Id,
+                TypeId = 0,
+                Type = "Test1",
+                strVal = "TestVal1",
+                intVal = 1
+                };
 
             
-            testItem0Opt0.strVal = "TestVal1";
-            testItem0Opt0.intVal = 1;
-            //testItem0.ItemOption.Add(testItem0Opt0);
-            _itemOptionRepo.Create(testItem0Opt0);
+            _itemOptionRepo.Create(testItem0Opt1);
 
 
             //await _itemRepo.AddItem(testItem0);

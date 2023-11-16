@@ -13,10 +13,14 @@
         <li class="nav-item">
             <a class="nav-link" asp-area="" asp-controller="Security" asp-action="GetAccounts">Пользователи</a>
         </li>
+    }
+    @if (User.IsInRole("Администратор") || User.IsInRole("Разработчик"))
+    {
         <li class="nav-item">
             <a class="nav-link" asp-area="" asp-controller="Items" asp-action="Index">Items</a>
         </li>
     }
+    
     @if (User.Identity.IsAuthenticated)
     {
 

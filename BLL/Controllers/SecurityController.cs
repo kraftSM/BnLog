@@ -220,6 +220,8 @@ namespace BnLog.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
+            ViewBag.CardView = 1;
+            ViewBag.TableView = 1;
             var users = await _securityService.GetAccounts();
 
             return View(users);

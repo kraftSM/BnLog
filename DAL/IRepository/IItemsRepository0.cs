@@ -9,7 +9,7 @@ namespace BnLog.DAL.IRepository
         Item GetItem(Guid id);
         List<Item> GetAllItems();
         public Task AddItem(Item? item);
-        List<Item> GetAllItemsOfTypes(int ItemType);
+        List<Item> GetAllItemsOfTypes( itType ItemType );
         //Task AddItem(Item item);
         //Task UpdateItem(Item item);
         //Task RemoveItem(Guid id);

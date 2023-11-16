@@ -8,7 +8,7 @@ namespace BnLog.DAL.Models.Items
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime CreatedData { get; set; } = DateTime.Now.ToUniversalTime();
         // к чему привязываемся
-        public int? ItemType { get; set; } = null;
+        public itType ItemType { get; set; } =itType.Undefinend;
         public Guid? ItemId { get; set; } = null;
         public List<ItemOption> ItemOption { get; set; } = new List<ItemOption>();
         public List<ItemResurce> ItemResurce { get; set; } = new List<ItemResurce>(); 

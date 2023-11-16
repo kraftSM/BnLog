@@ -17,7 +17,8 @@ namespace BnLog.BLL.Controllers
 {
     public class ItemsController : Controller
     {
-        //Сейчас не делаю. Может стоит отказаться от этого ВООБЩЕ 
+        //Сейчас сделано для просмотра отладки Items(Info) 
+        //Может стоит отказаться от этого ВООБЩЕ 
 
         //Добавочные опции для Разработчика.
         //Минимум данных для теста Users+Roles генерятся в HomeService
@@ -41,6 +42,9 @@ namespace BnLog.BLL.Controllers
 
         }
 
+        [Authorize(Roles = "Разработчик, Администратор")]
+    
+        [HttpGet]
         // GET: 
         //[AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
         public async Task<ActionResult> Index()

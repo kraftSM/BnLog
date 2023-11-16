@@ -70,7 +70,7 @@ namespace BnLog.BLL.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        [Route("Home/Error")]
+        //[Route("Home/Error")]
         public IActionResult Error(int? statusCode = null)
         {
             if (statusCode.HasValue)

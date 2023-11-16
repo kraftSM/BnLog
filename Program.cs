@@ -16,6 +16,7 @@ using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using BnLog.BLL.Extentions;
+using System.Diagnostics.Eventing.Reader;
 
 namespace BnLog
 {
@@ -30,8 +31,8 @@ namespace BnLog
 
             // Connect DataBase
             string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
-            //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped); // rконтекст вызова явно
+            //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
+            builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped); // rконтекст вызова явно
             // Add MS SECURITY
             builder.Services
                 .AddIdentity<User, Role>(opts =>
@@ -83,13 +84,23 @@ namespace BnLog
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                {
+                app.UseDeveloperExceptionPage(); 
+                //app.UseExceptionHandler("/Home/Error");
+                //app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
+                //app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
 
-            app.UseHttpsRedirection();
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
+                };
+            // Этот сегмент кода пока не в работе, скажем так не ясно, будет ли нужен... Здесь просто STUB
+            //else
+            //    {
+            //    app.UseExceptionHandler("/Error");
+            //    app.UseHsts();
+            //    }
+
+            // app.UseHttpsRedirection(); //?? 
             app.UseStaticFiles();
 
             app.UseRouting();

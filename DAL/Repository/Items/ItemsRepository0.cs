@@ -21,7 +21,7 @@ namespace BnLog.DAL.Repository.Items
         {
             return _context.Items.Include(p => p.ItemType).ToList();
         }
-        public List<Item> GetAllItemsOfTypes(int pItemType)
+        public List<Item> GetAllItemsOfTypes( itType pItemType )
         {
             return _context.Items.Include(p => p.ItemType == pItemType).ToList();
         }
