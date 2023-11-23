@@ -3,12 +3,12 @@
 ## Текущая версия  итогового проекта C# of SkillFactory.(V1.3.1 от 2023-11-16 HW3  branch)
  - Реализация  требований HW3 (HW3  branch)
  - + Добавление в проект Валидации
- - - -  Фактически Валидация производится текущим Mаппингом (использованием пакета FluentValidation тестировалось на Roles, но оказалось избыточным)
+ - -  Фактически Валидация производится текущим Mаппингом (использованием пакета FluentValidation тестировалось на Roles, но оказалось избыточным)
  - + Добавление в проект NLog произведено
- - - - Фактически логгирование можно было провести и штатными средствами (в + Nlog множественнное логгирование в с соответствии Nlog.config) 
+ - -  Фактически логгирование можно было провести и штатными средствами (в + Nlog множественнное логгирование в с соответствии Nlog.config) 
  - + Добавление в проект в проект Глобального обработчика произведено (но с вопросами)
- - - - Фактически обработка ошибок идет (+ их логгирование) в BnLog.BLL.Controllers.ErrorsController, но  как оказалось не всех
- - - - Попытка реализации ExceptionMiddleware : IMiddleware в итоге не удалась
+ - -  Фактически обработка ошибок идет (+ их логгирование) в BnLog.BLL.Controllers.ErrorsController, но  как оказалось не всех
+ - -  Попытка реализации ExceptionMiddleware : IMiddleware в итоге не удалась
  - При реализация  требований HW3 (HW3  branch) дробление на горизотальные приложения не производилось. Будет делаться в HW4
  - - Также код не достаточно "чист", эта задача тоже пока отложена
 ## Рабочая версия  итогового проекта C# of SkillFactory.(V1.3.02 от 2023-11-29)
@@ -19,7 +19,20 @@
   - - + Добавление в проект Валидации
   - - -  Фактически Валидация планируется с использованием пакета FluentValidation
   - - -  Правила/ограничения  Валидации лежат в ...\VAL\Validators\...
-  - - - + Для валидации ролей введены ограничения на наличие вв списке RoleValues -> BnLog.VAL.Models (пока 2-язычные)
+  - - - + Для валидации ролей введены ограничения на наличие в списке RoleValues -> BnLog.VAL.Models (пока 2-язычные)
+  - - - + Пример валидации из дока по FluentValidation ниже ролей введены
+  - - - +  // public class CustomerValidator : AbstractValidator<Customer> {
+  - - - +  //  public CustomerValidator() {
+  - - - +  //    RuleFor(x => x.Surname).NotEmpty();
+  - - - +  //    RuleFor(x => x.Forename).NotEmpty().WithMessage("Please specify a first name");
+  - - - +  //    RuleFor(x => x.Discount).NotEqual(0).When(x => x.HasDiscount);
+  - - - +  //    RuleFor(x => x.Address).Length(20, 250);
+  - - - +  //    RuleFor(x => x.Postcode).Must(BeAValidPostcode).WithMessage("Please specify a valid postcode");
+  - - - +  // }
+  - - - +  //  private bool BeAValidPostcode(string postcode) {
+  - - - +  //  // custom postcode validating logic goes here
+  - - - +  //  }
+  - - - +  // }
   - - + Добавление в проект NLog
   - - -  Фактически логгирование идет в Bin директроию ...\BnLog\bin\Debug\net6.0\logs\...
   - - -  для проверки функционирвания внесены  измения в Nlog.config для логгирования в файлы (LogPart.log,Error.log), находящиеся в ...\BnLog\\logs\...
