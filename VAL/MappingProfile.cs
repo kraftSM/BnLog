@@ -23,8 +23,8 @@ namespace BnLog.VAL
             // Entity
             CreateMap<PostCreateRequest, Post>();
             CreateMap<PostEditRequest, Post>();
-            CreateMap<CommentCreateRequest, Comment>();
-            CreateMap<CommentEditRequest, Comment>();
+            CreateMap<CommentRequest, Comment>();
+            //CreateMap<CommentEditRequest, Comment>();
             CreateMap<TagCreateRequest, Tag>();
             CreateMap<TagEditRequest, Tag>();
             // Item

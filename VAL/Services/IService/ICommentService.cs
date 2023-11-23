@@ -5,8 +5,8 @@ namespace BnLog.BLL.Services.IService
 {
     public interface ICommentService
     {
-        Task<Guid> CreateComment(CommentCreateRequest model, Guid UserId);
-        Task EditComment(CommentEditRequest model);
+        Task<Guid> CreateComment(CommentRequest model, Guid UserId);
+        Task EditComment( CommentRequest model );
         Task RemoveComment(Guid id);
         Task<List<Comment>> GetComments();
         Task<Comment> GetComment(Guid id);

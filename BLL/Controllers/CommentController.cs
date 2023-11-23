@@ -32,7 +32,7 @@ namespace BnLog.BLL.Controllers
         [Route("Comment/CreateComment")]
         public IActionResult CreateComment(Guid postId)
         {
-            var model = new CommentCreateRequest() { PostId = postId };
+            var model = new CommentRequest() { PostId = postId };
             return View(model);
         }
 
@@ -41,7 +41,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [HttpPost]
         [Route("Comment/CreateComment")]
-        public async Task<IActionResult> CreateComment(CommentCreateRequest model, Guid PostId)
+        public async Task<IActionResult> CreateComment(CommentRequest model, Guid PostId)
         {
             model.PostId = PostId;
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -62,10 +62,10 @@ namespace BnLog.BLL.Controllers
             if (comm == null)
                 return NotFound();
 
-            var model = new CommentEditRequest { Id = id };
+            var model = new CommentRequest { Id = id };
             model.Title = comm.Title;
             model.Author = comm.Author;
-            model.Description =  comm.Body;
+            model.Body =  comm.Body;
 
             return View(model);
         }
@@ -76,7 +76,7 @@ namespace BnLog.BLL.Controllers
         [Authorize]
         [Route("Comment/Edit")]
         [HttpPost]
-        public async Task<IActionResult> EditComment(CommentEditRequest model)
+        public async Task<IActionResult> EditComment(CommentRequest model)
         {
             if (ModelState.IsValid)
             {

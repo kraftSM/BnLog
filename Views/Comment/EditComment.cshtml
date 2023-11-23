@@ -1,4 +1,4 @@
-﻿@model CommentEditRequest;
+﻿@model CommentRequest;
 @using BnLog.VAL.Request.Entity;
 
 <div class="container-page">
@@ -11,9 +11,9 @@
             <input class="form-control" asp-for="Id" hidden/>
         </div>
         <div style="margin-bottom: 5px">
-            <label asp-for="Description"></label><br />
-            <input class="form-control" asp-for="Description" />
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <label asp-for="Body"></label><br />
+            <input class="form-control" asp-for="Body" />
+            <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div style="margin-bottom: 5px">
             <label asp-for="Author"></label><br />

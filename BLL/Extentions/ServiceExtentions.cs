@@ -14,8 +14,12 @@ using BnLog.DAL.Repository.Items;
 using BnLog.VAL;
 using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
+using BnLog.VAL.Validators;
 using BnLog.VAL.Response.Items;
 using BnLog.VAL.Exceptions;
+using BnLog.VAL.Request.Entity;
+using BnLog.VAL.Request.Security;
+using FluentValidation;
 
 namespace BnLog.BLL.Extentions
 {
@@ -69,7 +73,19 @@ namespace BnLog.BLL.Extentions
 
             //.AddTransient<ITagRepository, TagRepository>()
             //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IDataDefaultService, DataDefaultService>();       
+            //services.AddScoped<IDataDefaultService, DataDefaultService>();
+
+            //Add Validators
+            //security Validators
+            services.AddTransient<IValidator<RoleEditRequest>, RoleRequestValidator>();
+            services.AddTransient<IValidator<UserEditRequest>, UserRequestValidator>();
+            //Entity Validators
+            services.AddTransient<IValidator<TagRequest>, TagRequestValidator>();
+            services.AddTransient<IValidator<PostEditRequest>, PostRequestValidator>();
+            services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
+            
+
+
 
             return services;
         }

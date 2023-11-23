@@ -22,12 +22,12 @@ namespace BnLog.BLL.Services
             _userManager = userManager;
         }
 
-        public async Task<Guid> CreateComment(CommentCreateRequest model, Guid UserId)
+        public async Task<Guid> CreateComment(CommentRequest model, Guid UserId)
         {
             Comment comment = new Comment
             {
                 Title = model.Title,
-                Body = model.Description,
+                Body = model.Body,
                 Author = model.Author,
                 PostId = model.PostId,
                 AuthorId = UserId,
@@ -38,12 +38,12 @@ namespace BnLog.BLL.Services
             return comment.Id;
         }
 
-        public async Task EditComment(CommentEditRequest model)
+        public async Task EditComment( CommentRequest model )
         {
             var comment = _commentRepo.GetComment(model.Id);
 
             comment.Title = model.Title;
-            comment.Body = model.Description;
+            comment.Body = model.Body;
             comment.Author = model.Author;
 
             await _commentRepo.UpdateComment(comment);
