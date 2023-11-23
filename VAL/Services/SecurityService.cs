@@ -68,7 +68,7 @@ namespace BnLog.BLL.Services
             
             if (user is null)
             {
-                //throw new AuthenticationException("User not found");//здесь ли??
+                throw new AuthenticationException("User not found");//здесь ли??
                 return new SignInResult();// sinRes= Failed;                                                                 
             }
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);

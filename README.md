@@ -2,14 +2,18 @@
 # BnLog
 ## Рабочая версия  итогового проекта C# of SkillFactory.(V1.x.x от 2023-11-21)
   - - Реализация  требований HW3
+  - - + Добавление в проект Валидации
+  - - -  Фактически Валидация идет с использованием пакета FluentValidation
   - - + Добавление в проект NLog
   - - -  Фактически логгирование идет в Bin директроию ...\BnLog\bin\Debug\net6.0\logs\...
-  - - -  для проверки функционирвания внесены  измения в Nlog.config для логгирования во 2-й файл LogPart.log, находящися в ...\BnLog\\logs\...
-  - - - + <variable name="logDirectory" value="C:\Users\sergey\source\repos\BnLog\logs"/>
-  - - - + <target xsi:type="File" name="filePart" fileName="${logDirectory}/LogPart.log" layout="${longdate} ${uppercase:${level}} ${message}" />
-  - - - + <logger name="*" minlevel="Debug" writeTo="filedata" />
-  - - - + <logger name="*" minlevel="Info" writeTo="filePart" />
-  - - - - что оказалось работоспособным (в LogPart.log только Info, в 1-м файле ещё и Debug
+  - - -  для проверки функционирвания внесены  измения в Nlog.config для логгирования в файлы (LogPart.log,Error.log), находящиеся в ...\BnLog\\logs\...
+  - - - + variable name="logDirectory" value="C:\Users\sergey\source\repos\BnLog\logs"/>
+  - - - + target xsi:type="File" name="filePart" fileName="${logDirectory}/LogPart.log" layout="${longdate} ${uppercase:${level}} ${message}" />
+  - - - + target xsi:type="File" name="fileErr" fileName="${logDirectory}/Error.log" layout="${longdate} ${uppercase:${level}} ${message}" />
+  - - - + logger name="*" minlevel="Debug" writeTo="filedata" 
+  - - - + logger name="*" minlevel="Info" writeTo="filePart" 
+  - - - + logger name="*" minlevel="Error" writeTo="fileErr" 
+  - - - - что оказалось работоспособным (в LogPart.log только Info, в Error.log только Info, в 1-м файле полный LOG)
 
 
 ## Текущая версия  итогового проекта C# of SkillFactory.(V1.2.2 от 2023-11-16)

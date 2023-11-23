@@ -18,11 +18,14 @@ using System.Threading.Tasks;
 using BnLog.DAL.IRepository;
 using BnLog.VAL.Services.IService;
 using BnLog.VAL.Response.Items;
+using BnLog.VAL.Models;
+using Microsoft.Extensions.Options;
 
 namespace BnLog.BLL.Controllers
     {
     public class HomeController : Controller
         {
+        private IOptions<ApplConfiguration> _settings; 
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
@@ -32,8 +35,9 @@ namespace BnLog.BLL.Controllers
         private readonly IItemsRepository _itemRepo;
         private IMapper _mapper;
 
-        public HomeController ( RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, IItemService itemService, ILogger<HomeController> logger, IItemsRepository itemRepo )
+        public HomeController ( IOptions<ApplConfiguration> settings, RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, IItemService itemService, ILogger<HomeController> logger, IItemsRepository itemRepo )
             {
+            _settings = settings; 
             _itemRepo = itemRepo;
             _userManager = userManager;
             _roleManager = roleManager;
@@ -46,7 +50,8 @@ namespace BnLog.BLL.Controllers
             }
         public async Task<IActionResult> Index ( )
             {
-            await _homeService.GenerateData();
+            if (!_settings.Value.dbIsPreloaded) 
+                await _homeService.GenerateData();
             return View(new MainRequest());
             // return View();
             }
@@ -69,32 +74,6 @@ namespace BnLog.BLL.Controllers
             return View();
             }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        [Route("Home/Error")]
-        public IActionResult Error ( int? statusCode = null )
-            {
-            const string viewBaseDir = "Error/";
-            var ErrorInfo = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
-            if (statusCode.HasValue)
-                {
-                if (statusCode == 401|| statusCode == 403 || statusCode == 404) //
-                    {
-                    var stCode = statusCode.ToString();
-                    var viewName = viewBaseDir + stCode;
-                    //var viewName =  statusCode.ToString();
-
-                    _logger.LogError($"Home/Error Произошла ошибка - {stCode}\t{viewName}");
-                    return View(viewName);
-                    }
-                else
-                    {
-                    _logger.LogError($"Home/Error Произошла ошибка - {500}"); 
-                    return View(viewBaseDir + "500", ErrorInfo); //имеет ли смысл отдавать дот инф. наружу???
-                        //return View(viewBaseDir+"500");
-                    }
-                }
-            //Return message by default
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-            }
-        }
     }
+        
+}

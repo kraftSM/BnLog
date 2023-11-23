@@ -15,6 +15,7 @@ using BnLog.VAL;
 using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
 using BnLog.VAL.Response.Items;
+using BnLog.VAL.Exceptions;
 
 namespace BnLog.BLL.Extentions
 {

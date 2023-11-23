@@ -1,0 +1,13 @@
+﻿@model ErrorViewModel
+﻿﻿@{
+    ViewBag.Title = "Page Forbiden";
+}
+<h1>(401) Page Forbiden.</h1>
+<p>This page Forbiden for you.</p>
+
+@if (Model.ShowRequestId)
+    {
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+    }

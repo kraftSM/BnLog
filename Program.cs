@@ -24,26 +24,30 @@ using BnLog.BLL.Extentions;
 using System.Diagnostics.Eventing.Reader;
 //using BnLog.BLL.Exceptions;
 using BnLog.BLL.Controllers;
-using BnLog.VAL.Configuration.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
+using BnLog.VAL.Models;
+using BnLog.VAL.Exceptions;
+
 
 namespace BnLog
 {
     public class Program
-    {
-        public static void Main(string[] args)
         {
+        public static void Main ( string[ ] args )
+            {
             var builder = WebApplication.CreateBuilder(args);
 
-			// Add services Configuration
-			builder.Services.Configure<ApplConfiguration>(builder.Configuration.GetSection("ApplConfig"));
+            // Add services Configuration
+            //builder.Services.AddScoped<ExceptionMiddleware>();
+            builder.Services.Configure<ApplConfiguration>(builder.Configuration.GetSection("ApplConfig"));
+            
 
-			// Add services to the container.
-			builder.Services.AddControllers();
-			builder.Services.AddControllersWithViews();
-			//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-			builder.Services.AddRazorPages();
+            // Add services to the container.
+            builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews();
+            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddRazorPages();
 
 			// Connect DataBase
 			string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -51,14 +55,13 @@ namespace BnLog
             builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped); // контекст вызова явно
             // Add MS SECURITY
             builder.Services
-                .AddIdentity<User, Role>(opts =>
-                    {
-                        opts.Password.RequiredLength = 5;
-                        opts.Password.RequireNonAlphanumeric = false;
-                        opts.Password.RequireLowercase = false;
-                        opts.Password.RequireUppercase = false;
-                        opts.Password.RequireDigit = false;
-                    })
+                .AddIdentity<User, Role>(opts => {
+                    opts.Password.RequiredLength = 5;
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireDigit = false;
+                })
                 .AddEntityFrameworkStores<BlogDbContext>();
 
 
@@ -74,124 +77,129 @@ namespace BnLog
                 // // (2).AddRepositories()
                 .AddAutoMapper();
 
-			// Configure Logging Connect NLog as logger & Console
-			builder.Logging
+            // Configure Logging Connect NLog as logger & Console
+            builder.Logging
                 .ClearProviders()
                 .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
                 .AddNLog("nlog")
                 .AddConsole();
-                
+
 
             // AddAuthentication "Cookies"
             builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
-                .AddCookie("Cookies", options =>
-                {
+                .AddCookie("Cookies", options => {
                     options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
-                    {
-                        OnRedirectToLogin = redirectContext =>
                         {
+                        OnRedirectToLogin = redirectContext => {
                             redirectContext.HttpContext.Response.StatusCode = 401;
                             return Task.CompletedTask;
                         }
-                    };
+                        };
                 });
 
-			// AddConsole & Start WebApplication
-			var app = builder.Build();
+            // AddConsole & Start WebApplication
+            var app = builder.Build();
 
-			// Configure the HTTP request pipeline.
-			#region For UseDeveloperExceptionPage Try-1
+            //app.UseMiddleware<GlobalExceptionMiddleware>();
+            //app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseGlobalExceptionHandler();
 
-
-			//if (!app.Environment.IsDevelopment())
-			//    {
-			//    ////app.UseDeveloperExceptionPage();
-
-			//    ////app.UseExceptionHandler("/Home/Error");
-			//    ////app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
-
-			//    //app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
-
-			//    //1
-			//    app.UseExceptionHandler("/Error");                
-			//    //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-			//    app.UseHsts();
-
-			//    }
-
-			////app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");//1
+            // Configure the HTTP request pipeline.
+            #region For UseDeveloperExceptionPage Try-1
 
 
-			//    // Этот сегмент кода пока не в работе, скажем так не ясно, будет ли нужен... Здесь просто STUB
-			//else
-			//    {
-			//    app.UseExceptionHandler("/Error");
-			//    app.UseHsts();
-			//    };
-			#endregion
+            //if (!app.Environment.IsDevelopment())
+            //    {
+            //    ////app.UseDeveloperExceptionPage();
 
-			// 3 -> Error are based on ErrorsController
+            //    ////app.UseExceptionHandler("/Home/Error");
+            //    ////app.UseStatusCodePagesWithReExecute("/Home/HandleError/{0}");
+
+            //    //app.UseStatusCodePagesWithReExecute("/Home/Error/{0}", "?code={0}");
+
+            //    //1
+            //    app.UseExceptionHandler("/Error");                
+            //    //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+
+            //    }
+
+            ////app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");//1
+
+
+            //    // Этот сегмент кода пока не в работе, скажем так не ясно, будет ли нужен... Здесь просто STUB
+            //else
+            //    {
+            //    app.UseExceptionHandler("/Error");
+            //    app.UseHsts();
+            //    };
+            #endregion
+
+            // 3 -> Error are based on ErrorsController
             #region For UseDeveloperExceptionPage Try-3
-			// 3 -> Error are based on ErrorsController
-			// <snippet_ConsistentEnvironments>
-			if (app.Environment.IsDevelopment())
-				{
-				app.UseExceptionHandler("/error-exp");
-				//app.UseExceptionHandler("/error-development"); 
-				//app.UseExceptionHandler(exceptionHandlerApp =>
-				//{
-				//	exceptionHandlerApp.Run(async context =>
-				//	{
-				//		context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            // 3 -> Error are based on ErrorsController
+            // <snippet_ConsistentEnvironments>
+            if (app.Environment.IsDevelopment())
+                {
+                app.UseExceptionHandler("/error-exp");
 
-				//		// using static System.Net.Mime.MediaTypeNames;
-				//		context.Response.ContentType = Text.Plain;
+                //app.UseExceptionHandler("/error-development"); 
+                //app.UseExceptionHandler(exceptionHandlerApp =>
+                //{
+                //	exceptionHandlerApp.Run(async context =>
+                //	{
+                //		context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-				//		await context.Response.WriteAsync("An exception was thrown. Lambda CASE");
+                //		// using static System.Net.Mime.MediaTypeNames;
+                //		context.Response.ContentType = Text.Plain;
 
-				//		var exceptionHandlerPathFeature =
-				//			context.Features.Get<IExceptionHandlerPathFeature>();
+                //		await context.Response.WriteAsync("An exception was thrown. Lambda CASE");
 
-				//		if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
-				//			{
-				//			await context.Response.WriteAsync(" The file was not found.");
-				//			}
+                //		var exceptionHandlerPathFeature =
+                //			context.Features.Get<IExceptionHandlerPathFeature>();
 
-				//		if (exceptionHandlerPathFeature?.Path == "/")
-				//			{
-				//			await context.Response.WriteAsync(" Page: Home.");
-				//			}
-				//	});
-				//});
+                //		if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+                //			{
+                //			await context.Response.WriteAsync(" The file was not found.");
+                //			}
 
-				app.UseHsts();
+                //		if (exceptionHandlerPathFeature?.Path == "/")
+                //			{
+                //			await context.Response.WriteAsync(" Page: Home.");
+                //			}
+                //	});
+                //});
 
-				
-			}
-			else
-				{
+                app.UseHsts();
+
+
+                }
+            else
+                {
                 app.UseExceptionHandler("/error");
                 }
-			
-				
 
-			// </snippet_ConsistentEnvironments>
-			#endregion
 
-			//app.UseHttpsRedirection(); //?? 
 
-			app.UseStaticFiles();
+            // </snippet_ConsistentEnvironments>
+            #endregion
+
+            //app.UseHttpsRedirection(); //?? 
+
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-			//app.UseMiddleware<GlobalExceptionMiddleware>();
+            //app.UseMiddleware<GlobalExceptionMiddleware>();            
+            //app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseGlobalExceptionHandler();
 
-			app.UseAuthorization();
 
-			//app.MapRazorPages();//3?
-			//app.MapControllers();
-            
-            
+            //app.MapRazorPages();//3?
+            //app.MapControllers();
+
+
             //app.UseStatusCodePagesWithReExecute("error/error","?statusCode={0}"); //3-2
             //app.UseStatusCodePagesWithReExecute("error/error/{0}"); //3-1 work +/-
             //app.UseStatusCodePagesWithRedirects("/error/{0}"); //3-0
@@ -201,7 +209,11 @@ namespace BnLog
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            //app.UseGlobalExceptionHandler();
+
             app.Run();
-        }
+            }
+
     }
+       
 }

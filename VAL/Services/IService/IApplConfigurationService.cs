@@ -1,4 +1,4 @@
-﻿using BnLog.VAL.Configuration.Models;
+﻿using BnLog.VAL.Models;
 
 	namespace BnLog.VAL.Services.IService
 	{

@@ -62,17 +62,18 @@ namespace BnLog.BLL.Controllers
             if (!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль"); 
-                    throw new ArgumentNullException("Логин или пароль не корректен");
+                    throw new AuthenticationException("Login:   UserLoginRequest.lState.IsInValid");
                 }
             //Try to entry by Login/Password
             var result = await _securityService.Login(model);
             if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    throw new AuthenticationException("Login:   User Login or Password is invalid");
                     return View(model);
                     //return RedirectToAction("Error", "Home");//Можно итак грубо... Но здесь ли??                 
                     //throw new AuthenticationException("User password incorrect");//здесь ли??
-            }
+                  }
             //ALL is OK 
             //Add claims etc..
             //Возможно и не стоит так извращаться, в сервисе и так установлен флаг на хранение Cookieы ??? Think it Man...
