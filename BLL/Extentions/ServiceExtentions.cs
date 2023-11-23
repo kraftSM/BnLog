@@ -23,8 +23,15 @@ namespace BnLog.BLL.Extentions
     /// </summary>
     public static class ServiceExtentions
     {
+		public static IServiceCollection AddApplConfiguration ( this IServiceCollection services )
+			{
+			//services.AddScoped<IApplConfigurationService, ApplConfigurationService>();
+
+			return services;
+			}
+		
         #region For UnitOfWork Pattern
-        public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+		public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

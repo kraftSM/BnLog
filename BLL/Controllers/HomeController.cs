@@ -83,12 +83,12 @@ namespace BnLog.BLL.Controllers
                     var viewName = viewBaseDir + stCode;
                     //var viewName =  statusCode.ToString();
 
-                    _logger.LogWarning($"Произошла ошибка - {stCode}\t{viewName}");
+                    _logger.LogError($"Home/Error Произошла ошибка - {stCode}\t{viewName}");
                     return View(viewName);
                     }
                 else
                     {
-                    _logger.LogWarning($"Произошла ошибка - {500}"); 
+                    _logger.LogError($"Home/Error Произошла ошибка - {500}"); 
                     return View(viewBaseDir + "500", ErrorInfo); //имеет ли смысл отдавать дот инф. наружу???
                         //return View(viewBaseDir+"500");
                     }
