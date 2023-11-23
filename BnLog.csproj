@@ -9,6 +9,13 @@
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
   <ItemGroup>
+    <Compile Remove="Temp\**" />
+    <Content Remove="Temp\**" />
+    <EmbeddedResource Remove="Temp\**" />
+    <None Remove="Temp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="bootstrap" Version="5.3.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -26,8 +33,6 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
-    <Folder Include="Temp\" />
-    <Folder Include="VAL\Configuration\" />
     <Folder Include="VAL\Response\User\" />
   </ItemGroup>
 

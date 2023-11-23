@@ -13,6 +13,7 @@ using System.Security.Authentication;
 using BnLog.DAL.Models.Entity;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace BnLog.BLL.Services
 {
@@ -58,6 +59,7 @@ namespace BnLog.BLL.Services
 
         public async Task<SignInResult> Login(UserLoginRequest model)
         {
+            StringBuilder ExMsg = new StringBuilder();
             //?? Simple & BEST
             //var user = await _userManager.FindByEmailAsync(model.Email);
             //var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
@@ -68,7 +70,8 @@ namespace BnLog.BLL.Services
             
             if (user is null)
             {
-                throw new AuthenticationException("User not found");//здесь ли??
+                ExMsg.AppendFormat("onUserCheckErr: SecurityService.UserNotFoud : Login:[{0}] Psw[{1}]", model.Email, model.Password);
+                throw new AuthenticationException(ExMsg.ToString());//здесь ли??
                 return new SignInResult();// sinRes= Failed;                                                                 
             }
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);

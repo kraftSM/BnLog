@@ -14,6 +14,7 @@ using System.Security.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using System.Text;
 //using BnLog.
 //using BnLog.Views.Security;
 
@@ -58,18 +59,21 @@ namespace BnLog.BLL.Controllers
         public async Task<IActionResult> Login(UserLoginRequest model)
         {
             //Что-то Claim навертелось...
+            StringBuilder ExMsg = new StringBuilder();
             //Check Login/Password format
             if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль"); 
-                    throw new AuthenticationException("Login:   UserLoginRequest.lState.IsInValid");
+                    ModelState.AddModelError("", "Неправильный ввод логина и/или пароля");
+                    ExMsg.AppendFormat("onEntryLoginErr: UserLoginRequest.inVald : Login:[{0}] Psw[{1}]", model.Email, model.Password);//.ToString()); 
+                    throw new AuthenticationException(ExMsg.ToString());
                 }
             //Try to entry by Login/Password
             var result = await _securityService.Login(model);
             if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
-                    throw new AuthenticationException("Login:   User Login or Password is invalid");
+                    ExMsg.AppendFormat("onLoginErr: LoginOrPassword.inVald : Login:[{0}] Psw[{1}]", model.Email, model.Password);
+                    throw new AuthenticationException(ExMsg.ToString());
                     return View(model);
                     //return RedirectToAction("Error", "Home");//Можно итак грубо... Но здесь ли??                 
                     //throw new AuthenticationException("User password incorrect");//здесь ли??

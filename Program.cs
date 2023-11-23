@@ -200,7 +200,7 @@ namespace BnLog
             //app.MapControllers();
 
 
-            //app.UseStatusCodePagesWithReExecute("error/error","?statusCode={0}"); //3-2
+            app.UseStatusCodePagesWithReExecute("error/error","?statusCode={0}"); //3-2
             //app.UseStatusCodePagesWithReExecute("error/error/{0}"); //3-1 work +/-
             //app.UseStatusCodePagesWithRedirects("/error/{0}"); //3-0
             //app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}"); //2

@@ -2,14 +2,14 @@
 using BnLog.Views.StatusCode;
 using BnLog.Views;
 using System.Diagnostics;
-using BnLog.VAL.Configuration.Models;
+using BnLog.VAL.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using BnLog.Pages;
 using Microsoft.AspNetCore.Http;
 using System.Security.Authentication;
-using BnLog.VAL.Models;
+
 
 namespace BnLog.BLL.Controllers
 {
@@ -60,13 +60,15 @@ namespace BnLog.BLL.Controllers
 
                 // Get the exception that occurred
                 Exception exceptionThatOccurred = exceptionFeature.Error;
-                _logger.LogError($"ErrorsController Произошла ошибка - {StatusCode}\t{exceptionFeature.Error.Message}");
+                //StatusCode = exceptionThatOccurred.Data.
+
+                _logger.LogError($"ErrorsController.Er00000.TheErrorOnBoard: \t{exceptionFeature.Error.Message}");
                 // Get the exception that occurred by Types
                 if (exError is AuthenticationException)
                     {
                         StatusCode = 401;
-                        _logger.LogError($"ErrorsController - AuthenticationException:{exEndpoint.DisplayName}");
-                    return SetErrView (StatusCode);
+                        _logger.LogError($"ErrorsController.ErAn001.AuthenticationException:{exEndpoint.DisplayName}");
+                        return SetErrView (StatusCode);
                     }
 
                 // TODO: Do something with the exception
@@ -82,7 +84,7 @@ namespace BnLog.BLL.Controllers
                 }
 
             // return Common Case Exception
-            _logger.LogError($"ErrorsController: Unknoun Error have Plase - [ErrorCode=500]");
+            _logger.LogError($"ErrorsController.ErXXXXX.TheUnknounErrorOnBoard: - [ErrorCode=500]");
             return SetErrView (500);
             }
         // <snippet_ConsistentEnvironments>
