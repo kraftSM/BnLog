@@ -1,4 +1,4 @@
-namespace BnLog.DAL.Models
+namespace BnLog.VAL.Models
 {
     public class ErrorViewModel
     {

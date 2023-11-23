@@ -17,7 +17,7 @@
   - - -  Видимо всеже следует вернуться к механизму Редректа на StatusPage/code? от которого я отошел в попытке  отладить  ExceptionMiddleware
   - - - -   Все равно что-то подобное я пытаюсь изобразить через виды... (//app.UseStatusCodePagesWithReExecute("/StatusPage/{}", "?statusCode={0}"); //2)
   - - + Добавление в проект Валидации
-  - - -  Фактически Валидация планируется с использованием пакета FluentValidation
+  - - -  Фактически Валидация планируется с использованием пакета FluentValidation https://docs.fluentvalidation.net/en/latest/built-in-validators.html
   - - -  Правила/ограничения  Валидации лежат в ...\VAL\Validators\...
   - - - + Для валидации ролей введены ограничения на наличие в списке RoleValues -> BnLog.VAL.Models (пока 2-язычные)
   - - - + Пример валидации из дока по FluentValidation ниже ролей введены
