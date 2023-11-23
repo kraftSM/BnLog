@@ -6,7 +6,7 @@ namespace BnLog.BLL.Services.IService
 {
     public interface IRoleService
     {
-        Task<Guid> CreateRole(RoleCreateRequest model);
+        Task<Guid> CreateRole(RoleEditRequest model);
         Task EditRole(RoleEditRequest model);
         Task RemoveRole(Guid id);
         Task<Role> GetRole(Guid id);

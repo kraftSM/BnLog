@@ -1,8 +1,8 @@
-﻿@*@model BnLog.DAL.Request.Security.RoleEditRequest;*@
-@model BnLog.DAL.Models.Security.Role;
+﻿@model BnLog.VAL.Request.Security.RoleEditRequest; 
+@*@model BnLog.DAL.Models.Security.Role;*@
 
 <div class="container-page">
-    <h2 class="title-margin">Редактирование тега</h2>
+    <h2 class="title-margin">Редактирование роли</h2>
     <form method="post" asp-controller="Role" asp-action="EditRole"> <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
             <label asp-for="Name"></label><br />

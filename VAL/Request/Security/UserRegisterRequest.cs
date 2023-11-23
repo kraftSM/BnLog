@@ -16,7 +16,7 @@ namespace BnLog.VAL.Request.Security
         [Display(Name = "Фамилия", Prompt = "Введите фамилию")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Поле Никнейм обязательно для заполнения")]
+        [Required(ErrorMessage = "Поле Login обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Login", Prompt = "Введите Login")]
         public string UserName { get; set; }

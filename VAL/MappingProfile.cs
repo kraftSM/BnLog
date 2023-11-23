@@ -20,6 +20,7 @@ namespace BnLog.VAL
                 .ForMember(x => x.Email, opt => opt.MapFrom(c => c.Email))
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.UserName));
             CreateMap<UserEditRequest, User>();
+            CreateMap<RoleEditRequest, Role>();
             // Entity
             CreateMap<PostCreateRequest, Post>();
             CreateMap<PostEditRequest, Post>();

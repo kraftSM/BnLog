@@ -17,7 +17,7 @@ namespace BnLog.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateRole(RoleCreateRequest model)
+        public async Task<Guid> CreateRole(RoleEditRequest model)
         {
             var role = new Role() { Name = model.Name, SecurityLvl = model.SecurityLvl };
             await _roleManager.CreateAsync(role);

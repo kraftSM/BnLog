@@ -68,7 +68,10 @@ namespace BnLog.BLL.Controllers
                     {
                         StatusCode = 401;
                         _logger.LogError($"ErrorsController.ErAn001.AuthenticationException:{exEndpoint.DisplayName}");
-                        return SetErrView (StatusCode);
+
+                    return SetErrView(StatusCode);// надо перебросить на 
+                        //return ErrorsRedirect(StatusCode);
+
                     }
 
                 // TODO: Do something with the exception
@@ -149,10 +152,26 @@ namespace BnLog.BLL.Controllers
             return View("500", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
+
+        [Route("Errors/{id?}")]
+        public async Task<IActionResult> ErrorsRedirect ( int? statusCode = null )
+            {
+            if (statusCode.HasValue)
+                {
+                switch (statusCode)
+                    {
+                    case 400: return RedirectToPage("/Errors/ResourceIsNotFoundPage");
+                    case 401: return RedirectToPage("/Errors/AccessIsDeniedPage");
+                    default: return RedirectToPage("/Errors/UnknownErrorPage");
+                    }
+                }
+            return RedirectToPage("/Error");
+            }
+
         // <snippet_HandleError>
         //[Route("/error")]
         //public IActionResult HandleError ( ) =>
-            //Problem();
+        //Problem();
         // </snippet_HandleError>
         // </snippet_ConsistentEnvironments>
         }
