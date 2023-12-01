@@ -5,38 +5,34 @@ using Microsoft.Extensions.DependencyInjection;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
 using BnLog.DAL.IRepository;
-using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Repository.Entity;
 using BnLog.DAL.Repository;
-using BnLog.DAL.Models.Items;
 using BnLog.DAL.Repository.Items;
 
-using BnLog.VAL;
 using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
 using BnLog.VAL.Validators;
-using BnLog.VAL.Response.Items;
 using BnLog.VAL.Exceptions;
 using BnLog.VAL.Request.Entity;
 using BnLog.VAL.Request.Security;
 using FluentValidation;
 
-namespace BnLog.BLL.Extentions
+namespace BnLog.VAL.Extentions
 {
     // <summary>
     /// Методы расширения сервисов
     /// </summary>
     public static class ServiceExtentions
     {
-		public static IServiceCollection AddApplConfiguration ( this IServiceCollection services )
-			{
-			//services.AddScoped<IApplConfigurationService, ApplConfigurationService>();
+        public static IServiceCollection AddApplConfiguration(this IServiceCollection services)
+        {
+            //services.AddScoped<IApplConfigurationService, ApplConfigurationService>();
 
-			return services;
-			}
-		
+            return services;
+        }
+
         #region For UnitOfWork Pattern
-		public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+        public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -53,10 +49,10 @@ namespace BnLog.BLL.Extentions
         }
         #endregion
 
-        #region ServiceExtentions-> BAL services
+        #region ServiceExtentions-> BLL services
         public static IServiceCollection AddServicesBL(this IServiceCollection services)
         {
-            
+
             //Entity services
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
@@ -83,7 +79,7 @@ namespace BnLog.BLL.Extentions
             services.AddTransient<IValidator<TagRequest>, TagRequestValidator>();
             services.AddTransient<IValidator<PostEditRequest>, PostRequestValidator>();
             services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
-            
+
 
 
 

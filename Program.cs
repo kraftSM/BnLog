@@ -20,7 +20,6 @@ using BnLog.DAL.Repository.Entity;
 using BnLog.VAL;
 using BnLog.BLL.Services.IService;
 using BnLog.BLL.Services;
-using BnLog.BLL.Extentions;
 using System.Diagnostics.Eventing.Reader;
 //using BnLog.BLL.Exceptions;
 using BnLog.BLL.Controllers;
@@ -28,7 +27,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 using BnLog.VAL.Models;
 using BnLog.VAL.Exceptions;
-
+using BnLog.VAL.Extentions;
 
 namespace BnLog
 {
