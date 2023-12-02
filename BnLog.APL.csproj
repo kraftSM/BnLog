@@ -10,6 +10,8 @@
 
   <ItemGroup>
    
+    <Compile Remove="BnLog.API\**" />
+   
     <Compile Remove="BnLog.BLL\**" />
     
     <Compile Remove="BnLog.DAL\**" />
@@ -22,18 +24,22 @@
     
     <Compile Remove="VAL\**" />
     
+    <Content Remove="BnLog.API\**" />
+    
     <Content Remove="BnLog.BLL\**" />
     <Content Remove="BnLog.DAL\**" />
     <Content Remove="BnLog.VAL\**" />
     <Content Remove="DAL\**" />
     <Content Remove="Temp\**" />
     <Content Remove="VAL\**" />
+    <EmbeddedResource Remove="BnLog.API\**" />
     <EmbeddedResource Remove="BnLog.BLL\**" />
     <EmbeddedResource Remove="BnLog.DAL\**" />
     <EmbeddedResource Remove="BnLog.VAL\**" />
     <EmbeddedResource Remove="DAL\**" />
     <EmbeddedResource Remove="Temp\**" />
     <EmbeddedResource Remove="VAL\**" />
+    <None Remove="BnLog.API\**" />
     <None Remove="BnLog.BLL\**" />
     <None Remove="BnLog.DAL\**" />
     <None Remove="BnLog.VAL\**" />
