@@ -9,16 +9,44 @@
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
   <ItemGroup>
+    
+    <Compile Remove="BnLog.BLL\**" />
+    
+    <Compile Remove="BnLog.DAL\**" />
+    
+    <Compile Remove="BnLog.VAL\**" />
+    
+    <Compile Remove="DAL\**" />
+    
     <Compile Remove="Temp\**" />
+    
+    <Compile Remove="VAL\**" />
+    
+    <Content Remove="BnLog.BLL\**" />
+    <Content Remove="BnLog.DAL\**" />
+    <Content Remove="BnLog.VAL\**" />
+    <Content Remove="DAL\**" />
     <Content Remove="Temp\**" />
+    <Content Remove="VAL\**" />
+    <EmbeddedResource Remove="BnLog.BLL\**" />
+    <EmbeddedResource Remove="BnLog.DAL\**" />
+    <EmbeddedResource Remove="BnLog.VAL\**" />
+    <EmbeddedResource Remove="DAL\**" />
     <EmbeddedResource Remove="Temp\**" />
+    <EmbeddedResource Remove="VAL\**" />
+    <None Remove="BnLog.BLL\**" />
+    <None Remove="BnLog.DAL\**" />
+    <None Remove="BnLog.VAL\**" />
+    <None Remove="DAL\**" />
     <None Remove="Temp\**" />
+    <None Remove="VAL\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="bootstrap" Version="5.3.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.24" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.24" />
@@ -33,7 +61,12 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
-    <Folder Include="VAL\Response\User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="BnLog.BLL\BnLog.BLL.csproj" />
+    <ProjectReference Include="BnLog.DAL\BnLog.DAL.csproj" />
+    <ProjectReference Include="BnLog.VAL\BnLog.VAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,14 @@
 ﻿using BnLog.DAL.Models;
-using BnLog.Views.StatusCode;
-using BnLog.Views;
+//using BnLog.Views.StatusCode;
+//using BnLog.Views;
 using System.Diagnostics;
 using BnLog.VAL.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using BnLog.Pages;
+using Microsoft.Extensions.Logging;
+//using BnLog.Pages;
 using Microsoft.AspNetCore.Http;
 using System.Security.Authentication;
 
@@ -53,8 +55,8 @@ namespace BnLog.BLL.Controllers
                 // Get the exception that occurred
                 var exError = exceptionFeature.Error;
                 var exPath = exceptionFeature.Path;
-                var exRouteValues = exceptionFeature.RouteValues;
-                var exEndpoint = exceptionFeature.Endpoint;
+                //var exRouteValues = exceptionFeature.RouteValues;
+                //var exEndpoint = exceptionFeature.Endpoint;
                 // Get which route the exception occurred at
                 string routeWhereExceptionOccurred = exceptionFeature.Path;
 
@@ -67,17 +69,13 @@ namespace BnLog.BLL.Controllers
                 if (exError is AuthenticationException)
                     {
                         StatusCode = 401;
-                        _logger.LogError($"ErrorsController.ErAn001.AuthenticationException:{exEndpoint.DisplayName}");
+                    //_logger.LogError($"ErrorsController.ErAn001.AuthenticationException:{exEndpoint.DisplayName}");
+                    _logger.LogError($"ErrorsController.ErAn001.AuthenticationException:{exPath}");
 
                     return SetErrView(StatusCode);// надо перебросить на 
                         //return ErrorsRedirect(StatusCode);
 
                     }
-
-                // TODO: Do something with the exception
-                // Log it with Serilog?
-                // Send an e-mail, text, fax, or carrier pidgeon?  Maybe all of the above?
-                // Whatever you do, be careful to catch any exceptions, otherwise you'll end up with a blank page and throwing a 500
 
                 var errModel = new ErrorViewModel { ErrCode = StatusCode, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
                 //errModel.RequestId = 

@@ -12,7 +12,7 @@ using BnLog.DAL.Repository.Items;
 using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
 using BnLog.VAL.Validators;
-using BnLog.VAL.Exceptions;
+//using BnLog.VAL.Exceptions;
 using BnLog.VAL.Request.Entity;
 using BnLog.VAL.Request.Security;
 using FluentValidation;

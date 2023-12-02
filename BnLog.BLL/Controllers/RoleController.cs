@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BnLog.BLL.Services.IService;

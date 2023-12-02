@@ -1,22 +1,18 @@
 ﻿using AutoMapper;
-
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Data;
 
-using BnLog.BLL.Services;
-using BnLog.BLL.Services.IService;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
+using BnLog.VAL.Services.IService;
 using System.Security.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
 using System.Text;
-//using BnLog.
-//using BnLog.Views.Security;
+
 
 namespace BnLog.BLL.Controllers
 {

@@ -1,21 +1,21 @@
 ﻿using System.Security.Claims;
-using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using BnLog.BLL.Services.IService;
-
-
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-using BnLog.DAL.IRepository;
-using BnLog.DAL.Models.Security;
-using BnLog.VAL.Request.Security;
 using System.Security.Authentication;
-using BnLog.DAL.Models.Entity;
 using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace BnLog.BLL.Services
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+//using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+
+using AutoMapper;
+using BnLog.DAL.IRepository;
+using BnLog.DAL.Models.Security;
+using BnLog.VAL.Request.Security;
+using BnLog.VAL.Services.IService;
+
+
+namespace BnLog.VAL.Services
 {
     public class SecurityService : ISecurityService
     {
@@ -25,7 +25,8 @@ namespace BnLog.BLL.Services
         private readonly IPostRepository _postRepo;
         public IMapper _mapper;
 
-        public SecurityService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+
+        public SecurityService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)//
         {
             _roleManager = roleManager;
             _mapper = mapper;

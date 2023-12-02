@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using Microsoft.Extensions.Logging;
 using BnLog.BLL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.BLL.Services;
