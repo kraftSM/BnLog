@@ -80,9 +80,6 @@ namespace BnLog.VAL.Extentions
             services.AddTransient<IValidator<PostEditRequest>, PostRequestValidator>();
             services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
 
-
-
-
             return services;
         }
         #endregion
