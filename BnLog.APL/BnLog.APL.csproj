@@ -70,9 +70,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="BnLog.BLL\BnLog.BLL.csproj" />
-    <ProjectReference Include="BnLog.DAL\BnLog.DAL.csproj" />
-    <ProjectReference Include="BnLog.VAL\BnLog.VAL.csproj" />
+    <ProjectReference Include="..\BnLog.BLL\BnLog.BLL.csproj" />
+    <ProjectReference Include="..\BnLog.DAL\BnLog.DAL.csproj" />
+    <ProjectReference Include="..\BnLog.VAL\BnLog.VAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
