@@ -9,7 +9,11 @@
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
   <ItemGroup>
-   
+    
+    <Compile Remove="BnLog.API\**" />
+    
+    <Compile Remove="BnLog.APL\**" />
+    
     <Compile Remove="BnLog.BLL\**" />
     
     <Compile Remove="BnLog.DAL\**" />
@@ -22,18 +26,26 @@
     
     <Compile Remove="VAL\**" />
     
+    <Content Remove="BnLog.API\**" />
+    
+    <Content Remove="BnLog.APL\**" />
+    
     <Content Remove="BnLog.BLL\**" />
     <Content Remove="BnLog.DAL\**" />
     <Content Remove="BnLog.VAL\**" />
     <Content Remove="DAL\**" />
     <Content Remove="Temp\**" />
     <Content Remove="VAL\**" />
+    <EmbeddedResource Remove="BnLog.API\**" />
+    <EmbeddedResource Remove="BnLog.APL\**" />
     <EmbeddedResource Remove="BnLog.BLL\**" />
     <EmbeddedResource Remove="BnLog.DAL\**" />
     <EmbeddedResource Remove="BnLog.VAL\**" />
     <EmbeddedResource Remove="DAL\**" />
     <EmbeddedResource Remove="Temp\**" />
     <EmbeddedResource Remove="VAL\**" />
+    <None Remove="BnLog.API\**" />
+    <None Remove="BnLog.APL\**" />
     <None Remove="BnLog.BLL\**" />
     <None Remove="BnLog.DAL\**" />
     <None Remove="BnLog.VAL\**" />
@@ -67,13 +79,6 @@
     <ProjectReference Include="BnLog.BLL\BnLog.BLL.csproj" />
     <ProjectReference Include="BnLog.DAL\BnLog.DAL.csproj" />
     <ProjectReference Include="BnLog.VAL\BnLog.VAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Views\Errors\404.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>
