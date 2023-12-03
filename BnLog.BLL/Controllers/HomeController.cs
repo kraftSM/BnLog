@@ -56,7 +56,7 @@ namespace BnLog.BLL.Controllers
             return View(new MainRequest());
             // return View();
             }
-
+        [HttpGet]
         [Authorize]
         [Route("Home/UserPage")]
         //public IActionResult UserPage(UserLoginRequest model)

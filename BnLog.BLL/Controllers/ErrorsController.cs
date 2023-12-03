@@ -34,10 +34,10 @@ namespace BnLog.BLL.Controllers
         //public IActionResult Throw ( ) =>
         //    throw new Exception("Sample exception.");
         //</snippet_Throw>
-
+        [HttpGet]
         [Route("/Account/AccessDenied")]
         [Route("/error-exp")]
-
+       
         public IActionResult Error ( )
             {
             int StatusCode = StatusCodes.Status500InternalServerError;
@@ -89,7 +89,7 @@ namespace BnLog.BLL.Controllers
             return SetErrView (500);
             }
         // <snippet_ConsistentEnvironments>
-
+        [HttpGet]
         [Route("/error-development")]
         //public IActionResult HandleErrorDevelopment ( [FromServices] IHostEnvironment hostEnvironment, )
         public IActionResult HandleErrorDevelopment ( int? statusCode = null )
@@ -150,7 +150,7 @@ namespace BnLog.BLL.Controllers
             return View("500", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
-
+        [HttpGet]
         [Route("Errors/{id?}")]
         public async Task<IActionResult> ErrorsRedirect ( int? statusCode = null )
             {
