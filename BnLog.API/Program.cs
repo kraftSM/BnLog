@@ -18,6 +18,10 @@ using BnLog.DAL.Models.Items;
 using BnLog.DAL.Repository;
 using BnLog.DAL.Repository.Items;
 using BnLog.DAL.Repository.Entity;
+using BnLog.VAL.Services.IService;
+using BnLog.VAL.Services;
+using BnLog.API.Extentions;
+using BnLog.API.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,10 +41,39 @@ builder.Services
     })
     .AddEntityFrameworkStores<BlogDbContext>();
 // Add services to the container.
+// subServices, mapper & Company...+ Try ( but  NOT WORK) UnitOfWork() 
+builder.Services
+    .AddServicesBL()
+    .AddDirectRepositories()
+    // // UnitOfWork() не интегруем, DI exception - дописать потом,if any...
+    //.AddUnitOfWork()
+    // //(1) or (2)
+    // // (1).AddCustomRepository<ItemOption, ItemOptionRepository>()
+    // // (1).AddCustomRepository<ItemResurce, ItemResurceRepository>()
+    // // (2).AddRepositories()
+    .AddAutoMapper();
+
+// Configure Logging Connect NLog as logger & Console
+//builder.Logging
+//    .ClearProviders()
+//    .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
+//    .AddNLog("nlog")
+//    .AddConsole();
+
+
 
 builder.Services.AddControllers();
 // поддерживает автоматическую генерацию документации WebApi с использованием Swagger
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "BnLog.Api", Version = "v1" }); });
+builder.Services.AddSwaggerGen(options => 
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+        {
+        Title = "BnLog.Api",
+        Version = "v0.1" 
+        });
+    //var filepath = Path.Combine(AppContext.BaseDirectory, "BnLog.API.xml");
+    //options.IncludeXmlComments(filepath);
+});
 
 var app = builder.Build();
 

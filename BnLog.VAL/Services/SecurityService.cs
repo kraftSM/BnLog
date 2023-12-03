@@ -22,17 +22,17 @@ namespace BnLog.VAL.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly IPostRepository _postRepo;
+        //private readonly IPostRepository _postRepo;
         public IMapper _mapper;
 
 
-        public SecurityService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)//
-        {
+        public SecurityService(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager )//IPostRepository postRepo, 
+            {
             _roleManager = roleManager;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _postRepo = postRepo;
+            //_postRepo = postRepo;
         }
 
         public async Task<IdentityResult> Register(UserRegisterRequest model)

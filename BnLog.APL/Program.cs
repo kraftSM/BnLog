@@ -141,7 +141,7 @@ namespace BnLog
             if (app.Environment.IsDevelopment())
                 {
                 app.UseExceptionHandler("/error-exp");
-
+                
                 //app.UseExceptionHandler("/error-development"); 
                 //app.UseExceptionHandler(exceptionHandlerApp =>
                 //{

@@ -9,6 +9,9 @@ using BnLog.VAL.Request.Entity;
 
 namespace BnLog.BLL.Controllers
 {
+    [ApiController]
+        [Route("api/[controller]")]
+        //[Produces("application/json")]
     public class TagController : Controller
     {
 
@@ -23,7 +26,8 @@ namespace BnLog.BLL.Controllers
             _tagService = tagService;
             _logger = logger;
         }
-
+        
+        
         /// <summary>
         /// [Get] Метод, создания тега
         /// </summary>
