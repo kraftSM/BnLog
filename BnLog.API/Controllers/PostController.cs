@@ -37,15 +37,15 @@ namespace BnLog.API.Controllers
         [Route("[controller]/Get")]
         public async Task<List<PostInfo>> GetPosts ( )
         {
-            
-            //var PostInfo = _mapper.Map<PostInfo>(Pos);
+
+            //    //var PostInfo = _mapper.Map<PostInfo>(Pos);
             var posts = await _postService.GetPosts();
-            //Создание конфигурации сопоставления
-           var config = new MapperConfiguration(cfg => cfg.CreateMap<Post, PostInfo>());
-            //Настройка AutoMapper
-        var mapper = new Mapper(config);
-            //сопоставление
-           var postsInfo = mapper.Map<List<PostInfo>>(posts);
+            //    //Создание конфигурации сопоставления
+            //   var config = new MapperConfiguration(cfg => cfg.CreateMap<Post, PostInfo>());
+            //    //Настройка AutoMapper
+            //var mapper = new Mapper(config);
+            //    //сопоставление
+            //   var postsInfo = mapper.Map<List<PostInfo>>(posts);
 
 
 

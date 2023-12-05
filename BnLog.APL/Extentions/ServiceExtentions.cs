@@ -72,7 +72,7 @@ namespace BnLog.VAL.Extentions
             services.AddTransient<IValidator<RoleEditRequest>, RoleRequestValidator>();
             services.AddTransient<IValidator<UserEditRequest>, UserRequestValidator>();
             //Entity Validators
-            services.AddTransient<IValidator<TagInfo>, TagRequestValidator>();
+            services.AddTransient<IValidator<TagSelectInfo>, TagRequestValidator>();
             services.AddTransient<IValidator<PostEditRequest>, PostRequestValidator>();
             services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
 
