@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 
-namespace BnLog.BLL.Services
+namespace BnLog.VAL.Services
 {
     public class RoleService : IRoleService
     {

@@ -4,14 +4,14 @@
 namespace BnLog.VAL.Request.Entity
 
 {
-    public class PostShowRequest
-    {
+    public class PostInfo
+        {
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string AuthorId { get; set; }
-        public List<TagInfo> Tags { get; set; }
+        //public List<TagRequest> Tags { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Body { get; set; }
+        //public string Body { get; set; }
     }
 }

@@ -4,6 +4,16 @@
         <name>BnLog.API</name>
     </assembly>
     <members>
+        <member name="M:BnLog.API.Controllers.PostController.GetPosts">
+            <summary>
+            [Get] Метод, получения всех постов
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.RoleController.GetRoles">
+            <summary>
+            [Get] Метод, получения всех тегов
+            </summary>
+        </member>
         <member name="M:BnLog.API.Controllers.SecurityController.Login(BnLog.VAL.Request.Security.UserLoginRequest)">
             <summary>
             [Post] Метод, login
@@ -47,6 +57,11 @@
         <member name="M:BnLog.API.Controllers.SecurityController.RemoveAccount(System.Guid)">
             <summary>
             [Post] Метод, удаление аккаунта
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.TagController.GetTags">
+            <summary>
+            [Get] Метод, получения всех тегов
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "T:BnLog.API.Extentions.ServiceExtentions" -->

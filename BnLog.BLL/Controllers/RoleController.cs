@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BnLog.BLL.Services.IService;
-using BnLog.BLL.Services;
+using BnLog.VAL.Services.IService;
+using BnLog.VAL.Services;
 using BnLog.VAL.Request.Security;
 using BnLog.VAL.Validators;
 using BnLog.DAL.Models.Security;
@@ -26,7 +26,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, создания тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Create")]
         //[Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -38,7 +38,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, создания тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -61,7 +61,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -89,7 +89,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -141,7 +141,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаления тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -156,7 +156,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаления тега
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -171,7 +171,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/GetRoles")]
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]

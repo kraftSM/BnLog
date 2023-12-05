@@ -34,7 +34,7 @@ namespace BnLog.BLL.Controllers
         //public IActionResult Throw ( ) =>
         //    throw new Exception("Sample exception.");
         //</snippet_Throw>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("/Account/AccessDenied")]
         [Route("/error-exp")]
@@ -90,7 +90,7 @@ namespace BnLog.BLL.Controllers
             return SetErrView (500);
             }
         // <snippet_ConsistentEnvironments>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("/error-development")]
         //public IActionResult HandleErrorDevelopment ( [FromServices] IHostEnvironment hostEnvironment, )
@@ -152,7 +152,7 @@ namespace BnLog.BLL.Controllers
             return View("500", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
 
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("Errors/{id?}")]
         public async Task<IActionResult> ErrorsRedirect ( int? statusCode = null )

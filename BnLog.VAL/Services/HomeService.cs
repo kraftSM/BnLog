@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Items;
 using BnLog.DAL.Models.Entity;
@@ -8,7 +8,7 @@ using BnLog.VAL.Request.Security;
 using Microsoft.AspNetCore.Identity;
 using BnLog.DAL.Repository.Items;
 
-namespace BnLog.BLL.Services
+namespace BnLog.VAL.Services
 {
     public class HomeService : IHomeService
     {

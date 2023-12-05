@@ -1,8 +1,8 @@
 ﻿using BnLog.DAL.Models.Entity;
 using BnLog.VAL.Request.Entity;
 
-namespace BnLog.BLL.Services.IService
-{
+namespace BnLog.VAL.Services.IService
+    {
     public interface ITagService
     {    
         Task<Guid> CreateTag(TagCreateRequest model);

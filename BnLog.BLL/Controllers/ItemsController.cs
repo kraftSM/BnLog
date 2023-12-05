@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.Models.Security;
 using BnLog.DAL.Develop;
 using Microsoft.AspNetCore.Authorization;
@@ -43,7 +42,7 @@ namespace BnLog.BLL.Controllers
             }
 
         [Authorize(Roles = "Разработчик, Администратор")]
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         // GET: 
         //[AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
@@ -61,7 +60,7 @@ namespace BnLog.BLL.Controllers
                 return NoContent();
             }
         #region ItemsListAll
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Authorize(Roles = "Разработчик, Администратор")]
         [Route("Items/ListAll")]
         [HttpGet]
@@ -86,7 +85,7 @@ namespace BnLog.BLL.Controllers
             }
         #endregion
         #region DevelopGenerate
-        [NonAction]        
+        [ApiExplorerSettings(IgnoreApi = true)]        
         [Authorize(Roles = "Разработчик")]
         [Route("tems/DevelopGenerate")]
         [HttpGet]

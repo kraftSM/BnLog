@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 
-using Microsoft.Extensions.DependencyInjection;
-
-using BnLog.BLL.Services.IService;
-using BnLog.BLL.Services;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Repository.Entity;
 using BnLog.DAL.Repository;
 using BnLog.DAL.Repository.Items;
 
-using BnLog.VAL.Services;
 using BnLog.VAL.Services.IService;
+using BnLog.VAL.Services;
 using BnLog.VAL.Validators;
 //using BnLog.VAL.Exceptions;
 using BnLog.VAL.Request.Entity;
@@ -76,7 +72,7 @@ namespace BnLog.VAL.Extentions
             services.AddTransient<IValidator<RoleEditRequest>, RoleRequestValidator>();
             services.AddTransient<IValidator<UserEditRequest>, UserRequestValidator>();
             //Entity Validators
-            services.AddTransient<IValidator<TagRequest>, TagRequestValidator>();
+            services.AddTransient<IValidator<TagInfo>, TagRequestValidator>();
             services.AddTransient<IValidator<PostEditRequest>, PostRequestValidator>();
             services.AddTransient<IValidator<CommentRequest>, CommentRequestValidator>();
 

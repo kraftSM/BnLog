@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
@@ -30,7 +30,7 @@ namespace BnLog.VAL.Services
         {
             Post post = new Post();
 
-            var allTags = _tagRepo.GetAllTags().Select(t => new TagRequest() { Id = t.Id, Name = t.Name }).ToList();
+            var allTags = _tagRepo.GetAllTags().Select(t => new TagInfo() { Id = t.Id, Name = t.Name }).ToList();
 
             PostCreateRequest model = new PostCreateRequest
             {
@@ -75,7 +75,7 @@ namespace BnLog.VAL.Services
         {
             var post = _repo.GetPost(id);
 
-            var tags = _tagRepo.GetAllTags().Select(t => new TagRequest() { Id = t.Id, Name = t.Name }).ToList();
+            var tags = _tagRepo.GetAllTags().Select(t => new TagInfo() { Id = t.Id, Name = t.Name }).ToList();
 
             foreach (var tag in tags)
             {

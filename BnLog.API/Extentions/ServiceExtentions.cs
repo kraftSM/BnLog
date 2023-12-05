@@ -2,16 +2,16 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-using BnLog.BLL.Services.IService;
-using BnLog.BLL.Services;
+using BnLog.VAL.Services.IService;
+using BnLog.VAL.Services;
+using BnLog.API.Controllers;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Repository.Entity;
 using BnLog.DAL.Repository;
 using BnLog.DAL.Repository.Items;
 using BnLog.VAL;
 
-using BnLog.VAL.Services;
-using BnLog.VAL.Services.IService;
+
 using BnLog.VAL.Validators;
 //using BnLog.VAL.Exceptions;
 using BnLog.VAL.Request.Entity;
@@ -55,10 +55,10 @@ namespace BnLog.API.Extentions
         {
 
             //Entity services
-            //services.AddScoped<IPostService, PostService>();
-            //services.AddScoped<ICommentService, CommentService>();
-            //services.AddScoped<IRoleService, RoleService>();
-            //services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITagService, TagService>();
             //security services
             services.AddScoped<ISecurityService, SecurityService>();
             //services.AddScoped<IRoleService, RoleService>();

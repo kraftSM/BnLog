@@ -2,7 +2,7 @@
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Entity;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

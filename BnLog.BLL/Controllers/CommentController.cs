@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BnLog.BLL.Services;
-using BnLog.BLL.Services.IService;
+using BnLog.VAL.Services;
+using BnLog.VAL.Services.IService;
 using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Entity;
@@ -28,7 +28,7 @@ namespace BnLog.BLL.Controllers
         // <summary>
         /// [Get] Метод, добавление комментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("Comment/CreateComment")]
         public IActionResult CreateComment(Guid postId)
@@ -40,7 +40,7 @@ namespace BnLog.BLL.Controllers
         // <summary>
         /// [Post] Метод, добавление комментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("Comment/CreateComment")]
         public async Task<IActionResult> CreateComment(CommentRequest model, Guid PostId)
@@ -54,7 +54,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования коментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Comment/Edit")]
         [HttpGet]
         public async Task<IActionResult> EditComment(Guid id)
@@ -76,7 +76,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования коментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Authorize]
         [Route("Comment/Edit")]
         [HttpPost]
@@ -97,7 +97,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаления коментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Route("Comment/Remove")]
         public async Task<IActionResult> RemoveComment(Guid id, bool confirm = true)
@@ -110,7 +110,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Delete] Метод, удаления коментария
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpDelete]
         [Route("Comment/Remove")]
         public async Task<IActionResult> RemoveComment(Guid id)

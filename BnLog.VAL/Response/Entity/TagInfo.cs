@@ -2,7 +2,7 @@
 using System.Xml.Linq;
 
 
-namespace BnLog.VAL.Request.Entity
+namespace BnLog.VAL.Response.Entity
 
 {
     public class TagInfo
