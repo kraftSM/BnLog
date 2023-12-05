@@ -39,7 +39,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, login
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Login")]  
         [HttpGet]
         public IActionResult Login()
@@ -50,7 +50,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, login
         /// </summary>
-        [NonAction]        
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,7 +103,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, регистрации
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Register")]
         [HttpGet]
         public IActionResult Register()
@@ -114,7 +114,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, регистрации
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Register")]
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequest model)
@@ -144,7 +144,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -157,7 +157,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -183,7 +183,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаление аккаунта
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -198,7 +198,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаление аккаунта
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -214,7 +214,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, выхода из аккаунта
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Logout")]
         [Authorize]
         [HttpPost]
@@ -227,7 +227,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех пользователей
         /// </summary>
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/GetAccounts")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]

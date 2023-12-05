@@ -56,7 +56,7 @@ namespace BnLog.BLL.Controllers
             return View(new MainRequest());
             // return View();
             }
-        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet]
         [Authorize]
         [Route("Home/UserPage")]
