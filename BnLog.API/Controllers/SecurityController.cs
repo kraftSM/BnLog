@@ -74,7 +74,7 @@ namespace BnLog.API.Controllers
         /// [Get] Метод, получения всех пользователей
         /// </summary>
         [Route("GetAccounts")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        //[Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
         //public async Task<List<UserInfo>> GetAccounts ()
         public async Task<List<UserInfo>> GetAccounts ( )

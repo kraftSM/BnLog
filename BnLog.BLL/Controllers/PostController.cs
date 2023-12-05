@@ -30,6 +30,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, показывания поста
         /// </summary>
+        [NonAction]
         [Route("Post/Show")]
         [HttpGet]
         public async Task<IActionResult> ShowPost(Guid id)
@@ -41,6 +42,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, создания поста
         /// </summary>
+        [NonAction]
         [Route("Post/Create")]
         [HttpGet]
         [Authorize]
@@ -54,6 +56,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, создания поста
         /// </summary>
+        [NonAction]
         [Route("Post/Create")]
         [Authorize]
         [HttpPost]
@@ -75,6 +78,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования поста
         /// </summary>
+        [NonAction]
         [Route("Post/Edit")]
         [HttpGet]
         public async Task<IActionResult> EditPost(Guid id)
@@ -87,6 +91,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования поста
         /// </summary>
+        [NonAction]
         [Authorize]
         [Route("Post/Edit")]
         [HttpPost]
@@ -107,6 +112,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаления поста
         /// </summary>
+        [NonAction]
         [HttpGet]
         [Route("Post/Remove")]
         public async Task<IActionResult> RemovePost(Guid id, bool confirm = true)
@@ -119,6 +125,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаления поста
         /// </summary>
+        [NonAction]
         [HttpPost]
         [Route("Post/Remove")]
         public async Task<IActionResult> RemovePost(Guid id)
@@ -130,6 +137,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех постов
         /// </summary>
+        [NonAction]
         [HttpGet]
         [Route("Post/Get")]
         public async Task<IActionResult> GetPosts()

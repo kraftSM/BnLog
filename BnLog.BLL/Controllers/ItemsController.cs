@@ -14,9 +14,9 @@ using BnLog.VAL.Services.IService;
 using BnLog.VAL.Services;
 
 namespace BnLog.BLL.Controllers
-{
-    public class ItemsController : Controller
     {
+    public class ItemsController : Controller
+        {
         //Сейчас сделано для просмотра отладки Items(Info) 
         //Может стоит отказаться от этого ВООБЩЕ 
 
@@ -30,42 +30,43 @@ namespace BnLog.BLL.Controllers
         private readonly IItemService _itemService;
         private readonly IMapper _mapper;
         private readonly ILogger<ItemsController> _logger;
-        public ItemsController(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, RoleManager<Role> roleManager, ISecurityService securityService, IItemService itemService, ILogger<ItemsController> logger)
-        {
+        public ItemsController ( UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, RoleManager<Role> roleManager, ISecurityService securityService, IItemService itemService, ILogger<ItemsController> logger )
+            {
             _roleManager = roleManager;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _securityService = securityService;
-            _itemService =  itemService;
-        _logger = logger;
+            _itemService = itemService;
+            _logger = logger;
 
-        }
+            }
 
         [Authorize(Roles = "Разработчик, Администратор")]
-    
+        [NonAction]
         [HttpGet]
         // GET: 
         //[AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
-        public async Task<ActionResult> Index()
-        {
-            //return View(await _itemService.GetAsync());
-            var allItems  = await _itemService.GetAsync();
-            
-            if (allItems != null)
+        public async Task<ActionResult> Index ( )
             {
-                return View("ItemsAll",allItems);
+            //return View(await _itemService.GetAsync());
+            var allItems = await _itemService.GetAsync();
+
+            if (allItems != null)
+                {
+                return View("ItemsAll", allItems);
                 //return StatusCode(200, allItems);//for API
-            }
+                }
             else
                 return NoContent();
-        }
+            }
         #region ItemsListAll
+        [NonAction]
         [Authorize(Roles = "Разработчик, Администратор")]
-    [Route("Items/ListAll")]
-    [HttpGet]
-    public async Task<IActionResult> ListAll()
-    {
+        [Route("Items/ListAll")]
+        [HttpGet]
+        public async Task<IActionResult> ListAll ( )
+            {
             //DBItems generations
             //var DbItems = new DbGenerate();
 
@@ -82,14 +83,15 @@ namespace BnLog.BLL.Controllers
             return View("ItemsAll");
             //return ( HtmlEncoder.Default.Encode($"Hello Man, NumTimes is: 23"));
 
-        }
-    #endregion
-    #region DevelopGenerate
-    [Authorize(Roles = "Разработчик")]
+            }
+        #endregion
+        #region DevelopGenerate
+        [NonAction]        
+        [Authorize(Roles = "Разработчик")]
         [Route("tems/DevelopGenerate")]
         [HttpGet]
-        public async Task<IActionResult> Generate()
-        {
+        public async Task<IActionResult> Generate ( )
+            {
             //DBItems generations
             //var DbItems = new DbGenerate();
 
@@ -103,8 +105,8 @@ namespace BnLog.BLL.Controllers
             //}
 
             return RedirectToAction("Index", "Home");
-        }
+            }
         #endregion
 
+        }
     }
-}

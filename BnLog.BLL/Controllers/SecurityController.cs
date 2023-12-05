@@ -35,10 +35,11 @@ namespace BnLog.BLL.Controllers
             _securityService = securityService;
             _logger = logger;
         }
-    
+
         /// <summary>
         /// [Get] Метод, login
         /// </summary>
+        [NonAction]
         [Route("Security/Login")]  
         [HttpGet]
         public IActionResult Login()
@@ -49,6 +50,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, login
         /// </summary>
+        [NonAction]        
         [Route("Security/Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -101,6 +103,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, регистрации
         /// </summary>
+        [NonAction]
         [Route("Security/Register")]
         [HttpGet]
         public IActionResult Register()
@@ -111,6 +114,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, регистрации
         /// </summary>
+        [NonAction]
         [Route("Security/Register")]
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequest model)
@@ -140,6 +144,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования
         /// </summary>
+        [NonAction]
         [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -152,6 +157,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования
         /// </summary>
+        [NonAction]
         [Route("Security/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -177,6 +183,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаление аккаунта
         /// </summary>
+        [NonAction]
         [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -191,6 +198,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаление аккаунта
         /// </summary>
+        [NonAction]
         [Route("Security/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -206,6 +214,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, выхода из аккаунта
         /// </summary>
+        [NonAction]
         [Route("Security/Logout")]
         [Authorize]
         [HttpPost]
@@ -218,6 +227,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех пользователей
         /// </summary>
+        [NonAction]
         [Route("Security/GetAccounts")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]

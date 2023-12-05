@@ -26,11 +26,12 @@ namespace BnLog.BLL.Controllers
             _tagService = tagService;
             _logger = logger;
         }
-        
-        
+
+
         /// <summary>
         /// [Get] Метод, создания тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -42,6 +43,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, создания тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -63,6 +65,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод просмотра тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Info")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet, ActionName("ViewTag")]
@@ -78,6 +81,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -94,6 +98,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -116,6 +121,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаления тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -130,6 +136,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаления тега
         /// </summary>
+        [NonAction]
         [Route("Tag/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -144,6 +151,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
+        [NonAction]
         [Route("Tag/GetAll")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]

@@ -69,10 +69,10 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
         {
         Title = "BnLog.Api",
-        Version = "v0.1" 
+        Version = "v0.1"
         });
-    //var filepath = Path.Combine(AppContext.BaseDirectory, "BnLog.API.xml");
-    //options.IncludeXmlComments(filepath);
+    var filepath = Path.Combine(AppContext.BaseDirectory, "BnLogAPI.xml");
+    options.IncludeXmlComments(filepath);
 });
 
 var app = builder.Build();

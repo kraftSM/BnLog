@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BnLog.API</name>
+    </assembly>
+    <members>
+        <member name="M:BnLog.API.Controllers.SecurityController.Login(BnLog.VAL.Request.Security.UserLoginRequest)">
+            <summary>
+            [Post] Метод, login
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.LogoutAccount">
+            <summary>
+            [Post] Метод, выхода из аккаунта
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.GetAccounts">
+            <summary>
+            [Get] Метод, получения всех пользователей
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.Register">
+            <summary>
+            [Get] Метод, регистрации
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.Register(BnLog.VAL.Request.Security.UserRegisterRequest)">
+            <summary>
+            [Post] Метод, регистрации
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.EditAccount(System.Guid)">
+            <summary>
+            [Get] Метод, редактирования
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.EditAccount(BnLog.VAL.Request.Security.UserEditRequest)">
+            <summary>
+            [Post] Метод, редактирования
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.RemoveAccount(System.Guid,System.Boolean)">
+            <summary>
+            [Get] Метод, удаление аккаунта
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.SecurityController.RemoveAccount(System.Guid)">
+            <summary>
+            [Post] Метод, удаление аккаунта
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:BnLog.API.Extentions.ServiceExtentions" -->
+    </members>
+</doc>

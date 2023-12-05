@@ -26,6 +26,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, создания тега
         /// </summary>
+        [NonAction]
         [Route("Role/Create")]
         //[Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -37,6 +38,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, создания тега
         /// </summary>
+        [NonAction]
         [Route("Role/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -59,6 +61,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, редактирования тега
         /// </summary>
+        [NonAction]
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -86,6 +89,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, редактирования тега
         /// </summary>
+        [NonAction]
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -137,6 +141,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, удаления тега
         /// </summary>
+        [NonAction]
         [Route("Role/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
@@ -151,6 +156,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Post] Метод, удаления тега
         /// </summary>
+        [NonAction]
         [Route("Role/Remove")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
@@ -165,6 +171,7 @@ namespace BnLog.BLL.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
+        [NonAction]
         [Route("Role/GetRoles")]
         [HttpGet]
         [Authorize(Roles = "Администратор, Модератор")]
