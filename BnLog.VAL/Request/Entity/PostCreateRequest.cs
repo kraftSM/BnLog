@@ -10,7 +10,7 @@ namespace BnLog.VAL.Request.Entity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string AuthorId { get; set; }
-        public List<TagInfo> Tags { get; set; }
+        public List<TagSelectInfo> Tags { get; set; }
 
 
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]

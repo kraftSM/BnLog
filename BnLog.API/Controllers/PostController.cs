@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BnLog.VAL.Request.Entity;
 using BnLog.DAL.Models.Entity;
+using BnLog.VAL.Services;
 
 
 namespace BnLog.API.Controllers
@@ -16,16 +17,15 @@ namespace BnLog.API.Controllers
     [Route("API/[controller]")]
     public class PostController : Controller
         {
-        private readonly IPostRepository _postRepo;
+        //private readonly IPostRepository _postRepo;
         private readonly IPostService _postService;
-        private readonly ITagRepository _tagRepo;
+        //private readonly ITagRepository _tagRepo;
         private readonly UserManager<User> _userManager;
         private IMapper _mapper;
 
-        public PostController ( ITagRepository tagRepository, IPostRepository repo, IMapper mapper, IPostService postService, UserManager<User> userManager )
+        public PostController ( IMapper mapper, IPostService postService, UserManager<User> userManager )//ITagRepository tagRepository, 
             {
-            _tagRepo = tagRepository;
-            _postRepo = repo;
+            //_tagRepo = tagRepository;
             _mapper = mapper;
             _postService = postService;
             _userManager = userManager;
@@ -34,9 +34,9 @@ namespace BnLog.API.Controllers
         /// [Get] Метод, получения всех постов
         /// </summary>
         [HttpGet]
-        [Route("Post/Get")]
+        [Route("[controller]/Get")]
         public async Task<List<PostInfo>> GetPosts ( )
-            {
+        {
             
             //var PostInfo = _mapper.Map<PostInfo>(Pos);
             var posts = await _postService.GetPosts();
@@ -49,8 +49,23 @@ namespace BnLog.API.Controllers
 
 
 
-            //var postsInfo = _mapper.Map<PostInfo>(posts);
+            //    //сопоставление by Map<List<Post, PostInfo>>;
+            var postsInfo = _mapper.Map<List<PostInfo>>(posts);
             return postsInfo;
+        }
+        /// <summary>
+        /// [Get] Метод, получения поста по его ID
+        /// </summary>
+        [HttpGet("{id}")]
+        public ActionResult<PostInfo> GetPost ( Guid id )
+        {
+            var existingPost = _postService.GetPost(id);
+            if (existingPost.Result is null)
+                return NotFound();
+
+            var postInfo = _mapper.Map<PostInfo>(existingPost.Result);
+            return postInfo;
+            //return NoContent();
             }
 
         }

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace BnLog.VAL.Validators
     {
-    public class TagRequestValidator : AbstractValidator<TagInfo>
+    public class TagRequestValidator : AbstractValidator<TagSelectInfo>
         {
         public TagRequestValidator ( )
             {

@@ -9,7 +9,7 @@ namespace BnLog.VAL.Request.Entity
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string AuthorId { get; set; }
-        public List<TagInfo> Tags { get; set; }
+        public List<TagSelectInfo> Tags { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Body { get; set; }

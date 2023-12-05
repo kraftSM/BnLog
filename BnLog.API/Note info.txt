@@ -1,0 +1,8 @@
+﻿Dinamic AutoMapper
+////Создание конфигурации сопоставления
+//var config = new MapperConfiguration(cfg => cfg.CreateMap<Tag, TagEditRequest>());
+ ////Создание/Настройка AutoMapper
+//var mapper = new Mapper(config);
+////сопоставление by Map<Tag, TagEditRequest>());
+//var tagInfo = _mapper.Map<TagEditRequest>(existingTag.Result);
+//return tagInfo;

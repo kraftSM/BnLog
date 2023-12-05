@@ -5,7 +5,7 @@ using System.Xml.Linq;
 namespace BnLog.VAL.Request.Entity
 
 {
-    public class TagInfo
+    public class TagSelectInfo
     {
         public Guid Id { get; set; }
 

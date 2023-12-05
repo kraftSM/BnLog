@@ -8,25 +8,28 @@ using BnLog.VAL.Services;
 using BnLog.VAL.Request.Entity;
 using BnLog.DAL.Models.Entity;
 
+
+
 namespace BnLog.API.Controllers
-    {
+{
     [ApiController]
     [Route("API/[controller]")]
     //[Produces("application/json")]
     public class TagController : Controller
         {
 
-        private readonly ITagRepository _repo;
+        //private readonly ITagRepository _repo;
         private readonly ITagService _tagService;
         private readonly ILogger<TagController> _logger;
         private IMapper _mapper;
-        public TagController ( ITagRepository repo, IMapper mapper, ITagService tagService, ILogger<TagController> logger )
+        public TagController ( IMapper mapper, ITagService tagService, ILogger<TagController> logger )//ITagRepository repo, 
             {
-            _repo = repo;
+            //_repo = repo;
             _mapper = mapper;
             _tagService = tagService;
             _logger = logger;
             }
+        
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
@@ -50,5 +53,68 @@ namespace BnLog.API.Controllers
             return tags;
             }
 
+        /// <summary>
+        /// [Get] Метод, получения тега
+        /// </summary>
+        [HttpGet("{id}")]
+        //[Route("Tag/Get")]
+        public ActionResult<TagEditRequest> GetTag ( Guid id )
+            {
+            var existingTag = _tagService.GetTag(id);
+            if(existingTag.Result is null)
+                return NotFound();
+            var tagInfo = _mapper.Map<TagEditRequest>(existingTag.Result);
+            return tagInfo;
+            //return NoContent();
+            }
+        /// <summary>
+        /// [HttpPost] Метод, обновления/редактирования тега
+        /// </summary>
+        [HttpPost("{id}")]
+        public ActionResult<TagEditRequest> EditTag ( Guid id, [FromBody] TagEditRequest tag )
+            {
+            if (id != tag.Id)
+                return BadRequest();
+            var existingTag = _tagService.GetTag(id);
+            if (existingTag.Result is null)
+                return NotFound();
+            _tagService.EditTag(tag);
+
+            //return NoContent();
+            return tag;
+
+            }
+
+        /// <summary>
+        /// [HttpPost] Метод, создания тегов
+        /// </summary>
+        [HttpPost]
+        public IActionResult Create ( TagCreateRequest tag )
+            {
+            _tagService.CreateTag(tag);
+            return CreatedAtAction(nameof(GetTag), new { id = tag.Name }, tag);
+            }
+
+        /// <summary>
+        /// [HttpPost] Метод, удаления тега
+        /// </summary>
+        [HttpDelete("{id}")]
+        public IActionResult Delete ( Guid id )
+            {
+            if (id == null)
+                return BadRequest();
+            var existingTag = _tagService.GetTag(id);
+            if (existingTag.Result is null)
+                return NotFound();
+            if (id != existingTag.Result.Id)
+                return BadRequest();
+
+            _tagService.RemoveTag(id);
+            return NoContent();
+            }
+
+
         }
-    }
+
+
+    }   

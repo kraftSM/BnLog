@@ -30,7 +30,7 @@ namespace BnLog.VAL.Services
         {
             Post post = new Post();
 
-            var allTags = _tagRepo.GetAllTags().Select(t => new TagInfo() { Id = t.Id, Name = t.Name }).ToList();
+            var allTags = _tagRepo.GetAllTags().Select(t => new TagSelectInfo() { Id = t.Id, Name = t.Name }).ToList();
 
             PostCreateRequest model = new PostCreateRequest
             {
@@ -75,7 +75,7 @@ namespace BnLog.VAL.Services
         {
             var post = _repo.GetPost(id);
 
-            var tags = _tagRepo.GetAllTags().Select(t => new TagInfo() { Id = t.Id, Name = t.Name }).ToList();
+            var tags = _tagRepo.GetAllTags().Select(t => new TagSelectInfo() { Id = t.Id, Name = t.Name }).ToList();
 
             foreach (var tag in tags)
             {
@@ -137,9 +137,11 @@ namespace BnLog.VAL.Services
             return posts;
         }
 
-        public async Task<Post> ShowPost(Guid id)
+        public async Task<Post> GetPost(Guid id)
         {
             var post = _repo.GetPost(id);
+            if (post is null)
+                return null;
             var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
 
             var comments = _commentRepo.GetCommentsByPostId(post.Id);

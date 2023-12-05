@@ -23,6 +23,6 @@ namespace BnLog.VAL.Request.Entity
         public string? Body { get; set; }
 
         [Display(Name = "Теги", Prompt = "Теги")]
-        public List<TagInfo>? Tags { get; set; }
+        public List<TagSelectInfo>? Tags { get; set; }
     }
 }

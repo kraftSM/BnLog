@@ -25,14 +25,17 @@ namespace BnLog.VAL
             CreateMap<PostCreateRequest, Post>();
             CreateMap<PostEditRequest, Post>();
             CreateMap<PostInfo, Post>();
+            CreateMap<Post, PostInfo>();
             CreateMap<CommentRequest, Comment>();
             //CreateMap<CommentEditRequest, Comment>();
             CreateMap<TagCreateRequest, Tag>();
-            CreateMap<TagEditRequest, Tag>();
+            CreateMap<TagEditRequest, Tag>(); 
+            CreateMap<TagSelectInfo, Tag>();
+            CreateMap<Tag, TagEditRequest>();
             //CreateMap<TagInfo, Tag>();
-            
+
             // Item
 
-        }
+            }
     }
 }

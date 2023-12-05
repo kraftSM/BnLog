@@ -35,7 +35,7 @@ namespace BnLog.BLL.Controllers
         [HttpGet]
         public async Task<IActionResult> ShowPost(Guid id)
         {
-            var post = await _postService.ShowPost(id);
+            var post = await _postService.GetPost(id);
             return View(post);
         }
 

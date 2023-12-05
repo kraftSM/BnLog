@@ -11,6 +11,6 @@ namespace BnLog.VAL.Services.IService
     Task EditPost(PostEditRequest model, Guid Id);
     Task RemovePost(Guid id);
     Task<List<Post>> GetPosts();
-    Task<Post> ShowPost(Guid id);
+    Task<Post> GetPost(Guid id);
 }
 }
