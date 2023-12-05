@@ -6,6 +6,7 @@ using BnLog.VAL.Request.Entity;
 using BnLog.DAL.Models.Security;
 using Microsoft.AspNetCore.Identity;
 using BnLog.VAL.Request.Entity;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace BnLog.VAL.Services
@@ -24,8 +25,12 @@ namespace BnLog.VAL.Services
         public async Task<Guid> CreateTag(TagCreateRequest model)
         {
             var tag = _mapper.Map<Tag>(model);
-            await _tagRepo.AddTag(tag);
+            ////Поиск существующего Tag
+            //var inBaseTag = _tagRepo.GetAllTags().FirstOrDefault(t => t.Name == tag.Name);
+            //if (inBaseTag != null)
+            //    return inBaseTag.Id;
 
+            await _tagRepo.AddTag(tag);
             return tag.Id;
         }
         public async Task<Tag> GetTag(Guid id)

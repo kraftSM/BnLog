@@ -91,6 +91,7 @@ namespace BnLog.API.Controllers
         [HttpPost]
         public IActionResult Create ( TagCreateRequest tag )
             {
+            _tagService.GetTags().Where(nam)
             _tagService.CreateTag(tag);
             return CreatedAtAction(nameof(GetTag), new { id = tag.Name }, tag);
             }
