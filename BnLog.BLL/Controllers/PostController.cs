@@ -72,7 +72,7 @@ namespace BnLog.BLL.Controllers
             }
 
             var postId = await _postService.CreatePost(model);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace BnLog.BLL.Controllers
             }
 
             await _postService.EditPost(model, Id);
-            return RedirectToAction("Index", "Home");
-            //return RedirectToAction("GetPosts", "Posts");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Posts");
             
         }
 

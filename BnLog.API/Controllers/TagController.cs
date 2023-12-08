@@ -16,7 +16,7 @@ namespace BnLog.API.Controllers
     [Route("API/[controller]")]
     //[Produces("application/json")]
     public class TagController : Controller
-        {
+    {
 
         //private readonly ITagRepository _repo;
         private readonly ITagService _tagService;
@@ -33,22 +33,10 @@ namespace BnLog.API.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
-
         [Route("Tag/GetAll")]
         [HttpGet]
         public async Task<List<Tag>> GetTags ( )
             {
-            //var tag = await _tagService.GetTags();
-
-            //var resp = new TagInfo
-            //    {
-            //    Name = tag.n,
-            //    TegView = _mapper.Map<Tag[ ], TagInfo[ ]>(tag)
-            //    };
-
-            //return StatusCode(200, resp);
-
-
             var tags = await _tagService.GetTags();
             return tags;
             }
@@ -67,6 +55,7 @@ namespace BnLog.API.Controllers
             return tagInfo;
             //return NoContent();
             }
+
         /// <summary>
         /// [HttpPost] Метод, обновления/редактирования тега
         /// </summary>
@@ -82,7 +71,6 @@ namespace BnLog.API.Controllers
 
             //return NoContent();
             return tag;
-
             }
 
         /// <summary>
@@ -91,7 +79,6 @@ namespace BnLog.API.Controllers
         [HttpPost]
         public IActionResult Create ( TagCreateRequest tag )
             {
-            _tagService.GetTags().Where(nam)
             _tagService.CreateTag(tag);
             return CreatedAtAction(nameof(GetTag), new { id = tag.Name }, tag);
             }
@@ -113,9 +100,5 @@ namespace BnLog.API.Controllers
             _tagService.RemoveTag(id);
             return NoContent();
             }
-
-
-        }
-
-
-    }   
+    }
+}   

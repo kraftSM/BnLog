@@ -4,8 +4,9 @@ using System.Xml.Linq;
 namespace BnLog.VAL.Request.Entity
 
 {
-    public class CommentRequest
-    {
+    public class CommentCreateRequest
+        {     
+
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Заголовок", Prompt = "Заголовок")]
@@ -17,10 +18,15 @@ namespace BnLog.VAL.Request.Entity
         public string Body { get; set; }
 
         //[Required(ErrorMessage = "Поле Автор обязательно для заполнения")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Автор", Prompt = "Автор")]
+        public string Author { get; set; } = "Test0";
+
+        [Required(ErrorMessage = "Поле PostId обязательно для заполнения")]
         //[DataType(DataType.Text)]
-        //[Display(Name = "Автор", Prompt = "Автор")]
-        //public string Author { get; set; }
-        public Guid Id { get; set; }
-        public Guid PostId;
+        public Guid PostId { get; set; }
+
+        //public Guid Id { get; set; }
+        
     }
 }

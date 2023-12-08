@@ -54,7 +54,7 @@ namespace BnLog.API.Controllers
         /// </summary>
         [Route("Login")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login( [FromBody] UserLoginRequest model)
         {
             var result = await _securityService.Login(model);

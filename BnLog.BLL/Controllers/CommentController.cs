@@ -33,7 +33,7 @@ namespace BnLog.BLL.Controllers
         [Route("Comment/CreateComment")]
         public IActionResult CreateComment(Guid postId)
         {
-            var model = new CommentRequest() { PostId = postId };
+            var model = new CommentCreateRequest() { PostId = postId };
             return View(model);
         }
 
@@ -43,13 +43,15 @@ namespace BnLog.BLL.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("Comment/CreateComment")]
-        public async Task<IActionResult> CreateComment(CommentRequest model, Guid PostId)
+        public async Task<IActionResult> CreateComment( CommentCreateRequest comment, Guid PostId)
         {
-            model.PostId = PostId;
+            comment.PostId = PostId;
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var post = _commentService.CreateComment(model, new Guid(user.Id));
-            return RedirectToAction("Index", "Home");
-        }
+            comment.Author = user.FirstName;                   
+            
+            var post = _commentService.CreateComment(comment, new Guid(user.Id));
+            return RedirectToAction("GetPosts", "Post");
+            }
 
         /// <summary>
         /// [Get] Метод, редактирования коментария
@@ -67,8 +69,9 @@ namespace BnLog.BLL.Controllers
 
             var model = new CommentRequest { Id = id };
             model.Title = comm.Title;
-            model.Author = comm.Author;
+            //model.Author = comm.Author;
             model.Body =  comm.Body;
+            model.PostId = comm.PostId;
 
             return View(model);
         }
@@ -85,7 +88,9 @@ namespace BnLog.BLL.Controllers
             if (ModelState.IsValid)
             {
                 await _commentService.EditComment(model);
-                return RedirectToAction("Index", "Home");
+                //var returnAdr = "/Post/Show?id=" + model.PostId.ToString();
+                //return Redirect(returnAdr);
+                return RedirectToAction("GetPosts", "Post");
             }
             else
             {
@@ -104,8 +109,8 @@ namespace BnLog.BLL.Controllers
         {
             if (confirm)
                 await RemoveComment(id);
-            return RedirectToAction("Index", "Home");
-        }
+            return RedirectToAction("GetPosts", "Post");
+            }
 
         /// <summary>
         /// [Delete] Метод, удаления коментария
@@ -116,8 +121,8 @@ namespace BnLog.BLL.Controllers
         public async Task<IActionResult> RemoveComment(Guid id)
         {
             await _commentService.RemoveComment(id);
-            return RedirectToAction("Index", "Home");
-        }
+            return RedirectToAction("GetPosts", "Post");
+            }
     }
 }
 

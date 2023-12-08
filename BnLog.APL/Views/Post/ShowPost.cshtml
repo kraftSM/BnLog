@@ -1,6 +1,9 @@
 ﻿﻿@using BnLog.DAL.Models.Entity;
 @model Post
 
+<p>
+    <a method="get" asp-controller="Post" asp-action="GetPosts">Перейти к списку всех статей </a>
+</p>
 <div class="card w-75">
     <h1 class="card-title">Title: @Model.Title</h1>
     @{
@@ -22,7 +25,9 @@
     <div>
         <a class="btn btn-outline-secondary" method="get" asp-controller="Comment" asp-action="CreateComment" asp-route-postId="@Model.Id">Добавить комментарий</a>
     </div>
-    <p></p>
+    <p>
+        <a method="get" asp-controller="Post" asp-action="GetPosts">Перейти к списку всех статей </a>
+    </p>
     if (Model.Comments.Count() == 0)
     {
         <h5 style="color: gray;">Коментарии отсутствуют</h5>
@@ -42,11 +47,14 @@
                     <a class="btn btn-outline-danger button" method="post" asp-controller="Comment" asp-action="RemoveComment" asp-route-id="@comment.Id">Удалить</a>
                     *@
                     <span>
-                        <a method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Удалить</a>|
+                        <a method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Редактировать</a>|
                         <a method="post" asp-controller="Comment" asp-action="RemoveComment" asp-route-id="@comment.Id">Удалить </a>
                     </span>
                 }
             </div>
         }
     }
+    <p>
+        <a method="get" asp-controller="Post" asp-action="GetPosts">Перейти к списку всех статей </a>
+    </p>
 }

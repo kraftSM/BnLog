@@ -93,7 +93,7 @@ namespace BnLog
                             redirectContext.HttpContext.Response.StatusCode = 401;
                             return Task.CompletedTask;
                         }
-                        };
+                    };
                 });
 
             // AddConsole & Start WebApplication
@@ -183,7 +183,7 @@ namespace BnLog
             // </snippet_ConsistentEnvironments>
             #endregion
 
-            //app.UseHttpsRedirection(); //?? 
+            app.UseHttpsRedirection(); //?? 
 
             app.UseStaticFiles();
             app.UseRouting();

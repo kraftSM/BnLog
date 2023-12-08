@@ -22,20 +22,21 @@ namespace BnLog.VAL.Services
             _userManager = userManager;
         }
 
-        public async Task<Guid> CreateComment(CommentRequest model, Guid UserId)
+        public async Task<Comment> CreateComment(CommentCreateRequest model, Guid UserId )
         {
+            //var UserGUID = System.Guid.Parse(UserId);
             Comment comment = new Comment
             {
                 Title = model.Title,
                 Body = model.Body,
                 Author = model.Author,
                 PostId = model.PostId,
-                AuthorId = UserId,
+                AuthorId = UserId
                 //realAuthorName = _userManager.FindByIdAsync(UserId.ToString()).Result.UserName,
-            };
+                };
 
             await _commentRepo.AddComment(comment);
-            return comment.Id;
+            return comment;
         }
 
         public async Task EditComment( CommentRequest model )
@@ -44,7 +45,7 @@ namespace BnLog.VAL.Services
 
             comment.Title = model.Title;
             comment.Body = model.Body;
-            comment.Author = model.Author;
+            //comment.Author = model.Author;
 
             await _commentRepo.UpdateComment(comment);
         }

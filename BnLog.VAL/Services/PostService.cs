@@ -52,21 +52,30 @@ namespace BnLog.VAL.Services
                 var tagsId = postTags.Select(t => t.Id).ToList();
                 dbTags = _tagRepo.GetAllTags().Where(t => tagsId.Contains(t.Id)).ToList();
             }
+            
+             
+            var user = await _userManager.FindByIdAsync(model.AuthorId);
+            if (user is null)
+                user = await _userManager.FindByNameAsync(model.AuthorId);
+            if (user is null)
+                user = await _userManager.FindByNameAsync("Test0");
+
 
             Post post = new Post
             {
-                Id = model.Id,
+                //Id = model.Id,
                 Title = model.Title,
                 Body = model.Body,
+                Description = model.Description,
                 Tags = dbTags,
-                AuthorId = model.AuthorId
+                AuthorId = user.Id
             };
 
-            var user = await _userManager.FindByIdAsync(model.AuthorId);
+            //var user = await _userManager.FindByIdAsync(model.AuthorId);
             user.Posts.Add(post);
 
             await _repo.AddPost(post);
-            await _userManager.UpdateAsync(user);
+            //await _userManager.UpdateAsync(user);
 
             return post.Id;
         }
@@ -137,11 +146,20 @@ namespace BnLog.VAL.Services
             return posts;
         }
 
+        public async Task <bool> IsPostExist ( Guid id )
+        {
+            var post = _repo.GetPost(id);
+            if (post is null)
+                return false;
+            return true;
+            }
+
         public async Task<Post> GetPost(Guid id)
         {
             var post = _repo.GetPost(id);
             if (post is null)
                 return null;
+
             var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
 
             var comments = _commentRepo.GetCommentsByPostId(post.Id);
@@ -155,13 +173,12 @@ namespace BnLog.VAL.Services
                 }
             }
 
+            if (user is null)
+                post.AuthorId = "nonUsernamed";
+            else
             if (!string.IsNullOrEmpty(user.UserName))
             {
                 post.AuthorId = user.UserName;
-            }
-            else
-            {
-                post.AuthorId = "nonUsernamed";
             }
 
             return post;

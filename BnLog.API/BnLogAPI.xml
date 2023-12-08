@@ -4,6 +4,31 @@
         <name>BnLog.API</name>
     </assembly>
     <members>
+        <member name="M:BnLog.API.Controllers.CommentController.GetComments">
+            <summary>
+            [Get] Метод, получения всех коментариев
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.CommentController.GetComment(System.Guid)">
+            <summary>
+            [Get] Метод, получения тега
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.CommentController.EditComment(System.Guid,BnLog.VAL.Request.Entity.CommentRequest)">
+            <summary>
+            [HttpPost] Метод, обновления/редактирования комментария
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.CommentController.Create(BnLog.VAL.Request.Entity.CommentCreateRequest)">
+            <summary>
+            [HttpPost] Метод, создания комментария
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.CommentController.Delete(System.Guid)">
+            <summary>
+            [HttpPost] Метод, удаления тега
+            </summary>
+        </member>
         <member name="M:BnLog.API.Controllers.PostController.GetPosts">
             <summary>
             [Get] Метод, получения всех постов
