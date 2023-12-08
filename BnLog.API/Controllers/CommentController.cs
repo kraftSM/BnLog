@@ -78,50 +78,6 @@ namespace BnLog.API.Controllers
             }
 
         /// <summary>
-        /// [Get] Метод, получения всех коментариев
-        /// </summary>
-        [Route("/[controller]/GetAll")]
-        [HttpGet]
-        public async Task<List<Comment>> GetComments ( )
-            {
-            var comments = await _commentService.GetComments();
-            return comments;
-            }
-
-        /// <summary>
-        /// [Get] Метод, получения тега
-        /// </summary>
-        [HttpGet("{id}")]
-        //[Authorize]
-        //[Route("Tag/Get")]
-        public ActionResult<CommentRequest> GetComment ( Guid id )
-            {
-            var existingEntity = _commentService.GetComment(id);
-            if (existingEntity.Result is null)
-                return NotFound();
-            var entityInfo = _mapper.Map<CommentRequest>(existingEntity.Result);
-            return entityInfo;
-            //return NoContent();
-            }
-
-        /// <summary>
-        /// [HttpPost] Метод, обновления/редактирования комментария
-        /// </summary>
-        [HttpPut("{id}")]
-        
-        public ActionResult<CommentRequest> EditComment ( Guid id, CommentRequest com)
-            {
-            if (id != com.Id)
-                return BadRequest();
-            var existingTag = _commentService.GetComment(id);
-            if (existingTag.Result is null)
-                return NotFound();
-            _commentService.EditComment(com);
-
-            //return NoContent();
-            return com;
-            }
-
         /// <summary>
         /// [HttpPost] Метод, создания комментария
         /// </summary>
