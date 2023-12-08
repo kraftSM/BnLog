@@ -22,3 +22,19 @@ body {
     color: darkblue;
     /*color: darkred;*/
 }
+.aboutInfo {
+    font-size: 18px;
+    /*color: darkgreen;*/
+    /*color: darkgrey;*/
+    /*color: darkred;*/
+    color: black;
+    text-align: left;
+}
+.aboutInfo0 {
+    font-size: 22px;
+    color: darkblue;
+    /*color: darkgrey;*/
+    /*color: darkred;*/
+    /*color: black;*/
+    /*text-align: left;*/
+}

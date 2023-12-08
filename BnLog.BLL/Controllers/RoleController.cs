@@ -40,7 +40,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Create")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> CreateRole( RoleEditRequest model )
         {
@@ -63,7 +63,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> EditRole(Guid id)
         {
@@ -91,7 +91,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditRole(RoleEditRequest model)
         {
@@ -143,7 +143,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Remove")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> RemoveRole(Guid id, bool isConfirm = true)
         {
@@ -158,7 +158,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/Remove")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> RemoveRole(Guid id)
         {
@@ -174,7 +174,7 @@ namespace BnLog.BLL.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Role/GetRoles")]
         [HttpGet]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         public async Task<IActionResult> GetRoles()
         {
             var roles = await _roleService.GetRoles();

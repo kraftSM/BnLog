@@ -28,6 +28,7 @@
             <summary>
             [HttpPost] Метод, удаления тега
             </summary>
+            
         </member>
         <member name="M:BnLog.API.Controllers.PostController.GetPosts">
             <summary>
@@ -89,7 +90,7 @@
             [Post] Метод, удаление аккаунта
             </summary>
         </member>
-        <member name="M:BnLog.API.Controllers.TagController.GetTags">
+        <member name="M:BnLog.API.Controllers.TagController.GetAll">
             <summary>
             [Get] Метод, получения всех тегов
             </summary>

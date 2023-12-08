@@ -78,11 +78,57 @@ namespace BnLog.API.Controllers
             }
 
         /// <summary>
+        /// [Get] Метод, получения всех коментариев
+        /// </summary>
+        [Route("/[controller]/GetAll")]
+        [HttpGet]
+        public async Task<List<Comment>> GetComments ( )
+            {
+            var comments = await _commentService.GetComments();
+            return comments;
+            }
+
+        /// <summary>
+        /// [Get] Метод, получения тега
+        /// </summary>
+        [HttpGet("{id}")]
+        //[Authorize]
+        //[Route("Tag/Get")]
+        public ActionResult<CommentRequest> GetComment ( Guid id )
+            {
+            var existingEntity = _commentService.GetComment(id);
+            if (existingEntity.Result is null)
+                return NotFound();
+            var entityInfo = _mapper.Map<CommentRequest>(existingEntity.Result);
+            return entityInfo;
+            //return NoContent();
+            }
+
+        /// <summary>
+        /// [HttpPost] Метод, обновления/редактирования комментария
+        /// </summary>
+        [HttpPut("{id}")]
+        
+        public ActionResult<CommentRequest> EditComment ( Guid id, CommentRequest com)
+            {
+            if (id != com.Id)
+                return BadRequest();
+            var existingTag = _commentService.GetComment(id);
+            if (existingTag.Result is null)
+                return NotFound();
+            _commentService.EditComment(com);
+
+            //return NoContent();
+            return com;
+            }
+
+        /// <summary>
         /// [HttpPost] Метод, создания комментария
         /// </summary>
         [HttpPost]
+        //[Authorize]//(Roles = "Администратор")
         //[HttpPost("{postId}")]
-        //[Route("API/Comment/Create")]
+        [Route("Create")]
         //[Authorize] //UNTIL not exists Identityfication fo API
         public ActionResult<CommentInfo> Create ( [FromBody] CommentCreateRequest newComment )
             {
@@ -96,7 +142,7 @@ namespace BnLog.API.Controllers
 
             //Task<User>? existUser =  _userManager.FindByNameAsync(User?.Identity?.Name);
             //if (System.String.IsNullOrEmpty(newComment.Author))
-                newComment.Author = DefTestUserName;
+                //newComment.Author = DefTestUserName;
 
             Task<User>? existUser = _userManager.FindByNameAsync(DefTestUserName);
             if (existUser.Result is null)
@@ -104,14 +150,18 @@ namespace BnLog.API.Controllers
                 
             //newComment.Author = existUser.Result.UserName;
 
-            var comNew = _commentService.CreateComment(newComment, new Guid(existUser.Result.Id));// _commentService.CreateComment(newComment, UserGUID);
+            var comNew = _commentService.CreateComment(newComment, new Guid(existUser.Result.Id));
+            //_commentService.CreateComment(newComment, new Guid(existUser.Result.Id));
             return NoContent();
-            //return CreatedAtAction(nameof(GetComment),  comNew.Id);
+            
+
             }
 
         /// <summary>
         /// [HttpPost] Метод, удаления тега
         /// </summary>
+        /// 
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete ( Guid id )
             {

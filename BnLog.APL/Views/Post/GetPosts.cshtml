@@ -1,45 +1,90 @@
 ﻿﻿@using BnLog.DAL.Models.Entity;
-@model List<Post>
+@model IEnumerable<Post>
 
 @{
     @if (Model.Count() == 0)
     {
-        <h5 class="card-title">Нету данных для отображения</h5>
-        <h6 class="card-title"><a method="get" asp-controller="Post" asp-action="CreatePost">Добавить статью</a></h6>
+        <h5 class="card-title"> <span> User posts</span> <span> filter: ALL</span> </h5>
+        <th>Total of user posts: @Model.Count()</th>
+        @**@
     }
     else
     {
-        <h5 class="card-title">Все статьи</h5>
-        <h6 class="card-title"><a method="get" asp-controller="Post" asp-action="CreatePost">Добавить статью</a></h6>
-        foreach (var post in Model)
+        @*As Table *@
+        @if (ViewBag.TableView > 0)
         {
-            <div class="card w-75">
-                <div class="card-body">
-                    <h4 class="card-title">@post.Title</h4>
-                    <div>@post.Description</div>
-                    <h5>Теги:
-                    @foreach (var tag in post.Tags)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Title)</th>
+                        <th> @Html.DisplayNameFor(model => model.Description)</th>
+                        <th>[Num] @Html.DisplayNameFor(model => model.Tags)</th>
+                        @**@
+                        <th><a method="get" asp-controller="Security" asp-action="CreatePost">Add Post</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var post in Model)
                     {
-                            <span class="badge rounded-pill text-bg-success tagInfo" >@tag.Name</span>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => post.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => post.Description)
+                            </td>
+                            <td>
+                                <span>[@Html.DisplayFor(modelItem => post.Tags.Count)]:</span>
+                                @foreach (var tag in post.Tags)
+                                {
+                                    <span class="badge rounded-pill text-bg-success tagInfo">@tag.Name</span>
+                                }
+                            </td>
+                            <td>                                
+                                <a method="get" asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id">Edit</a> |
+                                <a method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Details</a> |
+                                <a method="post" asp-controller="Post" asp-action="RemovePost" asp-route-id="@post.Id">Delete</a> 
+                                @* *@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p> Total of user posts @Model.Count()</p>
+        }
+
+        @*As Card *@
+        @if (ViewBag.CardView > 0)
+        {
+            foreach (var post in Model)
+            {
+                <div class="card w-75">
+                    <div class="card-body">
+                        <h4 class="card-title">@post.Title</h4>
+                        <div>@post.Description</div>
+                        <h5>Теги:
+                        @foreach (var tag in post.Tags)
+                        {
+                                <span class="badge rounded-pill text-bg-success tagInfo" >@tag.Name</span>
+                            }
+                        </h5>
+                        @if (User.IsInRole("Администратор") || User.IsInRole("Admin"))
+                        {
+                            <div>
+                                <a class="btn btn-outline-info button" method="get" asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id">Редактировать</a>
+                                <a class="btn btn-outline-danger button" method="post" asp-controller="Post" asp-action="RemovePost" asp-route-id="@post.Id">Удалить</a>
+                                <a class="btn btn-outline-secondary" method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Просмотреть</a>
+                            </div>
                         }
-                    </h5>
-                    @if (User.IsInRole("Администратор"))
-                    {
-                        <div>
-                            <a class="btn btn-outline-info button" method="get" asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id">Редактировать</a>
-                            <a class="btn btn-outline-danger button" method="post" asp-controller="Post" asp-action="RemovePost" asp-route-id="@post.Id">Удалить</a>
-                            <a class="btn btn-outline-secondary" method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Просмотреть</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div>
-                            <a class="btn btn-outline-secondary" method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Просмотреть</a>
-                        </div>
-                    }
+                        else
+                        {
+                            <div>
+                                <a class="btn btn-outline-secondary" method="get" asp-controller="Post" asp-action="ShowPost" asp-route-id="@post.Id">Просмотреть</a>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-            <p></p>
+            }
         }
     }
 }

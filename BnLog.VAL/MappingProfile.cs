@@ -8,6 +8,7 @@ using BnLog.DAL.Models.Entity;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Entity;
 using BnLog.VAL.Request.Security;
+using BnLog.VAL.Response.Account;
 
 namespace BnLog.VAL
 {
@@ -19,8 +20,9 @@ namespace BnLog.VAL
             CreateMap<UserRegisterRequest, User>()
                 .ForMember(x => x.Email, opt => opt.MapFrom(c => c.Email))
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.UserName));
+            CreateMap<User,AccountInfo>();
+            CreateMap<AccountInfo,User>();
             CreateMap<UserEditRequest, User>();
-            CreateMap<RoleEditRequest, Role>();
             // Entity
             CreateMap<PostCreateRequest, Post>();
             CreateMap<PostEditRequest, Post>();

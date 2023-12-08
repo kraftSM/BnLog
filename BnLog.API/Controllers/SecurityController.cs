@@ -9,6 +9,7 @@ using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using BnLog.VAL.Services.IService;
 using BnLog.VAL.Response.User;
+using BnLog.VAL.Response.Account;
 using System.Security.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
@@ -39,16 +40,6 @@ namespace BnLog.API.Controllers
             _logger = logger;
         }
 
-        ///// <summary>
-        ///// [Get] Метод, login
-        ///// </summary>
-        //[Route("Security/Login")]
-        //[HttpGet]
-        //public IActionResult Login ( )
-        //    {
-        //    return View();
-        //    }
-
         /// <summary>
         /// [Post] Метод, login
         /// </summary>
@@ -57,7 +48,51 @@ namespace BnLog.API.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login( [FromBody] UserLoginRequest model)
         {
+            if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
+                throw new ArgumentNullException("User Login Requestis not filling");
+
             var result = await _securityService.Login(model);
+            if (!result.Succeeded)
+                throw new AuthenticationException("User Login or Password not not correct");
+
+            //define  Account data 
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            //claims creation for UserName, user.Id
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, model.Email) // Claim for user Name
+            };
+            //claims creation for User roles
+            var roles = await _userManager.GetRolesAsync(user);
+            if ((roles.Contains( "Admin" )) || (roles.Contains("Администратор")))
+            {
+                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, "Администратор"));
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimsIdentity.DefaultRoleClaimType, roles.First ()));
+            }
+
+            //var claimsIdentity = new ClaimsIdentity(
+            //    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims,
+                "AppCookie",
+                ClaimsIdentity.DefaultNameClaimType,
+                ClaimsIdentity.DefaultRoleClaimType);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
             return StatusCode(result.Succeeded ? 201 : 204);
         }
         /// <summary>
@@ -75,6 +110,7 @@ namespace BnLog.API.Controllers
         /// </summary>
         [Route("GetAccounts")]
         //[Authorize(Roles = "Администратор, Модератор")]
+        [Authorize]
         [HttpGet]
         //public async Task<List<UserInfo>> GetAccounts ()
         public async Task<List<UserInfo>> GetAccounts ( )
@@ -83,6 +119,8 @@ namespace BnLog.API.Controllers
             var users = await _securityService.GetAccounts();
             var userResponse = users.Select(u => new UserInfo
                 {
+                //Roles = u.Roles,
+                //Posts = u.Posts,
                 Id = u.Id,
                 FirstName = u.FirstName,
                 LastName = u.LastName,

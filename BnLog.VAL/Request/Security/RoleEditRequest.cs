@@ -13,7 +13,7 @@ namespace BnLog.VAL.Request.Security
 
         [DataType(DataType.Text)]
         [MinLength(4, ErrorMessage = "Длина роли должна быть не менее  4 символов")]
-        [MaxLength(10, ErrorMessage = "Длина роли должна быть не более 10 символов")]
+        [MaxLength(15, ErrorMessage = "Длина роли должна быть не более 15 символов")]
         [Required(ErrorMessage = "Поле [Название] обязательно для заполнения")]
         [Display(Name = "Название", Prompt = "Название")]
         public string Name { get; set; }

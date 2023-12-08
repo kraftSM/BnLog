@@ -33,9 +33,9 @@ namespace BnLog.API.Controllers
         /// <summary>
         /// [Get] Метод, получения всех тегов
         /// </summary>
-        [Route("Tag/GetAll")]
+        [Route("GetAll")]
         [HttpGet]
-        public async Task<List<Tag>> GetTags ( )
+        public async Task<List<Tag>> GetAll ( )
             {
             var tags = await _tagService.GetTags();
             return tags;
@@ -45,7 +45,7 @@ namespace BnLog.API.Controllers
         /// [Get] Метод, получения тега
         /// </summary>
         [HttpGet("{id}")]
-        //[Route("Tag/Get")]
+        //[Route("GetTag")]
         public ActionResult<TagEditRequest> GetTag ( Guid id )
             {
             var existingTag = _tagService.GetTag(id);
@@ -59,6 +59,7 @@ namespace BnLog.API.Controllers
         /// <summary>
         /// [HttpPost] Метод, обновления/редактирования тега
         /// </summary>
+        //[Route("EditTag")]
         [HttpPost("{id}")]
         public ActionResult<TagEditRequest> EditTag ( Guid id, [FromBody] TagEditRequest tag )
             {
@@ -76,6 +77,7 @@ namespace BnLog.API.Controllers
         /// <summary>
         /// [HttpPost] Метод, создания тегов
         /// </summary>
+        //[Route("Create")]
         [HttpPost]
         public IActionResult Create ( TagCreateRequest tag )
             {
@@ -86,6 +88,7 @@ namespace BnLog.API.Controllers
         /// <summary>
         /// [HttpPost] Метод, удаления тега
         /// </summary>
+        //[Route("Delete")]
         [HttpDelete("{id}")]
         public IActionResult Delete ( Guid id )
             {

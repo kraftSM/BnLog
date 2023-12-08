@@ -6,6 +6,8 @@
 </p>
 <div class="card w-75">
     <h1 class="card-title">Title: @Model.Title</h1>
+    <h5>Author: @Model.AuthorId</h5>
+    <div>Comments [ @Model.Comments.Count() ]</div>
     @{
         <div>
             <h6>Tags:
@@ -18,8 +20,7 @@
     }
     <p>Description: @Model.Description</p>
     <p>Body: @Model.Body</p>
-    <h5>Author: @Model.AuthorId</h5>
-    <p></p>
+
 </div>
 @{
     <div>
@@ -39,8 +40,9 @@
             <div class="card w-75">
                 <h6 class="card-title">@comment.Title</h6>
                 <p>@comment.Body</p>
-                <p>Author: @comment.Author</p>
-                @if (User.IsInRole("Администратор") || User.Identity.Name == comment.Author)
+                <p>
+                    Author: @comment.Author Created: @comment.CreatedData
+                @if (User.IsInRole("Admin") || User.IsInRole("Администратор") || (User.Identity.Name == comment.Author) )
                 {
                     @*
                     <a class="btn btn-outline-info button" method="get" asp-controller="Comment" asp-action="EditComment" asp-route-id="@comment.Id">Редактировать</a> 
@@ -51,6 +53,7 @@
                         <a method="post" asp-controller="Comment" asp-action="RemoveComment" asp-route-id="@comment.Id">Удалить </a>
                     </span>
                 }
+                </p>
             </div>
         }
     }

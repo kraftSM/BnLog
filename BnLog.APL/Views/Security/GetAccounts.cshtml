@@ -1,5 +1,5 @@
-﻿@model List<User>
-@using BnLog.DAL.Models.Security;
+﻿@model IEnumerable<AccountInfo>
+@using BnLog.VAL.Response.Account;
 
 ﻿@*    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,14 +19,16 @@
         @if (ViewBag.TableView > 0)
             {
 
-            <h5 class="card-title">Все теги</h5>
+            <h5 class="card-title"> <span> User accounts</span> <span> filter: ALL</span> </h5>
+            <th>Total of user accounts: @Model.Count()</th>@**@
 
             <table class="table">
                 <thead>
                     <tr>
-                        <th>User Name</th>
-                        @*<th>Total user accounts @Model.Count()</th>*@
-                        <th><a method="get" asp-controller="Security" asp-action="Register">Add user accounts</a></th>@**@
+                        <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.Roles)</th>
+                        <th><a method="get" asp-controller="Security" asp-action="Register">Add account</a></th>@**@
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +37,16 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <span>[@Html.DisplayFor(modelItem => item.Roles.Count)]:</span>
+                            @foreach (var role in item.Roles)
+                                {
+                                    <span>@Html.DisplayFor(modelItem => role.Name); </span>
+                                }
                             </td>
                             <td>
                                 <a method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@item.Id">Edit</a> |
@@ -58,7 +70,7 @@
                     <div class="card-body">
                         <h4 class="card-title">
                             Account : @user.UserName
-                            @if (User.IsInRole("Администратор"))
+                            @if (User.IsInRole("Администратор") || User.IsInRole("Admin"))
                                 {
                                 <span>
                                     <a class="btn btn-outline-info button" method="get" asp-controller="Security" asp-action="EditAccount" asp-route-id="@user.Id">Редактировать</a>

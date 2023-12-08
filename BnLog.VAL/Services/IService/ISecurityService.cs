@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
+using BnLog.VAL.Response.Account;
 
 namespace BnLog.VAL.Services.IService
 {

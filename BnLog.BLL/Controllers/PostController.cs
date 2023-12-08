@@ -105,7 +105,7 @@ namespace BnLog.BLL.Controllers
 
             await _postService.EditPost(model, Id);
             //return RedirectToAction("Index", "Home");
-            return RedirectToAction("GetPosts", "Posts");
+            return RedirectToAction("GetPosts", "Post");
             
         }
 
@@ -142,6 +142,9 @@ namespace BnLog.BLL.Controllers
         [Route("Post/Get")]
         public async Task<IActionResult> GetPosts()
         {
+            ViewBag.CardView = 1;
+            ViewBag.TableView = 1;
+            
             var posts = await _postService.GetPosts();
 
             return View(posts);

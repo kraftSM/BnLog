@@ -53,9 +53,11 @@
         {
             <div class="card w-75">
                 <div class="card-body">
-                    <h5 class="card-title">@role.Name</h5>
-                    <h5 class="card-title">Уровень доступа: @role.SecurityLvl</h5>
-                    @if (User.IsInRole("Администратор"))
+                    <h5>
+                        <span class="card-title">@role.Name</span>
+                        <span class="card-title"> * Уровень доступа: @role.SecurityLvl</span>
+                    </h5>
+                    @if (User.IsInRole("Администратор") || User.IsInRole("Admin"))
                     {
                         <div>
                             <a class="btn btn-outline-info button" method="get" asp-controller="Role" asp-action="EditRole" asp-route-id="@role.Id">Редактировать</a>

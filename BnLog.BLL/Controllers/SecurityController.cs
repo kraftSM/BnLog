@@ -8,6 +8,7 @@ using System.Security.Claims;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using BnLog.VAL.Services.IService;
+using BnLog.VAL.Response.Account;
 using System.Security.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
@@ -20,22 +21,21 @@ namespace BnLog.BLL.Controllers
     public class SecurityController : Controller     
     {
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        //private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly ISecurityService _securityService;
         private readonly IMapper _mapper;
         private readonly ILogger<SecurityController> _logger;
 
-        public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, ISecurityService securityService, ILogger<SecurityController> logger)
+        public SecurityController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, ISecurityService securityService, ILogger<SecurityController> logger) //, SignInManager<User> signInManager
         {
             _roleManager = roleManager;
             _mapper = mapper;
             _userManager = userManager;
-            _signInManager = signInManager;
+            //_signInManager = signInManager;
             _securityService = securityService;
             _logger = logger;
         }
-
         /// <summary>
         /// [Get] Метод, login
         /// </summary>
@@ -79,8 +79,13 @@ namespace BnLog.BLL.Controllers
             //ALL is OK 
             //Add claims etc..
             //Возможно и не стоит так извращаться, в сервисе и так установлен флаг на хранение Cookieы ??? Think it Man...
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            var roles = await _userManager.GetRolesAsync(user);
+
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimsIdentity.DefaultNameClaimType, model.Email) // Claim for user Name
                 //new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name) // Claim for user Role
             };
@@ -96,8 +101,7 @@ namespace BnLog.BLL.Controllers
             //Go to work   
             return RedirectToAction("Index", "Home");
             //return RedirectToAction("UserPage","Home", model);
-            //return _mapper.Map<UserViewModel>(user);        
-            
+            //return _mapper.Map<UserViewModel>(user);                   
         }
 
         /// <summary>
@@ -146,7 +150,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> EditAccount(Guid id)
         {
@@ -159,7 +163,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Edit")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditRequest model)
         {
@@ -185,7 +189,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Remove")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> RemoveAccount(Guid id, bool confirm = true)
         {
@@ -200,7 +204,7 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/Remove")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpPost]
         public async Task<IActionResult> RemoveAccount(Guid id)
         {
@@ -229,15 +233,16 @@ namespace BnLog.BLL.Controllers
         /// </summary>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Security/GetAccounts")]
-        [Authorize(Roles = "Администратор, Модератор")]
+        [Authorize(Roles = "Admin, Moderator, Администратор, Модератор")]
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
-            ViewBag.CardView = 1;
+            ViewBag.CardView = 0;
             ViewBag.TableView = 1;
             var users = await _securityService.GetAccounts();
+            var accountsInfo = _mapper.Map<List<AccountInfo>>(users);
 
-            return View(users);
+            return View(accountsInfo);
         }
     }
 }

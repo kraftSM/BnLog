@@ -18,7 +18,7 @@
     
     <Compile Remove="BnLog.VAL\**" />
     
-    <Compile Remove="DAL\**" />
+
     
     <Compile Remove="Temp\**" />
     
@@ -29,7 +29,7 @@
     <Content Remove="BnLog.BLL\**" />
     <Content Remove="BnLog.DAL\**" />
     <Content Remove="BnLog.VAL\**" />
-    <Content Remove="DAL\**" />
+
     <Content Remove="Temp\**" />
     <Content Remove="VAL\**" />
     <EmbeddedResource Remove="BnLog.API\**" />

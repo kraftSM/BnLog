@@ -23,14 +23,14 @@ using BnLog.VAL.Services;
 using BnLog.API.Extentions;
 using BnLog.API.Controllers;
 
-
 var builder = WebApplication.CreateBuilder(args);
 // Connect DataBase
 
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
 //builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Singleton);
 builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection), ServiceLifetime.Scoped); // контекст вызова явно
-// Add MS SECURITY
+
+// Add MS SECURITY EntityFrameworkCore
 builder.Services
     .AddIdentity<User, Role>(opts => {
         opts.Password.RequiredLength = 5;
@@ -41,16 +41,10 @@ builder.Services
     })
     .AddEntityFrameworkStores<BlogDbContext>();
 // Add services to the container.
-// subServices, mapper & Company...+ Try ( but  NOT WORK) UnitOfWork() 
+// subServices, mapper & Company...
 builder.Services
     .AddServicesBL()
     .AddDirectRepositories()
-    // // UnitOfWork() не интегруем, DI exception - дописать потом,if any...
-    //.AddUnitOfWork()
-    // //(1) or (2)
-    // // (1).AddCustomRepository<ItemOption, ItemOptionRepository>()
-    // // (1).AddCustomRepository<ItemResurce, ItemResurceRepository>()
-    // // (2).AddRepositories()
     .AddAutoMapper();
 
 // Configure Logging Connect NLog as logger & Console
@@ -60,9 +54,8 @@ builder.Services
 //    .AddNLog("nlog")
 //    .AddConsole();
 
-
-
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 // поддерживает автоматическую генерацию документации WebApi с использованием Swagger
 builder.Services.AddSwaggerGen(options => 
 {
@@ -75,17 +68,17 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(filepath);
 });
 
-// AddAuthentication "Cookies"
-//builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
-//    .AddCookie("Cookies", options => {
-//        options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
-//            {
-//            OnRedirectToLogin = redirectContext => {
-//                redirectContext.HttpContext.Response.StatusCode = 401;
-//                return Task.CompletedTask;
-//            }
-//            };
-//    });
+// AddAuthentication by"Cookies"
+builder.Services.AddAuthentication(options => options.DefaultScheme = "Cookies")
+    .AddCookie("Cookies", options => {
+        options.Events = new Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents
+            {
+            OnRedirectToLogin = redirectContext => {
+                redirectContext.HttpContext.Response.StatusCode = 401;
+                return Task.CompletedTask;
+            }
+            };
+    });
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -94,6 +87,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BnLog.API v1"));
     }
+
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();

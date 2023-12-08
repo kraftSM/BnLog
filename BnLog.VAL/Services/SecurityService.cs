@@ -13,6 +13,7 @@ using BnLog.DAL.IRepository;
 using BnLog.DAL.Models.Security;
 using BnLog.VAL.Request.Security;
 using BnLog.VAL.Services.IService;
+using BnLog.VAL.Response.Account;
 
 
 namespace BnLog.VAL.Services
@@ -80,8 +81,8 @@ namespace BnLog.VAL.Services
                 return result;
             else
             {
-                return result;
-                //throw new AuthenticationException("User password incorrect");//здесь ли??
+                //return result;
+                throw new AuthenticationException("User password incorrect");//здесь ли??
             }
         }
 
