@@ -82,7 +82,7 @@ namespace BnLog.API.Controllers
         /// </summary>
         [HttpPost]
         //[Authorize]//(Roles = "Администратор")
-        //[HttpPost("{postId}")]
+        [Authorize]//(Roles = "Администратор")
         [Route("Create")]
         //[Authorize] //UNTIL not exists Identityfication fo API
         public ActionResult<CommentInfo> Create ( [FromBody] CommentCreateRequest newComment )
