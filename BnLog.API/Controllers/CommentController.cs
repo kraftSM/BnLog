@@ -78,7 +78,6 @@ namespace BnLog.API.Controllers
             }
 
         /// <summary>
-        /// <summary>
         /// [HttpPost] Метод, создания комментария
         /// </summary>
         [HttpPost]
