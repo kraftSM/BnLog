@@ -50,7 +50,7 @@ namespace BnLog.API.Controllers
         /// [Get] Метод, получения тега
         /// </summary>
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin, User, Moderator, Designer")] //
+        //[Authorize(Roles = "Admin, User, Moderator, Designer")] //
         //[Route("Tag/Get")]
         public ActionResult<CommentRequest> GetComment ( Guid id )
             {
