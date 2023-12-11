@@ -68,5 +68,42 @@ namespace BnLog.API.Controllers
             //return NoContent();
             }
 
+        /// <summary>
+        /// Редактирование поста
+        /// </summary>
+        //[Authorize(Roles = "Admin, User, Moderator, Designer")] //
+        [HttpPatch]
+        [Route("EditPostBody")]
+        public async Task<IActionResult> EditPost ( PostShowRequest request )
+        {
+            await _postService.EditPostBody(request);
+
+            return StatusCode(201);
         }
+        /// <summary>
+        /// Редактирование поста
+        /// </summary>
+        //[Authorize(Roles = "Admin, User, Moderator, Designer")] //
+        [HttpPatch]
+        [Route("EditPost")]
+        public async Task<IActionResult> EditPost ( PostEditRequest request )
+        {
+            await _postService.EditPost(request, request.id);
+
+            return StatusCode(201);
+        }
+        /// <summary>
+        /// Удаление поста
+        /// </summary>
+        //[Authorize(Roles = "Admin, User, Moderator, Designer")] //
+        [HttpDelete]
+        [Route("RemovePost")]
+        public async Task<IActionResult> RemovePost ( Guid id )
+        {
+            await _postService.RemovePost(id);
+
+            return StatusCode(201);
+        }
+
+    }
     }

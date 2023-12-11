@@ -89,12 +89,12 @@ if (app.Environment.IsDevelopment())
     }
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllers();
+//app.MapControllers();
 // Сопоставляем маршруты с контроллерами
-//app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+
 app.Run();

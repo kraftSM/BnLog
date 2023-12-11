@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using BnLog.DAL.Models.Entity;
 using BnLog.VAL.Services;
 using Microsoft.Extensions.Hosting;
+using FluentValidation.AspNetCore;
 //using Microsoft.AspNet.Identity;
 //using Microsoft.AspNet.Identity;
 
@@ -49,9 +50,11 @@ namespace BnLog.API.Controllers
         /// [Get] Метод, получения тега
         /// </summary>
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, User, Moderator, Designer")] //
         //[Route("Tag/Get")]
         public ActionResult<CommentRequest> GetComment ( Guid id )
             {
+            var user = HttpContext.User.Identity; //Test
             var existingEntity = _commentService.GetComment(id);
             if (existingEntity.Result is null)
                 return NotFound();
@@ -82,7 +85,7 @@ namespace BnLog.API.Controllers
         /// </summary>
         [HttpPost]
         //[Authorize]//(Roles = "Администратор")
-        [Authorize]//(Roles = "Администратор")
+        [Authorize(Roles = "Admin, User, Moderator, Designer")] //
         [Route("Create")]
         //[Authorize] //UNTIL not exists Identityfication fo API
         public ActionResult<CommentInfo> Create ( [FromBody] CommentCreateRequest newComment )

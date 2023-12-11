@@ -134,6 +134,30 @@ namespace BnLog.VAL.Services
             await _repo.UpdatePost(post);
         }
 
+        public async Task EditPostBody ( PostShowRequest model )
+        {
+            var post = _repo.GetPost(model.Id);
+
+            post.Title = model.Title;
+            post.Description = model.Description;
+            post.Body = model.Body;
+
+            //foreach (var tag in model.Tags)
+            //{
+            //    var tagChanged = _tagRepo.GetTag(tag.Id);
+            //    if (tag.IsSelected)
+            //    {
+            //        post.Tags.Add(tagChanged);
+            //    }
+            //    else
+            //    {
+            //        post.Tags.Remove(tagChanged);
+            //    }
+            //}
+
+            await _repo.UpdatePost(post);
+        }
+
         public async Task RemovePost(Guid id)
         {
             await _repo.RemovePost(id);

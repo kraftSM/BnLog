@@ -40,6 +40,21 @@
             [Get] Метод, получения поста по его ID
             </summary>
         </member>
+        <member name="M:BnLog.API.Controllers.PostController.EditPost(BnLog.VAL.Request.Entity.PostShowRequest)">
+            <summary>
+            Редактирование поста
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.PostController.EditPost(BnLog.VAL.Request.Entity.PostEditRequest)">
+            <summary>
+            Редактирование поста
+            </summary>
+        </member>
+        <member name="M:BnLog.API.Controllers.PostController.RemovePost(System.Guid)">
+            <summary>
+            Удаление поста
+            </summary>
+        </member>
         <member name="M:BnLog.API.Controllers.RoleController.GetRoles">
             <summary>
             [Get] Метод, получения всех тегов
@@ -60,29 +75,14 @@
             [Get] Метод, получения всех пользователей
             </summary>
         </member>
-        <member name="M:BnLog.API.Controllers.SecurityController.Register">
-            <summary>
-            [Get] Метод, регистрации
-            </summary>
-        </member>
         <member name="M:BnLog.API.Controllers.SecurityController.Register(BnLog.VAL.Request.Security.UserRegisterRequest)">
             <summary>
             [Post] Метод, регистрации
             </summary>
         </member>
-        <member name="M:BnLog.API.Controllers.SecurityController.EditAccount(System.Guid)">
-            <summary>
-            [Get] Метод, редактирования
-            </summary>
-        </member>
         <member name="M:BnLog.API.Controllers.SecurityController.EditAccount(BnLog.VAL.Request.Security.UserEditRequest)">
             <summary>
             [Post] Метод, редактирования
-            </summary>
-        </member>
-        <member name="M:BnLog.API.Controllers.SecurityController.RemoveAccount(System.Guid,System.Boolean)">
-            <summary>
-            [Get] Метод, удаление аккаунта
             </summary>
         </member>
         <member name="M:BnLog.API.Controllers.SecurityController.RemoveAccount(System.Guid)">

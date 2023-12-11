@@ -9,6 +9,7 @@ namespace BnLog.VAL.Services.IService
     Task<Guid> CreatePost(PostCreateRequest model);
     Task<PostEditRequest> EditPost(Guid Id);
     Task EditPost(PostEditRequest model, Guid Id);
+    Task EditPostBody ( PostShowRequest model );
     Task RemovePost(Guid id);
     Task <bool> IsPostExist ( Guid id ); 
     Task<List<Post>> GetPosts();
